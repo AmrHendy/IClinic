@@ -5,10 +5,8 @@ import main.java.services.PasswordEncryptionService;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 public class UserDAO {
 
@@ -79,5 +77,32 @@ public class UserDAO {
             e.printStackTrace();
         }
         return status;
+    }
+
+    public static User getUser(String userName) {
+        User user = new User();
+
+        String query = "SELECT * FROM User WHERE userName = '" + userName + "';";
+        ResultSet rs = null;
+        try {
+            rs = ModelManager.getInstance().executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        try {
+            if (rs.next()) {
+                user.setUserID(rs.getInt("id"));
+                user.setUserName(rs.getString("userName"));
+                user.setEncryptedPassword(rs.getBytes("password"));
+                user.setSalt(rs.getBytes("salt"));
+            }
+            rs.close();
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
