@@ -41,6 +41,19 @@ public class ModelManager {
         return statement.getResultSet();
     }
 
+    public boolean executeUpdateQuery(String query){
+       try {
+            PreparedStatement pst = ModelManager.getInstance().getConnection().prepareStatement(query);
+            if (pst.executeUpdate() == 1) {
+                return true;
+            }
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void closeConnection() {
         try {
             connection.close();
