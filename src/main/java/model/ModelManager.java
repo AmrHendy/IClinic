@@ -3,7 +3,7 @@ package main.java.model;
 import java.sql.*;
 
 public class ModelManager {
-    private static String url = "jdbc:mysql://localhost:3306/iclinic";
+    private static String url = "jdbc:mysql://localhost:3306/iclinic?autoReconnect=true&useSSL=false";
     private static String user = "root";
     private static String pass = "root12_";
     private static ModelManager model;
@@ -27,6 +27,7 @@ public class ModelManager {
             connection = DriverManager.getConnection(url, user, pass);
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
+            System.out.println("Cannot open the connection");
             e.printStackTrace();
         }
     }

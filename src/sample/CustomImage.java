@@ -17,5 +17,4 @@ public class CustomImage {
     public ImageView getImage() {
         return image;
     }
-
 }
