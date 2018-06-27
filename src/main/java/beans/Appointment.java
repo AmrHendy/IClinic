@@ -1,16 +1,29 @@
 package main.java.beans;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Appointment {
-    int appointmentID;
-    int patientID;
-    Date date;
-    boolean finished;
-    Image image;
-    int paidCost;
-    String comment;
+    private int appointmentID;
+    private int patientID;
+    private Date date;
+    private Boolean finished;
+    private Image image;
+    private int paidCost;
+    private String comment;
+
+
+    public Appointment(){
+        finished = false;
+        image = null;
+        paidCost = 0;
+        comment = "";
+    }
 
     public int getAppointmentID() {
         return appointmentID;
@@ -32,15 +45,32 @@ public class Appointment {
         return date;
     }
 
+    public String getDateString() {
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+        String formattedDate = dt.format(date);
+        return formattedDate;
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
 
-    public boolean isFinished() {
+    public void setDate(String date) {
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+        Date formattedDate = null;
+        try {
+            formattedDate = dt.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.date = formattedDate;
+    }
+
+    public Boolean isFinished() {
         return finished;
     }
 
-    public void setFinished(boolean finished) {
+    public void setFinished(Boolean finished) {
         this.finished = finished;
     }
 
@@ -48,8 +78,31 @@ public class Appointment {
         return image;
     }
 
+    public byte[] getImageBytes() {
+        byte[] bytes = null;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write((BufferedImage)image, "jpg", baos);
+            baos.flush();
+            bytes = baos.toByteArray();
+            baos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bytes;
+    }
+
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public void setImage(byte[] bytes) {
+        InputStream in = new ByteArrayInputStream(bytes);
+        try {
+            this.image = ImageIO.read(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getPaidCost() {
