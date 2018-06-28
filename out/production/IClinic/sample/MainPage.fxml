@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="611.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <TextField alignment="TOP_LEFT" prefHeight="26.0" prefWidth="370.0" promptText="Enter Patient's Name" />
+            <Button mnemonicParsing="false" text="Search" />
+            <DatePicker prefHeight="26.0" prefWidth="254.0" promptText="Enter Date of Session" />
+            <Button mnemonicParsing="false" text="Get Sessions" />
+        </items>
+      </ToolBar>
+   </top>
+   <center>
+      <TableView fx:id="patientTable" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
