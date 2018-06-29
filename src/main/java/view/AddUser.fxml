@@ -4,45 +4,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="771.0" prefWidth="1247.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <left>
-        <VBox prefHeight="642.0" prefWidth="646.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="646.0" prefWidth="646.0" BorderPane.alignment="CENTER">
             <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="138.0" prefWidth="646.0">
-                    <children>
-                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="132.0" text="صورة:" />
-                        <ImageView fitHeight="127.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true" />
-                    </children>
-                </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="132.0" text="اسم المريض:" />
-                        <TextField prefHeight="26.0" prefWidth="324.0" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="132.0" text="العنوان:" />
-                  <TextField prefHeight="26.0" prefWidth="324.0" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="132.0" text="تاريخ الميلاد:" />
+                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="132.0" text="اسم المستخدم:" />
                         <TextField prefHeight="26.0" prefWidth="324.0" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="348.0" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="132.0" text="المبلغ المتبقى:" />
+                        <Label alignment="CENTER" prefHeight="60.0" prefWidth="132.0" text="كلمة المرور:" />
                         <TextField prefHeight="26.0" prefWidth="324.0" />
                     </children>
                 </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="132.0" text="اعادة كلمة المرور:" />
+                  <TextField prefHeight="26.0" prefWidth="324.0" />
+               </children>
+            </HBox>
             </children>
         </VBox>
     </left>
