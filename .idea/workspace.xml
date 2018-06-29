@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33f578a9-4500-4c05-8c97-bbb537cad10d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/AddAndEditPatient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/AddAndEditPatient.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/AddAndEditProfile.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/AddAndEditSession.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/AddAndEditSession.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/MainPage.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="33f578a9-4500-4c05-8c97-bbb537cad10d" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/src/sample/MainPage.fxml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="731">
-              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -81,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddUser.fxml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AddUser.fxml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/view/AddUser.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="41" column="10" lean-forward="true" selection-end-line="51" />
+            <state relative-caret-position="393">
+              <caret line="42" column="12" lean-forward="true" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -101,11 +95,11 @@
           <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
-      <file leaf-file-name="userSession.fxml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="userSession.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/view/userSession.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="425">
+              <caret line="25" column="13" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -444,15 +438,16 @@
       <workItem from="1530078247323" duration="1373000" />
       <workItem from="1530154644318" duration="1729000" />
       <workItem from="1530160876036" duration="3571000" />
-      <workItem from="1530244566068" duration="4629000" />
+      <workItem from="1530244566068" duration="4980000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32318000" />
+    <option name="totallyTimeSpent" value="32669000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -805,14 +800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/view/AddUser.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="41" column="10" lean-forward="true" selection-end-line="51" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/EditUser.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
@@ -824,15 +811,23 @@
     <entry file="file://$PROJECT_DIR$/src/sample/MainPage.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/view/userSession.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="425">
+          <caret line="25" column="13" lean-forward="true" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/view/AddUser.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="42" column="12" lean-forward="true" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />

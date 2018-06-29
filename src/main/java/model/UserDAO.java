@@ -5,6 +5,7 @@ import main.java.services.PasswordEncryptionService;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -77,6 +78,25 @@ public class UserDAO {
             e.printStackTrace();
         }
         return status;
+    }
+
+    public static boolean updateUser(int id, User newUser) {
+        try {
+            PreparedStatement pst = ModelManager.getInstance().getConnection().prepareStatement(
+                    "UPDATE User SET userName = ?, password = ? WHERE id = ?;");
+            pst.setString(1, newUser.getUserName());
+            pst.setBytes(2, newUser.getEncryptedPassword());
+            pst.setInt(3, id);
+
+            if (pst.executeUpdate() == 1) {
+                return true;
+            }
+            pst.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     public static User getUser(String userName) {

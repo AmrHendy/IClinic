@@ -17,6 +17,24 @@ import java.util.Date;
 
 public class AppointmentDAO {
 
+    public static boolean addAppointment(Appointment app){
+        String query = "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment) VALUES ( "
+                + app.getPatientID() + " , " + "'" + app.getDateString() + "'" + " , "
+                + app.getPaidCost() + " , " + (app.isFinished() ? 1 : 0) + " , "
+                + "'" + app.getImageBytes() + "'" + " , " + "'" + app.getComment() + "'" + " );" ;
+        return ModelManager.getInstance().executeUpdateQuery(query);
+    }
+
+    public static boolean deleteAppointmentByID(int id){
+        String query = "DELETE FROM Appointment WHERE id = " + id + " ;";
+        return ModelManager.getInstance().executeUpdateQuery(query);
+    }
+
+    public static boolean deleteAllAppointmentByPatientID(int patientID){
+        String query = "DELETE FROM Appointment WHERE patientId = " + patientID + " ;";
+        return ModelManager.getInstance().executeUpdateQuery(query);
+    }
+
     public static ArrayList<Appointment> findByPatientID(int patientID){
         String query = "SELECT * FROM Appointment WHERE patientId = " + patientID + " ;";
         ArrayList<Appointment> matched = new ArrayList<>();
@@ -31,7 +49,6 @@ public class AppointmentDAO {
         }
         return matched;
     }
-
 
     public static ArrayList<Appointment> findByDate(Date date){
         SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
@@ -50,17 +67,12 @@ public class AppointmentDAO {
         return matched;
     }
 
-    public static boolean deleteAllAppointmentByPatientID(int patientID){
-        String query = "DELETE FROM Appointment WHERE patientId = " + patientID + " ;";
-        return ModelManager.getInstance().executeUpdateQuery(query);
-    }
-
-    public static boolean addAppointment(Appointment app){
-        String query = "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment) VALUES ( "
-                        + app.getPatientID() + " , " + "'" + app.getDateString() + "'" + " , "
-                        + app.getPaidCost() + " , " + (app.isFinished() ? 1 : 0) + " , "
-                        + "'" + app.getImageBytes() + "'" + " , " + "'" + app.getComment() + "'" + " );" ;
-        return ModelManager.getInstance().executeUpdateQuery(query);
+    // id can not be changed by user (read only ==> fix it in gui)
+    public static boolean updateAppointmentByID(int id, Appointment newAppointment){
+        boolean delete = deleteAppointmentByID(id);
+        newAppointment.setAppointmentID(id);
+        boolean add = addAppointment(newAppointment);
+        return delete && add;
     }
 
     private static Appointment buildAppointment(ResultSet rs){
