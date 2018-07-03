@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`Patient` (
   `address` VARCHAR(45) NULL,
   `birthdate` DATE NULL,
   `remainingCost` INT NULL,
+  `mobile_number` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `name_index` (`name` ASC))
 ENGINE = InnoDB;
@@ -53,21 +54,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `IClinic`.`PatientMobile`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `IClinic`.`PatientMobile` (
-  `id` INT NOT NULL,
-  `mobile_number` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`, `mobile_number`),
-  CONSTRAINT `fk_patient_mobile_id`
-    FOREIGN KEY (`id`)
-    REFERENCES `IClinic`.`Patient` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `IClinic`.`User`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `IClinic`.`User` (
@@ -76,7 +62,8 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`User` (
   `password` BLOB NOT NULL,
   `salt` BLOB NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `name_index` (`userName` ASC))
+  INDEX `name_index` (`userName` ASC),
+  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC))
 ENGINE = InnoDB;
 
 
