@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="257.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.addUsers.AddUsers">
+   <children>
+      <VBox prefHeight="236.0" prefWidth="600.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXTextField promptText="اسم المستخدم">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField layoutX="20.0" layoutY="20.0" promptText="رقم المرور">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField layoutX="10.0" layoutY="56.0" promptText="تاكيد رقم المرور">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <HBox prefHeight="159.0" prefWidth="600.0">
+               <children>
+                  <JFXButton id="save" onMouseClicked="#save" prefHeight="92.0" prefWidth="339.0" stylesheets="@../addPatient/addPatient.css" text="حفظ">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton id="cancel" layoutX="10.0" layoutY="10.0" onMouseClicked="#cancel" prefHeight="92.0" prefWidth="339.0" stylesheets="@../addPatient/addPatient.css" text="الغاء">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

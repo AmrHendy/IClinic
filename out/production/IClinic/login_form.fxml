@@ -1,65 +1,59 @@
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Button?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<GridPane fx:controller="main.java.controller.LoginForm"
-          xmlns:fx="http://javafx.com/fxml" alignment="center"
-          hgap="10" vgap="10">
-<padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.LoginForm">
+<padding><Insets bottom="40" left="40" right="40" top="40" /></padding>
 <columnConstraints>
-    <ColumnConstraints minWidth="100" prefWidth="100"
-                       maxWidth="Infinity" halignment="RIGHT">
+    <ColumnConstraints halignment="RIGHT" maxWidth="Infinity" minWidth="100.0" prefWidth="214.0">
     </ColumnConstraints>
-    <ColumnConstraints minWidth="200" prefWidth="200"
-                       maxWidth="Infinity" hgrow="ALWAYS">
+    <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="86.0" prefWidth="86.0">
     </ColumnConstraints>
 </columnConstraints>
 
 <!-- Add Header Label -->
-<Label text="Log in" GridPane.columnIndex="0"
-       GridPane.rowIndex="0" GridPane.columnSpan="2"
-       GridPane.rowSpan="1" GridPane.halignment="CENTER" >
+<Label text="تسجيل الدخول" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.rowSpan="1">
     <font>
-        <Font name="Arial" size="24" ></Font>
+        <Font name="Arial" size="24" />
     </font>
     <GridPane.margin>
-        <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        <Insets bottom="20" left="0" right="0" top="20" />
     </GridPane.margin>
 </Label>
 
 
 
 <!-- Add Name Label -->
-<Label text="User Name : " GridPane.columnIndex="0"
-       GridPane.rowIndex="1" >
+<Label prefHeight="17.0" prefWidth="87.0" text="اسم المستخدم " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
 </Label>
 <!-- Add Name Text Field -->
-<TextField fx:id="nameField" prefHeight="40"
-           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+<TextField fx:id="nameField" prefHeight="40" GridPane.rowIndex="1" />
 
 <!-- Add Password Label -->
-<Label text="Password : " GridPane.columnIndex="0"
-       GridPane.rowIndex="2" >
+<Label prefHeight="17.0" prefWidth="76.0" text="كلمة المرور    " textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
 </Label>
 <!-- Add Password Field -->
-<PasswordField fx:id="passwordField" prefHeight="40"
-               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+<PasswordField fx:id="passwordField" prefHeight="40" GridPane.rowIndex="2" />
 
 
 <!-- Add Submit Button -->
-<Button fx:id="submitButton" text="Submit"
-        prefWidth="100" prefHeight="40" defaultButton="true"
-        GridPane.columnIndex="0" GridPane.rowIndex="3"
-        GridPane.columnSpan="2" GridPane.rowSpan="1"
-        GridPane.halignment="CENTER"
-        onAction="#handleSubmitButtonAction">
+<Button fx:id="submitButton" defaultButton="true" onAction="#handleSubmitButtonAction" prefHeight="40" prefWidth="100" text="تأكيد" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.rowSpan="1">
     <GridPane.margin>
-        <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        <Insets bottom="20" left="0" right="0" top="20" />
     </GridPane.margin>
 </Button>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>
