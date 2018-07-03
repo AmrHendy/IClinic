@@ -4,6 +4,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" prefHeight="611.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <top>
@@ -19,8 +20,7 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <Button defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="259.0" text="حفظ" translateX="-53.0" />
-                <Button layoutX="401.0" layoutY="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="259.0" text="الغاء" />
+                <Button defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="259.0" text="اضافة جلسة" translateX="-53.0" />
             </children>
         </HBox>
     </bottom>
