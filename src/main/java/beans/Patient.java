@@ -15,16 +15,33 @@ import java.util.Date;
 public class Patient {
     private int patientID;
     private String patientName;
-    private Image image;
     private String address;
     private Date birthdate;
     private int remainingCost;
     private String mobileNumber;
+    private String file_number;
+    private int clinic_number;
 
     public Patient(){
         remainingCost = 0;
-        image = null;
     }
+
+    public String getFile_number() {
+        return file_number;
+    }
+
+    public void setFile_number(String file_number) {
+        this.file_number = file_number;
+    }
+
+    public int getClinic_number() {
+        return clinic_number;
+    }
+
+    public void setClinic_number(int clinic_number) {
+        this.clinic_number = clinic_number;
+    }
+
 
     // Getters
     public int getPatientID() {
@@ -33,24 +50,6 @@ public class Patient {
 
     public String getPatientName() {
         return patientName;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public byte[] getImageBytes() {
-        byte[] bytes = null;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            ImageIO.write((BufferedImage)image, "jpg", baos);
-            baos.flush();
-            bytes = baos.toByteArray();
-            baos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bytes;
     }
 
     public String getAddress() {
@@ -82,19 +81,6 @@ public class Patient {
         this.patientName = patientName;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    public void setImage(byte[] bytes) {
-        InputStream in = new ByteArrayInputStream(bytes);
-        try {
-            this.image = ImageIO.read(in);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -120,17 +106,5 @@ public class Patient {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "patientID=" + patientID +
-                ", patientName='" + patientName + '\'' +
-                ", image=" + image +
-                ", address='" + address + '\'' +
-                ", birthdate='" + birthdate + '\'' +
-                ", remainingCost=" + remainingCost +
-                '}';
     }
 }
