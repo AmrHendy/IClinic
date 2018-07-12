@@ -16,7 +16,7 @@ public class Appointment {
     private Image image;
     private int paidCost;
     private String comment;
-
+    private boolean confirmed_paid;
 
     public Appointment(){
         finished = false;
@@ -64,6 +64,15 @@ public class Appointment {
             e.printStackTrace();
         }
         this.date = formattedDate;
+    }
+
+
+    public boolean isConfirmedPaid() {
+        return confirmed_paid;
+    }
+
+    public void setConfirmedPaid(boolean confirmed_paid) {
+        this.confirmed_paid = confirmed_paid;
     }
 
     public Boolean isFinished() {
