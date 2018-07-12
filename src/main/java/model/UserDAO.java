@@ -59,10 +59,11 @@ public class UserDAO {
 
         try {
             if (!rs.isBeforeFirst()) {
-                String query = "INSERT INTO User (userName , password , salt) VALUES ( "
-                                + "'" + user.getUserName() + "'"
-                                + "'" + user.getEncryptedPassword() + "'"
-                                + "'" + user.getSalt() + "'"
+                String query = "INSERT INTO User (userName , password , salt, clinic) VALUES ( "
+                                + "'" + user.getUserName() + "'" + " , "
+                                + "'" + user.getEncryptedPassword() + "'" + " , "
+                                + "'" + user.getSalt() + "'" + " , "
+                                + user.getClinic()
                                 + " );";
 
 
@@ -83,10 +84,11 @@ public class UserDAO {
     public static boolean updateUser(int id, User newUser) {
         try {
             PreparedStatement pst = ModelManager.getInstance().getConnection().prepareStatement(
-                    "UPDATE User SET userName = ?, password = ? WHERE id = ?;");
+                    "UPDATE User SET userName = ?, password = ?, clinic = ? WHERE id = ?;");
             pst.setString(1, newUser.getUserName());
             pst.setBytes(2, newUser.getEncryptedPassword());
-            pst.setInt(3, id);
+            pst.setInt(3, newUser.getClinic());
+            pst.setInt(4, id);
 
             if (pst.executeUpdate() == 1) {
                 return true;
@@ -117,6 +119,7 @@ public class UserDAO {
                 user.setUserName(rs.getString("userName"));
                 user.setEncryptedPassword(rs.getBytes("password"));
                 user.setSalt(rs.getBytes("salt"));
+                user.setClinic(rs.getInt("clinic"));
             }
             rs.close();
             return user;
