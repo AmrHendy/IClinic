@@ -16,7 +16,7 @@
                   <TextField onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="299.0" />
                </items>
             </ToolBar>
-            <TableView prefHeight="400.0" prefWidth="600.0">
+            <TableView prefHeight="1000.0" prefWidth="600.0">
                <columns>
                   <TableColumn prefWidth="75.0" text="اسم المريض" />
                   <TableColumn prefWidth="75.0" text="العنوان" />

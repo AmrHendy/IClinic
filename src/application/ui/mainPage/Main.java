@@ -12,7 +12,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("mainPage.fxml"));
         primaryStage.setTitle("IClinic");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
