@@ -63,8 +63,9 @@
                      <children>
                         <TableView fx:id="TodaySession" layoutX="218.0" layoutY="76.0" prefHeight="552.0" prefWidth="588.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                              <TableColumn fx:id="date" prefWidth="75.0" text="التوقيت" />
+                              <TableColumn fx:id="time" prefWidth="75.0" text="التوقيت" />
                             <TableColumn fx:id="patientName" prefWidth="75.0" text="اسم المريض" />
+                              <TableColumn fx:id="patientNumber" prefWidth="75.0" text="رقم المريض" />
                             <TableColumn fx:id="phoneNumber" prefWidth="75.0" text="رقم التليفون" />
                           </columns>
                            <columnResizePolicy>

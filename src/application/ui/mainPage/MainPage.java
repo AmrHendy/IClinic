@@ -1,7 +1,10 @@
 package application.ui.mainPage;
 
+import application.ui.handler.ScheduleLine;
+import application.ui.handler.TimeGenerator;
 import application.ui.handler.WindowHandlers;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -16,16 +19,19 @@ import java.util.ResourceBundle;
 public class MainPage implements Initializable {
 
     @FXML
-    private TableView<Patient> TodaySession;
+    private TableView<ScheduleLine> TodaySession;
 
     @FXML
-    private TableColumn<Patient, String> date;
+    private TableColumn<ScheduleLine, String> time;
 
     @FXML
-    private TableColumn<Patient, String> patientName;
+    private TableColumn<ScheduleLine, String> patientNumber;
 
     @FXML
-    private TableColumn<Patient, String> phoneNumber;
+    private TableColumn<ScheduleLine, String> patientName;
+
+    @FXML
+    private TableColumn<ScheduleLine, String> phoneNumber;
 
     private WindowHandlers windowHandlers;
 
@@ -77,40 +83,16 @@ public class MainPage implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        time.setCellValueFactory(new PropertyValueFactory<>("time"));
         patientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        addDates();
-    }
+        patientNumber.setCellValueFactory(new PropertyValueFactory<>("patientNumber"));
 
-    private void addDates(){
-        Patient p = new Patient("sdlkfj", "name", "01234");
-        TodaySession.getItems().add(p);
-    }
-
-    public class Patient{
-        private SimpleStringProperty date;
-        private SimpleStringProperty patientName;
-        private SimpleStringProperty phoneNumber;
-
-        public Patient(String date, String patientName, String phoneNumber){
-            this.date = new SimpleStringProperty(date);
-            this.phoneNumber = new SimpleStringProperty(phoneNumber);
-            this.patientName = new SimpleStringProperty(patientName);
-        }
-        public String getDate() {
-            return date.get();
-        }
-        public String getPatientName() {
-            return patientName.get();
-        }
-
-        public String getPhoneNumber() {
-            return phoneNumber.get();
-        }
-
-
-
+        TimeGenerator timeGenerator = new TimeGenerator();
+        ObservableList<ScheduleLine> list = timeGenerator.getDayTimeEmpty();
+        TodaySession.setItems(list);
 
     }
+
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -7,13 +8,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.displayUsers.DisplayUser">
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="564.0" prefWidth="734.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.displayUsers.DisplayUser">
    <children>
       <VBox layoutX="266.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ToolBar prefHeight="40.0" prefWidth="10000.0">
                <items>
-                  <TextField onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="304.0" />
+                  <TextField onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="304.0" promptText="اسم المريض" />
+                  <JFXButton text="بحث" />
+               </items>
+            </ToolBar>
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <items>
+                  <JFXButton text="مسح مستخدم" />
+                  <JFXButton layoutX="10.0" layoutY="10.0" text="حفظ التغيرات" />
                </items>
             </ToolBar>
             <TableView prefHeight="10000.0">

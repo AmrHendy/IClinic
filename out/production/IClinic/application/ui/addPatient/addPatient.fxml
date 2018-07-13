@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,13 +28,18 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXTextField>
+            <JFXComboBox fx:id="clinicNumber" prefWidth="6288.0" promptText="رقم العيادة">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXComboBox>
             <HBox prefHeight="85.0" prefWidth="600.0">
                <children>
-                  <JFXButton id="save" prefHeight="92.0" prefWidth="339.0" stylesheets="@addPatient.css" text="حفظ">
+                  <JFXButton id="save" onMouseClicked="#save" prefHeight="92.0" prefWidth="339.0" stylesheets="@addPatient.css" text="حفظ">
                      <font>
                         <Font size="22.0" />
                      </font></JFXButton>
-                  <JFXButton id="cancel" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="339.0" stylesheets="@addPatient.css" text="الغاء">
+                  <JFXButton id="cancel" layoutX="10.0" layoutY="10.0" onMouseClicked="#cancel" prefHeight="92.0" prefWidth="339.0" stylesheets="@addPatient.css" text="الغاء">
                      <font>
                         <Font size="22.0" />
                      </font></JFXButton>
