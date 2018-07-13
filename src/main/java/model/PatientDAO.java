@@ -10,22 +10,23 @@ import java.util.ArrayList;
 public class PatientDAO {
 
     public static boolean addPatient(Patient newPatient){
-        String query = "INSERT INTO Patient (id, name, image, address, birthdate, remainingCost, mobile_number) VALUES ( "
+        String query = "INSERT INTO Patient (id, name, address, birthdate, remainingCost, mobile_number, file_number, clinic_number) VALUES ( "
                 + newPatient.getPatientID() + " , " + "'" + newPatient.getPatientName() + "'" + " , "
-                + "'" + newPatient.getImageBytes() + "'" + " , " + "'" + newPatient.getAddress() + "'" + " , "
-                + "'" + newPatient.getDateString() + "'" + " , " + newPatient.getRemainingCost()
-                + "'" + newPatient.getMobileNumber() + "'" + ");";
+                + "'" + newPatient.getAddress() + "'" + " , " + "'" + newPatient.getDateString() + "'" + " , "
+                + newPatient.getRemainingCost() + " , " + "'" + newPatient.getMobileNumber() + "'" + " , "
+                + "'" + newPatient.getFile_number() + "'" + " , " + newPatient.getClinic_number() + " );";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
     public static boolean updatePatient(int id, Patient newPatient){
         String query = "UPDATE Patient SET "
                         + "name = '" + newPatient.getPatientName() + "' , "
-                        + "image = '" + newPatient.getImageBytes() + "' , "
                         + "address = '" + newPatient.getAddress() + "' , "
                         + "birthdate = '" + newPatient.getDateString() + "' , "
                         + "remainingCost = " + newPatient.getRemainingCost() + " , "
-                        + "mobile_number = '" + newPatient.getMobileNumber() + "'"
+                        + "mobile_number = '" + newPatient.getMobileNumber() + "' , "
+                        + "file_number = '" + newPatient.getFile_number() + "' , "
+                        + "clinic_number = " + newPatient.getClinic_number()
                         + " WHERE id = " + id + " ;";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
@@ -45,10 +46,28 @@ public class PatientDAO {
         return matched;
     }
 
+    public static Patient findByFileNumber(String file_number){
+        // we will use the current logged in user to get the clinic number and use it in the where condition
+        String query = "SELECT * FROM Patient WHERE file_number = '" + file_number + "' ;";
+        ArrayList<Patient> matched = new ArrayList<>();
+        try{
+            ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+            while (resultSet.next()) {
+                matched.add(buildPatient(resultSet));
+            }
+            resultSet.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return matched.isEmpty() ? null : matched.get(0);
+    }
+
+
     public static ArrayList<Patient> findByName(String name){
        return findByName(name, -1);
     }
 
+    // use this for lazy loading if you want
     public static ArrayList<Patient> findByName(String name, int limit){
         String query = "SELECT * FROM Patient WHERE name = " + "'" + name + "'";
         if(limit != -1){
@@ -80,11 +99,12 @@ public class PatientDAO {
         try {
             patient.setPatientID(rs.getInt("id"));
             patient.setPatientName(rs.getString("name"));
-            patient.setImage(rs.getBytes("image"));
             patient.setAddress(rs.getString("address"));
             patient.setBirthdate(rs.getString("birthdate"));
             patient.setRemainingCost(rs.getInt("remainingCost"));
             patient.setMobileNumber(rs.getString("mobile_number"));
+            patient.setFile_number(rs.getString("file_number"));
+            patient.setClinic_number(rs.getInt("clinic_number"));
             return patient;
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();

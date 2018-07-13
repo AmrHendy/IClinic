@@ -13,15 +13,17 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AppointmentDAO {
 
     public static boolean addAppointment(Appointment app){
-        String query = "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment) VALUES ( "
+        String query = "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment, confirmed_paid) VALUES ( "
                 + app.getPatientID() + " , " + "'" + app.getDateString() + "'" + " , "
                 + app.getPaidCost() + " , " + (app.isFinished() ? 1 : 0) + " , "
-                + "'" + app.getImageBytes() + "'" + " , " + "'" + app.getComment() + "'" + " );" ;
+                + "'" + app.getImageBytes() + "'" + " , " + "'" + app.getComment() + "'" + " , "
+                + (app.isConfirmedPaid() ? 1 : 0) + " );" ;
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
@@ -51,9 +53,9 @@ public class AppointmentDAO {
     }
 
     public static ArrayList<Appointment> findByDate(Date date){
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
         String formattedDate = dt.format(date);
-        String query = "SELECT * FROM Appointment WHERE date = '" + formattedDate + "' ;";
+        String query = "SELECT * FROM Appointment WHERE CAST(Appointment.date as date) = '" + formattedDate + "'" + " ORDER BY date ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -64,7 +66,25 @@ public class AppointmentDAO {
         } catch (SQLException e){
             e.printStackTrace();
         }
-        return matched;
+
+        int index = 0;
+        ArrayList<Appointment> result = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), 12, 0);
+        for(int i = 0; i <= 24; i++){
+            Appointment app = new Appointment();
+            app.setDate(calendar.getTime());
+            calendar.add(Calendar.MINUTE, 30);
+            if(index < matched.size() && matched.get(index).getDateString() == app.getDateString()){
+                result.add(matched.get(index));
+                index++;
+            }
+            else{
+                result.add(app);
+            }
+        }
+        return result;
     }
 
     // id can not be changed by user (read only ==> fix it in gui)
@@ -89,6 +109,8 @@ public class AppointmentDAO {
             app.setImage(rs.getBytes("image"));
 
             app.setComment(rs.getString("comment"));
+
+            app.setConfirmedPaid(rs.getBoolean("confirmed_paid"));
             return app;
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();

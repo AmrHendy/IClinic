@@ -5,6 +5,7 @@ public class User {
     private byte[] encryptedPassword;
     private byte[] salt;
     private String userName;
+    private int clinic;
 
     public User(){
 
@@ -27,6 +28,10 @@ public class User {
         return userName;
     }
 
+    public int getClinic() {
+        return clinic;
+    }
+
 
     // SETTERS
     public void setUserName(String userName) {
@@ -44,6 +49,8 @@ public class User {
     public void setUserID(int userID) {
         this.userID = userID;
     }
+
+    public void setClinic(int clinic) { this.clinic = clinic; }
 
     @Override
     public String toString() {

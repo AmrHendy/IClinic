@@ -15,18 +15,42 @@ CREATE SCHEMA IF NOT EXISTS `IClinic` DEFAULT CHARACTER SET utf8 ;
 USE `IClinic` ;
 
 -- -----------------------------------------------------
+-- Table `IClinic`.`User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `IClinic`.`User` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `userName` VARCHAR(125) NOT NULL,
+  `password` BLOB NOT NULL,
+  `salt` BLOB NOT NULL,
+  `clinic` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `name_index` (`userName` ASC),
+  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC),
+  UNIQUE INDEX `clinic_UNIQUE` (`clinic` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `IClinic`.`Patient`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `IClinic`.`Patient` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(125) NULL,
-  `image` LONGBLOB NULL,
   `address` VARCHAR(45) NULL,
   `birthdate` DATE NULL,
-  `remainingCost` INT NULL,
+  `remainingCost` INT NULL DEFAULT 0,
   `mobile_number` VARCHAR(45) NULL,
+  `file_number` VARCHAR(45) NOT NULL,
+  `clinic_number` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `name_index` (`name` ASC))
+  INDEX `name_index` (`name` ASC),
+  UNIQUE INDEX `file_id_UNIQUE` (`file_number` ASC),
+  INDEX `clinic_fk_idx` (`clinic_number` ASC),
+  CONSTRAINT `clinic_fk`
+    FOREIGN KEY (`clinic_number`)
+    REFERENCES `IClinic`.`User` (`clinic`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -41,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`Appointment` (
   `finished` TINYINT NULL DEFAULT 0,
   `image` LONGBLOB NULL,
   `comment` VARCHAR(125) NULL,
+  `confirmed_paid` TINYINT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `patient_index` (`patientId` ASC),
   INDEX `date_index` (`date` ASC),
@@ -50,20 +75,6 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`Appointment` (
     REFERENCES `IClinic`.`Patient` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `IClinic`.`User`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `IClinic`.`User` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `userName` VARCHAR(125) NOT NULL,
-  `password` BLOB NOT NULL,
-  `salt` BLOB NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `name_index` (`userName` ASC),
-  UNIQUE INDEX `userName_UNIQUE` (`userName` ASC))
 ENGINE = InnoDB;
 
 
