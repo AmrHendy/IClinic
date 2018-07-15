@@ -14,18 +14,18 @@
          <children>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
                <items>
-                  <TextField layoutX="10.0" layoutY="10.0" onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="299.0" promptText="رقم المريض" />
-                  <TextField onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="299.0" promptText="اسم المريض" />
+                  <TextField fx:id="patientID" layoutX="10.0" layoutY="10.0" onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="299.0" promptText="رقم المريض" />
+                  <TextField fx:id="patientName" onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="299.0" promptText="اسم المريض" />
                   <JFXButton text="بحث" />
                </items>
             </ToolBar>
             <ToolBar layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
                <items>
-                  <JFXButton text="مسح مريض" />
-                  <JFXButton layoutX="10.0" layoutY="10.0" text="حفظ التغيرات" />
+                  <JFXButton onMouseClicked="#deletePatients" text="مسح مريض" />
+                  <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#saveChanges" text="حفظ التغيرات" />
                </items>
             </ToolBar>
-            <TableView prefHeight="1000.0" prefWidth="600.0">
+            <TableView fx:id="patientTable" prefHeight="1000.0" prefWidth="600.0">
                <columns>
                   <TableColumn prefWidth="75.0" text="رقم المريض" />
                   <TableColumn prefWidth="75.0" text="اسم المريض" />

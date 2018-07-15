@@ -14,17 +14,17 @@
          <children>
             <ToolBar prefHeight="40.0" prefWidth="10000.0">
                <items>
-                  <TextField onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="304.0" promptText="اسم المريض" />
+                  <TextField fx:id="userName" onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="304.0" promptText="اسم المستخدم" />
                   <JFXButton text="بحث" />
                </items>
             </ToolBar>
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
                <items>
-                  <JFXButton text="مسح مستخدم" />
-                  <JFXButton layoutX="10.0" layoutY="10.0" text="حفظ التغيرات" />
+                  <JFXButton onMouseClicked="#deleteUser" text="مسح مستخدم" />
+                  <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#SaveChanges" text="حفظ التغيرات" />
                </items>
             </ToolBar>
-            <TableView prefHeight="10000.0">
+            <TableView fx:id="userTable" prefHeight="10000.0">
                <columns>
                   <TableColumn prefWidth="75.0" text="اسم المستخدم" />
                   <TableColumn prefWidth="75.0" text="تاريخ الانضمام" />

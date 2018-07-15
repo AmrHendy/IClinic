@@ -87,7 +87,7 @@ public class AppointmentDAO {
         return result;
     }
 
-    // id can not be changed by user (read only ==> fix it in gui)
+    //TODO:: id can not be changed by user (read only ==> fix it in gui)
     public static boolean updateAppointmentByID(int id, Appointment newAppointment){
         boolean delete = deleteAppointmentByID(id);
         newAppointment.setAppointmentID(id);
