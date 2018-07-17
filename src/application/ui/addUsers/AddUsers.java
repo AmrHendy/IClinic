@@ -16,15 +16,18 @@ import java.util.ResourceBundle;
 
 public class AddUsers implements Initializable {
 
+    //mandatory
     @FXML
     private JFXTextField userName;
 
+    //mandatory and equal confirm password.
     @FXML
     private JFXTextField password;
 
     @FXML
     private JFXTextField confirmPassword;
 
+    //mandatory
     @FXML
     private JFXComboBox<String> clinicNumber;
 

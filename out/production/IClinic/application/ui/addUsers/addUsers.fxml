@@ -13,17 +13,17 @@
    <children>
       <VBox prefHeight="236.0" prefWidth="600.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXTextField promptText="اسم المستخدم">
+            <JFXTextField fx:id="userName" promptText="اسم المستخدم">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField layoutX="20.0" layoutY="20.0" promptText="رقم المرور">
+            <JFXTextField fx:id="password" layoutX="20.0" layoutY="20.0" promptText="رقم المرور">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField layoutX="10.0" layoutY="56.0" promptText="تاكيد رقم المرور">
+            <JFXTextField fx:id="confirmPassword" layoutX="10.0" layoutY="56.0" promptText="تاكيد رقم المرور">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>

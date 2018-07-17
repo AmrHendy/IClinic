@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,25 +10,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="279.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.addPatient.AddPatient">
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="328.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.addPatient.AddPatient">
    <children>
       <VBox layoutX="12.0" layoutY="224.0" prefHeight="621.2" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXTextField promptText="اسم المريض">
+            <JFXTextField fx:id="patientName" promptText="اسم المريض">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField layoutX="20.0" layoutY="20.0" promptText="العنوان">
+            <JFXTextField fx:id="address" layoutX="20.0" layoutY="20.0" promptText="العنوان">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField layoutX="10.0" layoutY="56.0" promptText="رقم التليفون">
+            <JFXTextField fx:id="phoneNumber" layoutX="10.0" layoutY="56.0" promptText="رقم التليفون">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXTextField>
+            <JFXDatePicker fx:id="dateOfBirth" prefHeight="28.0" prefWidth="650.0" promptText="تاريخ الميلاد">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXDatePicker>
             <JFXComboBox fx:id="clinicNumber" prefWidth="6288.0" promptText="رقم العيادة">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -35,11 +41,11 @@
             </JFXComboBox>
             <HBox prefHeight="85.0" prefWidth="600.0">
                <children>
-                  <JFXButton id="save" onMouseClicked="#save" prefHeight="92.0" prefWidth="339.0" stylesheets="@addPatient.css" text="حفظ">
+                  <JFXButton id="save" fx:id="save" onMouseClicked="#save" prefHeight="92.0" prefWidth="339.0" stylesheets="@addPatient.css" text="حفظ">
                      <font>
                         <Font size="22.0" />
                      </font></JFXButton>
-                  <JFXButton id="cancel" layoutX="10.0" layoutY="10.0" onMouseClicked="#cancel" prefHeight="92.0" prefWidth="339.0" stylesheets="@addPatient.css" text="الغاء">
+                  <JFXButton id="cancel" fx:id="cancel" layoutX="10.0" layoutY="10.0" onMouseClicked="#cancel" prefHeight="92.0" prefWidth="339.0" stylesheets="@addPatient.css" text="الغاء">
                      <font>
                         <Font size="22.0" />
                      </font></JFXButton>

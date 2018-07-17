@@ -9,23 +9,28 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import main.java.beans.Patient;
+import main.java.model.PatientDAO;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AddPatient implements Initializable {
+    //mandatory
     @FXML
     private JFXTextField patientName;
 
     @FXML
     private JFXTextField address;
-
+    //mandatory
     @FXML
     private JFXTextField phoneNumber;
 
     @FXML
     private JFXDatePicker dateOfBirth;
-
+    //mandatory
     @FXML
     private JFXComboBox<String> clinicNumber;
 
@@ -42,7 +47,15 @@ public class AddPatient implements Initializable {
 
     @FXML
     void save(MouseEvent event) {
-
+        //TODO:: add validation here.
+        Patient patient = new Patient();
+        patient.setPatientName(patientName.getText());
+        patient.setAddress(address.getText());
+        LocalDate date = dateOfBirth.getValue();
+        patient.setBirthdate(Date.valueOf(date));
+        //TODO:: add set phone number here.
+        patient.setPhoneNumber(phoneNumber.getText());
+        PatientDAO.addPatient(patient);
     }
 
 

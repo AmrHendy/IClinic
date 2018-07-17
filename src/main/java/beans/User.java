@@ -8,7 +8,9 @@ public class User {
     private int clinic;
 
     public User(){
-
+        //default val to know if user not provide a value.
+        //look at userValidator.
+        this.clinic = -1;
     }
 
     // GETTERS

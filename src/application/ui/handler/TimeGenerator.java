@@ -2,6 +2,7 @@ package application.ui.handler;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import main.java.beans.Appointment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,13 +12,15 @@ public class TimeGenerator {
     private final int dayPeriods = 24;
 
 
-    public ObservableList<ScheduleLine> getDayTimeEmpty(){
-        ObservableList<ScheduleLine> list = FXCollections.observableArrayList();
+    public ObservableList<Appointment> getDayTimeEmpty(){
+        ObservableList<Appointment> list = FXCollections.observableArrayList();
         String time = "11:30";
         for(int i = 0 ;i < dayPeriods; i++){
             time = getNextPeriod(30, time);
-            ScheduleLine scheduleLine = new ScheduleLine(time, "", "", "");
-            list.add(scheduleLine);
+            Appointment appointment = new Appointment();
+            //TODO:: set time function to get values by time.
+            appointment.setTime(time);
+            list.add(appointment);
         }
         return list;
     }
