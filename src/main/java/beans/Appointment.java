@@ -1,5 +1,7 @@
 package main.java.beans;
 
+import main.java.model.PatientDAO;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,11 +21,20 @@ public class Appointment {
     private String comment;
     private boolean confirmed_paid;
 
+    //TODO
+    private String userName;
+    private String userFileID;
+    private String userMobile;
+    private int clinicNumber;
+    private Date dateOnly;
+    private Date timeOnly;
+
     public Appointment(){
         finished = false;
         image = null;
         paidCost = 0;
         comment = "";
+        confirmed_paid = false;
     }
 
     public int getAppointmentID() {
@@ -129,5 +140,39 @@ public class Appointment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getDateOnly(){
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
+        String formattedDate = dt.format(date);
+        return formattedDate;
+    }
+
+    public String getTimeOnly(){
+        SimpleDateFormat dt = new SimpleDateFormat("hh:mm");
+        String formattedDate = dt.format(date);
+        return formattedDate;
+    }
+
+    public Patient getPatient(){
+        Patient patient = PatientDAO.findByID(patientID).get(0);
+        return patient;
+    }
+
+
+    public String getPatientName(){
+        return getPatient().getPatientName();
+    }
+
+    public String getPatientFileID(){
+        return getPatient().getFile_number();
+    }
+
+    public String getPatientPhone(){
+        return getPatient().getPhoneNumber();
+    }
+
+    public String getClinicNumber(){
+        return String.valueOf(getPatient().getClinic_number());
     }
 }

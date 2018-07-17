@@ -1,6 +1,7 @@
 package main.java.model;
 
 import main.java.beans.Appointment;
+import main.java.beans.Patient;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -95,6 +96,64 @@ public class AppointmentDAO {
         return delete && add;
     }
 
+    public static boolean editAppointmentList(String patientFileIDBefore, String patientFileIDAfter, Date appDate, int paidCost){
+        if(patientFileIDBefore.isEmpty() && patientFileIDAfter.isEmpty()){
+            return true;
+        }
+
+        if(patientFileIDBefore.isEmpty()){
+            //insert
+            Patient patient = PatientDAO.findByFileNumber(patientFileIDAfter);
+            Appointment app = new Appointment();
+            app.setPatientID(patient.getPatientID());
+            app.setDate(appDate);
+            app.setPaidCost(paidCost);
+            //TODO add clinic numebr
+            return AppointmentDAO.addAppointment(app);
+        }
+        else if(patientFileIDAfter.isEmpty()){
+            //delete
+            Patient patient = PatientDAO.findByFileNumber(patientFileIDBefore);
+            SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+            String formattedDate = dt.format(appDate);
+            String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate +"' ;";
+            ArrayList<Appointment> matched = new ArrayList<>();
+            try{
+                ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+                while (resultSet.next()) {
+                    matched.add(buildAppointment(resultSet));
+                }
+                resultSet.close();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+            return deleteAppointmentByID(matched.get(0).getAppointmentID());
+        }
+        else{
+            //update
+            Patient patient1 = PatientDAO.findByFileNumber(patientFileIDBefore);
+            Patient patient2 = PatientDAO.findByFileNumber(patientFileIDAfter);
+            SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+            String formattedDate = dt.format(appDate);
+            String query = "SELECT * FROM Appointment WHERE patientId = " + patient1.getPatientID() + " AND date = '" + formattedDate +"' ;";
+            ArrayList<Appointment> matched = new ArrayList<>();
+            try{
+                ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+                while (resultSet.next()) {
+                    matched.add(buildAppointment(resultSet));
+                }
+                resultSet.close();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+            Appointment app = new Appointment();
+            app.setPatientID(patient2.getPatientID());
+            app.setDate(appDate);
+            app.setPaidCost(paidCost);
+            return updateAppointmentByID(matched.get(0).getAppointmentID(), app);
+        }
+    }
+
     private static Appointment buildAppointment(ResultSet rs){
         Appointment app = new Appointment();
         try {
@@ -117,4 +176,6 @@ public class AppointmentDAO {
         }
         return null;
     }
+
+
 }

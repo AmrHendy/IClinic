@@ -46,6 +46,36 @@ public class PatientDAO {
         return matched;
     }
 
+    public static ArrayList<Patient> findByFileNumberLike(String file_number){
+        String query = "SELECT * FROM Patient WHERE file_number LIKE '" + file_number + "%' ;";
+        ArrayList<Patient> matched = new ArrayList<>();
+        try{
+            ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+            while (resultSet.next()) {
+                matched.add(buildPatient(resultSet));
+            }
+            resultSet.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return matched;
+    }
+
+    public static ArrayList<Patient> findByNameLike(String patientName){
+        String query = "SELECT * FROM Patient WHERE file_number LIKE '%" + patientName + "' ;";
+        ArrayList<Patient> matched = new ArrayList<>();
+        try{
+            ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+            while (resultSet.next()) {
+                matched.add(buildPatient(resultSet));
+            }
+            resultSet.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return matched;
+    }
+
     public static Patient findByFileNumber(String file_number){
         // we will use the current logged in user to get the clinic number and use it in the where condition
         String query = "SELECT * FROM Patient WHERE file_number = '" + file_number + "' ;";

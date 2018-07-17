@@ -1,5 +1,8 @@
 package main.java.model;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import main.java.beans.User;
 import main.java.services.PasswordEncryptionService;
 
@@ -127,5 +130,26 @@ public class UserDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static boolean deleteUser(String userName){
+        String query = "DELETE FROM User WHERE userName = '" + userName + "' ;";
+        return ModelManager.getInstance().executeUpdateQuery(query);
+    }
+
+    public static ObservableList<String> getClinics(){
+         String query = "SELECT DISTINCT clinic FROM User";
+         ObservableList<String> result = FXCollections.observableArrayList();
+         try{
+            ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+            while (resultSet.next()) {
+                result.add(resultSet.getString("clinic"));
+            }
+                resultSet.close();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+            return result;
+        }
     }
 }
