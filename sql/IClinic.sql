@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`Patient` (
   CONSTRAINT `clinic_fk`
     FOREIGN KEY (`clinic_number`)
     REFERENCES `IClinic`.`User` (`clinic`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -66,15 +66,22 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`Appointment` (
   `image` LONGBLOB NULL,
   `comment` VARCHAR(125) NULL,
   `confirmed_paid` TINYINT NULL DEFAULT 0,
+  `clinic_number` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `patient_index` (`patientId` ASC),
   INDEX `date_index` (`date` ASC),
   INDEX `finished_index` (`finished` ASC),
+  INDEX `fk_appointment_clinic_number_idx` (`clinic_number` ASC),
   CONSTRAINT `fk_appointment_patient_id`
     FOREIGN KEY (`patientId`)
     REFERENCES `IClinic`.`Patient` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_appointment_clinic_number`
+    FOREIGN KEY (`clinic_number`)
+    REFERENCES `IClinic`.`User` (`clinic`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
