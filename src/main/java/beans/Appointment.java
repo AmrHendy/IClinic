@@ -159,7 +159,6 @@ public class Appointment {
         return patient;
     }
 
-
     public String getPatientName(){
         return getPatient().getPatientName();
     }
@@ -174,5 +173,9 @@ public class Appointment {
 
     public String getClinicNumber(){
         return String.valueOf(getPatient().getClinic_number());
+    }
+
+    public void setClinicNumber(int clinicNumber){
+        this.clinicNumber = clinicNumber;
     }
 }

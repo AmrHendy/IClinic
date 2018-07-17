@@ -4,6 +4,7 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.beans.User;
+import main.java.beans.UserSignedInData;
 import main.java.services.PasswordEncryptionService;
 
 import java.security.NoSuchAlgorithmException;
@@ -31,9 +32,11 @@ public class UserDAO {
                     if(pw.authenticate(password, rs.getBytes("password"), rs.getBytes("salt"))) {
                         System.out.println("CORRECT PASSWORD");
                         status = true;
+                        UserSignedInData.user = getUser(userName);
                     } else {
                         System.out.println("WRONG PASSWORD: ");
                         status = false;
+                        UserSignedInData.user = null;
                     }
                 } catch (NoSuchAlgorithmException | InvalidKeySpecException | SQLException e) {
                     e.printStackTrace();
@@ -45,7 +48,6 @@ public class UserDAO {
         }
         return status;
     }
-
 
     public static boolean register(User user) {
         boolean status = false;
