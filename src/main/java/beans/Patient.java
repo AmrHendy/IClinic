@@ -61,7 +61,7 @@ public class Patient {
     }
 
     public String getDateString() {
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd hh:mm:ss");
         String formattedDate = dt.format(birthdate);
         return formattedDate;
     }
@@ -90,7 +90,7 @@ public class Patient {
     }
 
     public void setBirthdate(String date) {
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd hh:mm:ss");
         Date formattedDate = null;
         try {
             formattedDate = dt.parse(date);
