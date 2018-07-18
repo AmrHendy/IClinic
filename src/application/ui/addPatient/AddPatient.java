@@ -14,11 +14,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import main.java.beans.Patient;
+import main.java.beans.User;
 import main.java.model.PatientDAO;
+import main.java.model.UserDAO;
+import main.java.validator.PatientValidator;
 
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddPatient implements Initializable {
@@ -46,35 +50,39 @@ public class AddPatient implements Initializable {
 
     @FXML
     void cancel(MouseEvent event) {
-        String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
-        Alert alert = MessagesController.getAlert(msg, Alert.AlertType.CONFIRMATION);
-        alert.setTitle("تحذير");
-        if(alert.getResult() == ButtonType.YES) {
-            //((Node) (event.getSource())).getScene().getWindow().hide();
+        if(patientName.getText() != null || address.getText() != null ||
+                phoneNumber.getText() != null || dateOfBirth.getValue() != null
+                || clinicNumber.getValue() != null){
+            String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
+            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.CONFIRMATION);
         }
     }
 
     @FXML
     void save(MouseEvent event) {
-        //TODO:: add validation here.
+
         Patient patient = new Patient();
         patient.setPatientName(patientName.getText());
         patient.setAddress(address.getText());
         LocalDate date = dateOfBirth.getValue();
         patient.setBirthdate(Date.valueOf(date));
-        //TODO:: add set phone number here.
         patient.setPhoneNumber(phoneNumber.getText());
-        PatientDAO.addPatient(patient);
+        ArrayList<String> msgs = PatientValidator.insertingValidator(patient);
+        if(msgs.size() > 0){
+            Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.ERROR);
+        }else{
+            if(!PatientDAO.addPatient(patient)){
+                String msg = "لا يمكن اتمام اضافة مريض اعد المحاولة.";
+                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            }
+        }
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO:: add Values from database.
-        ObservableList<String> options = FXCollections.observableArrayList(
-                "1",
-                "2"
-        );
+        //TODO:: How to add clinics.
+        ObservableList<String> options = FXCollections.observableArrayList(UserDAO.getClinics());
         clinicNumber.getItems().addAll(options);
     }
 }
