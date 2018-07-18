@@ -55,6 +55,7 @@ public class AppointmentDAO {
     }
 
     public static ArrayList<Appointment> findByDate(Date date){
+        //TODO:: changed mm to MM as mm is the minutes and MM is the months.
         SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
         String formattedDate = dt.format(date);
         String query = "SELECT * FROM Appointment WHERE CAST(Appointment.date as date) = '" + formattedDate + "'"
@@ -200,7 +201,7 @@ public class AppointmentDAO {
             app.setComment(rs.getString("comment"));
 
             app.setConfirmedPaid(rs.getBoolean("confirmed_paid"));
-            app.setClinicNumber(rs.getInt("clinic_number"))
+            app.setClinicNumber(rs.getInt("clinic_number"));
             return app;
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();

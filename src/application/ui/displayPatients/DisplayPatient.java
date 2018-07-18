@@ -101,7 +101,7 @@ public class DisplayPatient implements Initializable {
         boolean finished = true;
         for(int i = 0 ;i < list.size(); i++){
             Patient patient  = list.get(i);
-            finished = PatientDAO.updatePatient(patient.getPatientID(), patient);
+            finished = PatientDAO.updatePatient(patient.getFile_number(), patient);
             if(!finished){
                 msg.add("لا يمكن تعديل " + patient.getPatientID() + ": " + patient.getPatientName());
                 showMsg = true;

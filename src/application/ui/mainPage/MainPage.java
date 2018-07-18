@@ -4,6 +4,7 @@ import application.ui.handler.TimeGenerator;
 import application.ui.handler.WindowHandlers;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,10 @@ import main.java.model.AppointmentDAO;
 import main.java.util.UiUtil;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -24,7 +29,7 @@ import java.util.ResourceBundle;
 public class MainPage implements Initializable {
 
     @FXML
-    private TableView<Appointment> TodaySession;
+    private TableView<Appointment> todaySession;
 
     @FXML
     private TableColumn<Appointment, String> time;
@@ -62,7 +67,9 @@ public class MainPage implements Initializable {
     @FXML
     private TableColumn<Appointment, String> money1;
 
-    private
+    private ObservableList<Appointment> tmpTodayTableData;
+
+    private ObservableList<Appointment> tmpSearchTableData;
 
     private WindowHandlers windowHandlers;
 
@@ -126,31 +133,74 @@ public class MainPage implements Initializable {
         phoneNumber1.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         patientNumber1.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
         money1.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
+        //TODO:: initialize today session here.
+        searchSessionsTable.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getDate())));
+        tmpTodayTableData.addAll(searchSessionsTable.getItems());
     }
 
 
     @FXML
     void saveInSearch(MouseEvent event) {
-        ObservableList<Appointment> tableData = searchSessionsTable.getItems();
-        for(Appointment item : ta)
+        ObservableList<Appointment> appointments = searchSessionsTable.getItems();
+        ObservableList<Appointment> remaining = FXCollections.observableArrayList();
+        ArrayList<String> msgs = new ArrayList<>();
+        for(int i = 0 ;i < appointments.size(); i++){
+            Appointment appointment = appointments.get(i);
+            if(AppointmentDAO.updateAppointmentByID(appointment.getAppointmentID(), appointment)){
+                remaining.add(appointment);
+                String msg = "لا يمكن تعديل " + appointment.getPatientName() + " : " + appointment.getPatientFileID();
+                msgs.add(msg);
+            }else{
+                remaining.add(tmpSearchTableData.get(i));
+            }
+        }
+        searchSessionsTable.setItems(remaining);
+        tmpSearchTableData.setAll(remaining);
     }
 
     @FXML
     void saveInToday(MouseEvent event){
-
+        ObservableList<Appointment> appointments = todaySession.getItems();
+        ObservableList<Appointment> remaining = FXCollections.observableArrayList();
+        ArrayList<String> msgs = new ArrayList<>();
+        for(int i = 0 ;i < appointments.size(); i++){
+            Appointment appointment = appointments.get(i);
+            if(AppointmentDAO.updateAppointmentByID(appointment.getAppointmentID(), appointment)){
+                remaining.add(appointment);
+                String msg = "لا يمكن تعديل " + appointment.getPatientName() + " : " + appointment.getPatientFileID();
+                msgs.add(msg);
+            }else{
+                remaining.add(tmpTodayTableData.get(i));
+            }
+        }
+        todaySession.setItems(remaining);
+        tmpTodayTableData.setAll(remaining);
     }
 
     @FXML
     void searchAppointment(MouseEvent event) {
         if(chooseDate.getValue() != null){
-            SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
-            //TODO:: search for it.
-            Date date = dt.parse(chooseDate.getValue());
+            SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd");
+            Date date = getDate();
             ArrayList<Appointment> list = AppointmentDAO.findByDate(date);
             searchSessionsTable.setItems(UiUtil.getAppointmentObservable(list));
-
+            tmpSearchTableData.setAll(searchSessionsTable.getItems());
         }
     }
+
+    private Date getDate() {
+        LocalDate localDate = chooseDate.getValue();
+        if(chooseDate.getValue() == null){
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date today = new Date();
+            System.out.println(dateFormat.format(today));
+            return today;
+        }
+        Date ret = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        System.out.println(ret);
+        return ret;
+    }
+
 
 
 
