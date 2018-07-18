@@ -37,7 +37,6 @@ public class LoginForm {
         }
 
         boolean loginSuccess = UserDAO.login(nameField.getText(), passwordField.getText());
-        boolean loginSuccess= true;
         if(loginSuccess){
                 try {
                     WindowHandlers windowHandlers = WindowHandlers.getInstance();
