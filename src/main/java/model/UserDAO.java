@@ -154,5 +154,20 @@ public class UserDAO {
                 e.printStackTrace();
             }
             return result;
+    }
+
+    public static boolean registerAdmin(){
+        User user = new User();
+        PasswordEncryptionService pw = new PasswordEncryptionService();
+        try {
+            byte[] salt = pw.generateSalt();
+            user.setSalt(salt);
+            user.setUserName("admin");
+            user.setClinic(0);
+            user.setEncryptedPassword(pw.getEncryptedPassword("admin", salt));
+            return register(user);
+        } catch(Exception e){
+            return false;
         }
+    }
 }
