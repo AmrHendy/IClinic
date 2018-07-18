@@ -24,7 +24,6 @@ public class Patient {
 
     public Patient(){
         remainingCost = 0;
-        clinic_number = -1;
     }
 
     public String getFile_number() {

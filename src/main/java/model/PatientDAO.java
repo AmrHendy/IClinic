@@ -2,6 +2,7 @@ package main.java.model;
 
 import main.java.beans.Appointment;
 import main.java.beans.Patient;
+import main.java.beans.UserSignedInData;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class PatientDAO {
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
-    public static boolean updatePatient(int id, Patient newPatient){
+    public static boolean updatePatient(String oldFileNumber, Patient newPatient){
         String query = "UPDATE Patient SET "
                         + "name = '" + newPatient.getPatientName() + "' , "
                         + "address = '" + newPatient.getAddress() + "' , "
@@ -27,12 +28,12 @@ public class PatientDAO {
                         + "mobile_number = '" + newPatient.getPhoneNumber() + "' , "
                         + "file_number = '" + newPatient.getFile_number() + "' , "
                         + "clinic_number = " + newPatient.getClinic_number()
-                        + " WHERE id = " + id + " ;";
+                        + " WHERE file_number = '" + oldFileNumber + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
     public static ArrayList<Patient> findByID(int id){
-        String query = "SELECT * FROM Patient WHERE id = " + id + " ;";
+        String query = "SELECT * FROM Patient WHERE id = " + id + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -47,7 +48,7 @@ public class PatientDAO {
     }
 
     public static ArrayList<Patient> findByFileNumberLike(String file_number){
-        String query = "SELECT * FROM Patient WHERE file_number LIKE '" + file_number + "%' ;";
+        String query = "SELECT * FROM Patient WHERE file_number LIKE '" + file_number + "%' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -62,7 +63,7 @@ public class PatientDAO {
     }
 
     public static ArrayList<Patient> findByNameLike(String patientName){
-        String query = "SELECT * FROM Patient WHERE file_number LIKE '%" + patientName + "' ;";
+        String query = "SELECT * FROM Patient WHERE file_number LIKE '%" + patientName + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -78,7 +79,7 @@ public class PatientDAO {
 
     public static Patient findByFileNumber(String file_number){
         // we will use the current logged in user to get the clinic number and use it in the where condition
-        String query = "SELECT * FROM Patient WHERE file_number = '" + file_number + "' ;";
+        String query = "SELECT * FROM Patient WHERE file_number = '" + file_number + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -99,7 +100,7 @@ public class PatientDAO {
 
     // use this for lazy loading if you want
     public static ArrayList<Patient> findByName(String name, int limit){
-        String query = "SELECT * FROM Patient WHERE name = " + "'" + name + "'";
+        String query = "SELECT * FROM Patient WHERE name = " + "'" + name + "' AND clinic_number = " + UserSignedInData.user.getClinic();
         if(limit != -1){
             query += " LIMIT " + limit;
         }
@@ -120,7 +121,7 @@ public class PatientDAO {
 
     public static boolean deletePatient(int id){
         AppointmentDAO.deleteAllAppointmentByPatientID(id);
-        String query = "DELETE FROM Patient WHERE id = " + id + " ;";
+        String query = "DELETE FROM Patient WHERE id = " + id + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 

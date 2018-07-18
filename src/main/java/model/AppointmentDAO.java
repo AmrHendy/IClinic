@@ -2,6 +2,7 @@ package main.java.model;
 
 import main.java.beans.Appointment;
 import main.java.beans.Patient;
+import main.java.beans.UserSignedInData;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,11 +21,11 @@ import java.util.Date;
 public class AppointmentDAO {
 
     public static boolean addAppointment(Appointment app){
-        String query = "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment, confirmed_paid) VALUES ( "
+        String query = "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment, confirmed_paid, clinic_number) VALUES ( "
                 + app.getPatientID() + " , " + "'" + app.getDateString() + "'" + " , "
                 + app.getPaidCost() + " , " + (app.isFinished() ? 1 : 0) + " , "
                 + "'" + app.getImageBytes() + "'" + " , " + "'" + app.getComment() + "'" + " , "
-                + (app.isConfirmedPaid() ? 1 : 0) + " );" ;
+                + (app.isConfirmedPaid() ? 1 : 0) + " , " + UserSignedInData.user.getClinic() + " );" ;
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
@@ -34,12 +35,12 @@ public class AppointmentDAO {
     }
 
     public static boolean deleteAllAppointmentByPatientID(int patientID){
-        String query = "DELETE FROM Appointment WHERE patientId = " + patientID + " ;";
+        String query = "DELETE FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
     public static ArrayList<Appointment> findByPatientID(int patientID){
-        String query = "SELECT * FROM Appointment WHERE patientId = " + patientID + " ;";
+        String query = "SELECT * FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -56,7 +57,8 @@ public class AppointmentDAO {
     public static ArrayList<Appointment> findByDate(Date date){
         SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
         String formattedDate = dt.format(date);
-        String query = "SELECT * FROM Appointment WHERE CAST(Appointment.date as date) = '" + formattedDate + "'" + " ORDER BY date ;";
+        String query = "SELECT * FROM Appointment WHERE CAST(Appointment.date as date) = '" + formattedDate + "'"
+                        + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ORDER BY date ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -116,7 +118,8 @@ public class AppointmentDAO {
             Patient patient = PatientDAO.findByFileNumber(patientFileIDBefore);
             SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
             String formattedDate = dt.format(appDate);
-            String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate +"' ;";
+            String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
+                            + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
             ArrayList<Appointment> matched = new ArrayList<>();
             try{
                 ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -135,7 +138,8 @@ public class AppointmentDAO {
             Patient patient2 = PatientDAO.findByFileNumber(patientFileIDAfter);
             SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
             String formattedDate = dt.format(appDate);
-            String query = "SELECT * FROM Appointment WHERE patientId = " + patient1.getPatientID() + " AND date = '" + formattedDate +"' ;";
+            String query = "SELECT * FROM Appointment WHERE patientId = " + patient1.getPatientID() + " AND date = '" + formattedDate
+                            + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
             ArrayList<Appointment> matched = new ArrayList<>();
             try{
                 ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -154,6 +158,32 @@ public class AppointmentDAO {
         }
     }
 
+    public static boolean confirmPaidCost(String patientFileID, Date appDate){
+        Patient patient = PatientDAO.findByFileNumber(patientFileID);
+        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+        String formattedDate = dt.format(appDate);
+        String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
+                + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
+        ArrayList<Appointment> matched = new ArrayList<>();
+        try{
+            ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+            while (resultSet.next()) {
+                matched.add(buildAppointment(resultSet));
+            }
+            resultSet.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        if(matched.isEmpty())return false;
+        if(!matched.get(0).isConfirmedPaid()){
+            matched.get(0).setConfirmedPaid(true);
+            patient.setRemainingCost(Math.max(patient.getRemainingCost() - matched.get(0).getPaidCost(), 0));
+            AppointmentDAO.updateAppointmentByID(matched.get(0).getAppointmentID(), matched.get(0));
+            PatientDAO.updatePatient(patient.getFile_number(), patient);
+        }
+        return true;
+    }
+
     private static Appointment buildAppointment(ResultSet rs){
         Appointment app = new Appointment();
         try {
@@ -170,12 +200,11 @@ public class AppointmentDAO {
             app.setComment(rs.getString("comment"));
 
             app.setConfirmedPaid(rs.getBoolean("confirmed_paid"));
+            app.setClinicNumber(rs.getInt("clinic_number"))
             return app;
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-
 }
