@@ -21,13 +21,12 @@ public class Appointment {
     private String comment;
     private boolean confirmed_paid;
 
-    //TODO
     private String patientName;
     private String patientFileID;
-    private String PatientMobile;
     private int clinicNumber;
     private Date dateOnly;
     private Date timeOnly;
+    private String phoneNumber;
 
     public Appointment(){
         finished = false;
@@ -56,6 +55,7 @@ public class Appointment {
     public Date getDate() {
         return date;
     }
+
 
     public String getDateString() {
         SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
@@ -156,6 +156,9 @@ public class Appointment {
 
     public Patient getPatient(){
         Patient patient = PatientDAO.findByID(patientID).get(0);
+        if(patient == null){
+            patient = new Patient();
+        }
         return patient;
     }
 
@@ -168,7 +171,7 @@ public class Appointment {
         return getPatient().getFile_number();
     }
 
-    public String getPatientPhone(){
+    public String getPhoneNumber(){
         return getPatient().getPhoneNumber();
     }
 

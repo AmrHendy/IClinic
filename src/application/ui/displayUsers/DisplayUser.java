@@ -111,9 +111,9 @@ public class DisplayUser implements Initializable {
         ObservableList<User> firstTenID = FXCollections.observableArrayList();
         for(int i = 0 ;i < limit; i++){
             //TODO:: find by id must return only one User by id?
-            firstTenID.add(UserDAO.getUserByID(i));
+            //firstTenID.add(UserDAO.getUserByID(i));
         }
         userTable.getItems().setAll(firstTenID);
-        tmpTableData.setAll(userTable.getItems());
+        //tmpTableData.setAll(userTable.getItems());
     }
 }

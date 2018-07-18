@@ -2,8 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33f578a9-4500-4c05-8c97-bbb537cad10d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/ui/addUsers/AddUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/addUsers/AddUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/addPatient/AddPatient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/addPatient/AddPatient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/addUsers/AddUsers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/addUsers/AddUsers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayPatients/DisplayPatient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayPatients/DisplayPatient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayPatients/displayPatient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayPatients/displayPatient.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayUsers/DisplayUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayUsers/DisplayUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayUsers/displayUsers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayUsers/displayUsers.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/handler/MessagesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/handler/MessagesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/mainPage/MainPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/mainPage/MainPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/patientProfile/patientProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/application/ui/patientProfile/patientProfile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/main/java/beans/Appointment.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/main/java/beans/Appointment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/IClinic/main/java/beans/Patient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/IClinic/main/java/beans/Patient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/mainPage/mainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/mainPage/mainPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/patientProfile/patientProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/patientProfile/patientProfile.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/beans/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/beans/Appointment.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,58 +48,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/model/UserDAO.java">
+      <file leaf-file-name="Appointment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/beans/Appointment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="40" column="74" selection-start-line="40" selection-start-column="74" selection-end-line="40" selection-end-column="74" />
+            <state relative-caret-position="187">
+              <caret line="19" column="24" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DisplayUser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
+      <file leaf-file-name="MainPage.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="116" column="37" selection-start-line="116" selection-start-column="37" selection-end-line="116" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1056#1064#0" expanded="true" />
-                <element signature="e#1538#1546#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddUsers.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/application/ui/addUsers/AddUsers.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="66" column="81" selection-start-line="66" selection-start-column="81" selection-end-line="66" selection-end-column="81" />
+            <state relative-caret-position="-969">
+              <caret line="64" column="11" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddPatient.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="83" column="36" selection-start-line="83" selection-start-column="36" selection-end-line="83" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/beans/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="22" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -91,8 +72,8 @@
       <file leaf-file-name="DisplayPatient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="130" column="53" lean-forward="true" selection-start-line="124" selection-start-column="8" selection-end-line="130" selection-end-column="53" />
+            <state relative-caret-position="1734">
+              <caret line="120" column="47" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,9 +97,13 @@
     <findStrings>
       <find>connection</find>
       <find>charEntered</find>
-      <find>getPhoneNumber</find>
       <find>phoneNum</find>
+      <find>getPhoneNumber</find>
       <find>phoneNumber</find>
+      <find>PatientMobile</find>
+      <find>patientFileID</find>
+      <find>Date</find>
+      <find>Date date</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -164,20 +149,20 @@
         <option value="$PROJECT_DIR$/src/main/java/services/PasswordEncryptionService.java" />
         <option value="$PROJECT_DIR$/src/main/java/beans/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/validator/UserValidator.java" />
-        <option value="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" />
         <option value="$PROJECT_DIR$/src/application/ui/handler/messagesController.java" />
         <option value="$PROJECT_DIR$/src/main/java/validator/PatientValidator.java" />
         <option value="$PROJECT_DIR$/src/application/ui/handler/TimeGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/PatientDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/beans/Appointment.java" />
         <option value="$PROJECT_DIR$/src/application/ui/handler/UserSingedInData.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/beans/Patient.java" />
         <option value="$PROJECT_DIR$/src/application/ui/handler/MessagesController.java" />
-        <option value="$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java" />
-        <option value="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" />
         <option value="$PROJECT_DIR$/src/application/ui/addUsers/AddUsers.java" />
         <option value="$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java" />
+        <option value="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/beans/Appointment.java" />
+        <option value="$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java" />
+        <option value="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" />
       </list>
     </option>
   </component>
@@ -197,9 +182,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="395" />
-    <option name="y" value="-30" />
-    <option name="width" value="980" />
+    <option name="x" value="-10" />
+    <option name="width" value="979" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -329,9 +313,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -519,51 +503,54 @@
       <workItem from="1531814235457" duration="7009000" />
       <workItem from="1531822959285" duration="1395000" />
       <workItem from="1531870252401" duration="5607000" />
-      <workItem from="1531878656337" duration="7078000" />
+      <workItem from="1531878656337" duration="7145000" />
+      <workItem from="1531891374571" duration="3371000" />
+      <workItem from="1531896830966" duration="7000" />
+      <workItem from="1531912315601" duration="474000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92989000" />
+    <option name="totallyTimeSpent" value="96908000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Palette" order="8" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="1" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.30369356" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Capture Tool" order="3" />
-      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.28864568" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="Designer" order="3" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16015625" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info id="Learn" order="2" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="2" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info id="Learn" order="6" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="JetGradle" order="10" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32831737" />
+      <window_info anchor="right" id="JetGradle" order="9" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32831737" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32968536" />
-      <window_info anchor="bottom" id="Changes" order="16" />
+      <window_info anchor="bottom" id="Changes" order="12" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Profiler" order="16" />
-      <window_info anchor="bottom" id="Problems" order="16" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Profiler" order="13" />
+      <window_info anchor="bottom" id="Problems" order="14" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Application Servers" order="16" />
+      <window_info anchor="bottom" id="Application Servers" order="15" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,12 +584,16 @@
     <MESSAGE value="adding basic login and register views" />
     <option name="LAST_COMMIT_MESSAGE" value="adding basic login and register views" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/controller/LoginForm.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/view/login_form.fxml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/view/EditSession.fxml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/view/ViewSession.fxml" />
@@ -620,21 +611,21 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/view/userSession.fxml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/view/AddUser.fxml" />
     <entry file="file://$PROJECT_DIR$/src/sample/MainPage.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="535">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/application/model/LoginFormApplication.java" />
     <entry file="file://$PROJECT_DIR$/src/application/ui/displayPatients/displayPatient.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="15" column="45" lean-forward="true" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/javafx.graphics/javafx/application/Application.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -659,20 +650,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/ui/handler/ScheduleLine.java" />
     <entry file="file://$PROJECT_DIR$/src/application/ui/addUsers/addUsers.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
           <caret line="37" column="57" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/ui/addPatient/addPatient.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/sql/IClinic.sql">
       <provider selected="true" editor-type-id="text-editor">
@@ -703,14 +694,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/services/SqlInjectionProtector.java" />
-    <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/displayUsers.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/validator/abstractValidator.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/validator/ValidatorIF.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/services/PasswordEncryptionService.java">
@@ -727,32 +710,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/patientProfile/patientProfile.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/patientProfile/PatientProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/handler/TimeGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -764,15 +725,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/mainPage.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/beans/Appointment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/ui/handler/WindowHandlers.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -788,16 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="104" column="64" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/beans/Patient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-540">
@@ -805,20 +749,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/AppointmentDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/PatientDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="669">
           <caret line="134" column="35" selection-start-line="134" selection-start-column="35" selection-end-line="134" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -829,19 +763,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="130" column="53" lean-forward="true" selection-start-line="124" selection-start-column="8" selection-end-line="130" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/UserDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="493">
           <caret line="40" column="74" selection-start-line="40" selection-start-column="74" selection-end-line="40" selection-end-column="74" />
         </state>
       </provider>
@@ -850,9 +774,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -860,31 +781,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="116" column="37" selection-start-line="116" selection-start-column="37" selection-end-line="116" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1056#1064#0" expanded="true" />
-            <element signature="e#1538#1546#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/addUsers/AddUsers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="66" column="81" selection-start-line="66" selection-start-column="81" selection-end-line="66" selection-end-column="81" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -892,6 +788,88 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="83" column="36" selection-start-line="83" selection-start-column="36" selection-end-line="83" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/patientProfile/patientProfile.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/displayUsers.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/addUsers/AddUsers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="66" column="81" selection-start-line="66" selection-start-column="81" selection-end-line="66" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/javafx.fxml/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="2624" selection-start-line="2624" selection-end-line="2624" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/patientProfile/PatientProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/AppointmentDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/handler/TimeGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="33" column="50" lean-forward="true" selection-start-line="33" selection-start-column="50" selection-end-line="33" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1734">
+          <caret line="120" column="47" selection-start-line="120" selection-start-column="47" selection-end-line="120" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/beans/Appointment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-969">
+          <caret line="64" column="11" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

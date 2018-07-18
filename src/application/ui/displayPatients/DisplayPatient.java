@@ -118,6 +118,7 @@ public class DisplayPatient implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //TODO:: add remaining money here also.
         patientFIleID.setCellValueFactory(new PropertyValueFactory<>("file_number"));
         patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
@@ -125,9 +126,9 @@ public class DisplayPatient implements Initializable {
         ObservableList<Patient> firstTenID = FXCollections.observableArrayList();
         for(int i = 0 ;i < limit; i++){
             //TODO:: find by id must return only one Patient?
-            firstTenID.add(PatientDAO.findByID(i));
+            //firstTenID.add(PatientDAO.findByID(i));
         }
         patientTable.getItems().setAll(firstTenID);
-        tmpTableData.setAll(patientTable.getItems());
+        //tmpTableData.setAll(patientTable.getItems());
     }
 }

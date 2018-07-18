@@ -15,7 +15,6 @@
             <ToolBar prefHeight="40.0" prefWidth="10000.0">
                <items>
                   <TextField fx:id="userName" onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="304.0" promptText="اسم المستخدم" />
-                  <JFXButton text="بحث" />
                </items>
             </ToolBar>
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
@@ -26,8 +25,8 @@
             </ToolBar>
             <TableView fx:id="userTable" prefHeight="10000.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="اسم المستخدم" />
-                  <TableColumn prefWidth="75.0" text="تاريخ الانضمام" />
+                  <TableColumn fx:id="userNameColumn" prefWidth="75.0" text="اسم المستخدم" />
+                  <TableColumn fx:id="clinicNumber" prefWidth="75.0" text="رقم العيادة" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
