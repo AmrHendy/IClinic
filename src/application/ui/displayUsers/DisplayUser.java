@@ -26,51 +26,68 @@ public class DisplayUser {
     @FXML
     private TableView<User> userTable;
 
+    private ObservableList<User> tmpTableData;
+
     @FXML
     void SaveChanges(MouseEvent event) {
-        for(int i = 0 ;i < userTable.getItems().size(); i++){
-            User user = userTable.getItems().get(i);
-            UserDAO.updateUser(user.getUserID(), user);
+        boolean showMsg = false;
+        ObservableList<User> list = userTable.getItems();
+        ObservableList<User> showThem = FXCollections.observableArrayList();
+        ArrayList<String> msg = new ArrayList<String>();
+        boolean finished = true;
+        for (int i = 0; i < list.size(); i++) {
+            User user = list.get(i);
+            finished = UserDAO.updateUser(user.getUserID(), user);
+            if (!finished) {
+                msg.add("لا يمكن تعديل " + user.getUserID() + ": " + user.getUserName());
+                showMsg = true;
+                showThem.add(tmpTableData.get(i));
+            } else {
+                showThem.add(user);
+            }
         }
+        if (showMsg) {
+            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+        }
+        userTable.setItems(showThem);
     }
 
     @FXML
     void charEntered(KeyEvent event) {
-        //TODO:: search must be with LIKE in SQL so the result may be many of Users.
-        User user = UserDAO.getUser(userName.getText());
-        userTable.getItems().add(user);
+        //TODO:: getuser must implemented with LIKE and return multiple values.
+        String name = userName.getText();
+        if (name != null) {
+            userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser(name)));
+        }
+        tmpTableData.setAll(userTable.getItems());
     }
 
     @FXML
     void deleteUser(MouseEvent event) {
-        if(userTable.getSelectionModel().getSelectedCells().size() == 0){
-            return;
-        }
         boolean finished = true;
         boolean showMsg = false;
         ArrayList<String> msg = new ArrayList<String>();
         ObservableList<User> remaining = FXCollections.observableArrayList();
-        //Note selectedCells may need to be selectedItems (type user).
         for (int i = 0; i < userTable.getSelectionModel().getSelectedCells().size(); i++) {
             TablePosition pos = userTable.getSelectionModel().getSelectedCells().get(i);
             int row = pos.getRow();
             User user = userTable.getItems().get(row);
             finished = UserDAO.deleteUser(user.getUserName());
-            if(!finished){
+            if (!finished) {
                 msg.add("لا يمكن مسح " + user.getUserName());
                 remaining.add(user);
                 showMsg = true;
-            }else{
+            } else {
                 userTable.getItems().set(row, null);
             }
         }
-        for(int i = 0 ;i < userTable.getItems().size(); i++){
+        for (int i = 0; i < userTable.getItems().size(); i++) {
             User user = userTable.getItems().get(i);
-            if(user != null){
+            if (user != null) {
                 remaining.add(user);
             }
         }
-        if(showMsg){
+        if (showMsg) {
             MessagesController.getAlert(msg, Alert.AlertType.ERROR);
             userTable.setItems(remaining);
         }

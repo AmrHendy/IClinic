@@ -123,7 +123,7 @@ public class DisplayPatient implements Initializable {
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
         ObservableList<Patient> firstTenID = FXCollections.observableArrayList();
         for(int i = 0 ;i < limit; i++){
-            //TODO:: find by id must return only on Patient?
+            //TODO:: find by id must return only one Patient?
             firstTenID.add(PatientDAO.findByID(i));
         }
         patientTable.getItems().setAll(firstTenID);
