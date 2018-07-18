@@ -25,8 +25,8 @@
             </ToolBar>
             <TableView fx:id="userTable" prefHeight="10000.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="اسم المستخدم" />
-                  <TableColumn prefWidth="75.0" text="تاريخ الانضمام" />
+                  <TableColumn fx:id="userNameColumn" prefWidth="75.0" text="اسم المستخدم" />
+                  <TableColumn fx:id="clinicNumber" prefWidth="75.0" text="رقم العيادة" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

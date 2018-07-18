@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DisplayPatient implements Initializable {
+
     private final int limit = 10;
 
     @FXML

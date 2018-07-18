@@ -4,10 +4,9 @@ import application.ui.handler.MessagesController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import main.java.beans.Patient;
@@ -16,15 +15,26 @@ import main.java.model.PatientDAO;
 import main.java.model.UserDAO;
 import main.java.util.UiUtil;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class DisplayUser {
+public class DisplayUser implements Initializable {
+
+    private final int limit = 10;
 
     @FXML
     private TextField userName;
 
     @FXML
     private TableView<User> userTable;
+
+
+    @FXML
+    private TableColumn<User, String> userNameColumn;
+
+    @FXML
+    private TableColumn<User, String> clinicNumber;
 
     private ObservableList<User> tmpTableData;
 
@@ -91,5 +101,19 @@ public class DisplayUser {
             MessagesController.getAlert(msg, Alert.AlertType.ERROR);
             userTable.setItems(remaining);
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinic"));
+
+        ObservableList<User> firstTenID = FXCollections.observableArrayList();
+        for(int i = 0 ;i < limit; i++){
+            //TODO:: find by id must return only one User by id?
+            firstTenID.add(UserDAO.getUserByID(i));
+        }
+        userTable.getItems().setAll(firstTenID);
+        tmpTableData.setAll(userTable.getItems());
     }
 }
