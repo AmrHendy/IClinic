@@ -18,7 +18,7 @@ public class Patient {
     private String address;
     private Date birthdate;
     private int remainingCost;
-    private String mobileNumber;
+    private String phoneNumber;
     private String file_number;
     private int clinic_number;
 
@@ -71,7 +71,7 @@ public class Patient {
         return remainingCost;
     }
 
-    public String getPhoneNumber() { return mobileNumber; }
+    public String getPhoneNumber() { return phoneNumber; }
 
     // Setters
     public void setPatientID(int patientID) {
@@ -105,7 +105,7 @@ public class Patient {
         this.remainingCost = remainingCost;
     }
 
-    public void setPhoneNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

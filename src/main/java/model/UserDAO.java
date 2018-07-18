@@ -1,5 +1,6 @@
 package main.java.model;
 
+import application.ui.handler.UserSingedInData;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +32,9 @@ public class UserDAO {
                     if(pw.authenticate(password, rs.getBytes("password"), rs.getBytes("salt"))) {
                         System.out.println("CORRECT PASSWORD");
                         status = true;
+                        UserSingedInData.user = getUser(userName);
                     } else {
+                        UserSingedInData.user = null;
                         System.out.println("WRONG PASSWORD: ");
                         status = false;
                     }
@@ -151,5 +154,4 @@ public class UserDAO {
             }
             return result;
         }
-    }
 }

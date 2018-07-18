@@ -1,11 +1,15 @@
 package application.ui.addUsers;
 
+import application.ui.handler.MessagesController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import main.java.beans.User;
 import main.java.model.UserDAO;
@@ -33,7 +37,12 @@ public class AddUsers implements Initializable {
 
     @FXML
     void cancel(MouseEvent event) {
-        //TODO:: add pop up menu to confirm exit.
+        String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
+        Alert alert = MessagesController.getAlert(msg, Alert.AlertType.CONFIRMATION);
+        alert.setTitle("تحذير");
+        if(alert.getResult() == ButtonType.YES) {
+            //((Node) (event.getSource())).getScene().getWindow().hide();
+        }
     }
 
     @FXML
@@ -46,8 +55,10 @@ public class AddUsers implements Initializable {
         }
         PasswordEncryptionService encryptionService = new PasswordEncryptionService();
         byte[] enc = {};
+        byte[] salt = {};
         try{
-            enc = encryptionService.getEncryptedPassword(pass, encryptionService.generateSalt());
+            salt = encryptionService.generateSalt();
+            enc = encryptionService.getEncryptedPassword(pass, salt);
         } catch (Exception e) {
             //TODO:: log4j and pop menu.
             return;
@@ -55,9 +66,9 @@ public class AddUsers implements Initializable {
         User user = new User();
         user.setClinic(Integer.valueOf(clinicNumber.getValue()));
         user.setEncryptedPassword(enc);
-        //TODO:: make userID a auto increment value.
-        user.setUserID();
+        user.setSalt(salt);
         user.setUserName(userName.getText());
+        //TODO:: add check if not inserted.
         UserDAO.register(user);
     }
 

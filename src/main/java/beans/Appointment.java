@@ -22,9 +22,9 @@ public class Appointment {
     private boolean confirmed_paid;
 
     //TODO
-    private String userName;
-    private String userFileID;
-    private String userMobile;
+    private String patientName;
+    private String patientFileID;
+    private String PatientMobile;
     private int clinicNumber;
     private Date dateOnly;
     private Date timeOnly;

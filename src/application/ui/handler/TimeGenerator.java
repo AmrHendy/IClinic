@@ -19,7 +19,7 @@ public class TimeGenerator {
             time = getNextPeriod(30, time);
             Appointment appointment = new Appointment();
             //TODO:: set time function to get values by time.
-            appointment.setTime(time);
+            //appointment.(time);
             list.add(appointment);
         }
         return list;

@@ -1,5 +1,6 @@
 package application.ui.addPatient;
 
+import application.ui.handler.MessagesController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -8,6 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import main.java.beans.Patient;
 import main.java.model.PatientDAO;
@@ -42,7 +46,12 @@ public class AddPatient implements Initializable {
 
     @FXML
     void cancel(MouseEvent event) {
-
+        String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
+        Alert alert = MessagesController.getAlert(msg, Alert.AlertType.CONFIRMATION);
+        alert.setTitle("تحذير");
+        if(alert.getResult() == ButtonType.YES) {
+            //((Node) (event.getSource())).getScene().getWindow().hide();
+        }
     }
 
     @FXML

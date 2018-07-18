@@ -13,7 +13,7 @@ public class PatientDAO {
         String query = "INSERT INTO Patient (id, name, address, birthdate, remainingCost, mobile_number, file_number, clinic_number) VALUES ( "
                 + newPatient.getPatientID() + " , " + "'" + newPatient.getPatientName() + "'" + " , "
                 + "'" + newPatient.getAddress() + "'" + " , " + "'" + newPatient.getDateString() + "'" + " , "
-                + newPatient.getRemainingCost() + " , " + "'" + newPatient.getMobileNumber() + "'" + " , "
+                + newPatient.getRemainingCost() + " , " + "'" + newPatient.getPhoneNumber() + "'" + " , "
                 + "'" + newPatient.getFile_number() + "'" + " , " + newPatient.getClinic_number() + " );";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
@@ -24,7 +24,7 @@ public class PatientDAO {
                         + "address = '" + newPatient.getAddress() + "' , "
                         + "birthdate = '" + newPatient.getDateString() + "' , "
                         + "remainingCost = " + newPatient.getRemainingCost() + " , "
-                        + "mobile_number = '" + newPatient.getMobileNumber() + "' , "
+                        + "mobile_number = '" + newPatient.getPhoneNumber() + "' , "
                         + "file_number = '" + newPatient.getFile_number() + "' , "
                         + "clinic_number = " + newPatient.getClinic_number()
                         + " WHERE id = " + id + " ;";
@@ -132,7 +132,7 @@ public class PatientDAO {
             patient.setAddress(rs.getString("address"));
             patient.setBirthdate(rs.getString("birthdate"));
             patient.setRemainingCost(rs.getInt("remainingCost"));
-            patient.setMobileNumber(rs.getString("mobile_number"));
+            patient.setPhoneNumber(rs.getString("mobile_number"));
             patient.setFile_number(rs.getString("file_number"));
             patient.setClinic_number(rs.getInt("clinic_number"));
             return patient;

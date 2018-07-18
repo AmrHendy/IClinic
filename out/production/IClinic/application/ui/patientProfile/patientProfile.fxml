@@ -90,6 +90,9 @@
                           <columns>
                             <TableColumn prefWidth="75.0" text="التوقيت" />
                             <TableColumn prefWidth="75.0" text="صورة" />
+                              <TableColumn prefWidth="75.0" text="رقم العيادة" />
+                              <TableColumn prefWidth="75.0" text="المبلغ المدفوع" />
+                              <TableColumn prefWidth="75.0" text="تاكيد الدفع" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

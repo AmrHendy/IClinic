@@ -16,7 +16,7 @@ public class PatientValidator {
             msgs.add("لا توجد قيمة لرقم العيادة");
         }
         //TODO:: add phoneNumber in patient
-        if(patient.getPhoneNumber == null){
+        if(patient.getPhoneNumber() == null){
             msgs.add("لا توجد قيمة صحيحة لرقم الهاتف");
         }
 

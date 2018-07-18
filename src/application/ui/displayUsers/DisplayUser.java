@@ -1,16 +1,22 @@
 package application.ui.displayUsers;
 
+import application.ui.handler.MessagesController;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import main.java.beans.Patient;
 import main.java.beans.User;
 import main.java.model.PatientDAO;
 import main.java.model.UserDAO;
 import main.java.util.UiUtil;
+
+import java.util.ArrayList;
 
 public class DisplayUser {
 
@@ -37,12 +43,36 @@ public class DisplayUser {
 
     @FXML
     void deleteUser(MouseEvent event) {
+        if(userTable.getSelectionModel().getSelectedCells().size() == 0){
+            return;
+        }
+        boolean finished = true;
+        boolean showMsg = false;
+        ArrayList<String> msg = new ArrayList<String>();
+        ObservableList<User> remaining = FXCollections.observableArrayList();
+        //Note selectedCells may need to be selectedItems (type user).
         for (int i = 0; i < userTable.getSelectionModel().getSelectedCells().size(); i++) {
             TablePosition pos = userTable.getSelectionModel().getSelectedCells().get(i);
             int row = pos.getRow();
             User user = userTable.getItems().get(row);
-            //TODO:: add delete user function.
-            UserDAO.delete(user.getUserName());
+            finished = UserDAO.deleteUser(user.getUserName());
+            if(!finished){
+                msg.add("لا يمكن مسح " + user.getUserName());
+                remaining.add(user);
+                showMsg = true;
+            }else{
+                userTable.getItems().set(row, null);
+            }
+        }
+        for(int i = 0 ;i < userTable.getItems().size(); i++){
+            User user = userTable.getItems().get(i);
+            if(user != null){
+                remaining.add(user);
+            }
+        }
+        if(showMsg){
+            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            userTable.setItems(remaining);
         }
     }
 }
