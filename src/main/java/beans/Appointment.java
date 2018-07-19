@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 public class Appointment {
     //TODO:: add patient name to appointment object
     private int appointmentID;

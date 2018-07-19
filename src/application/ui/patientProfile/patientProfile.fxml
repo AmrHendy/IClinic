@@ -113,18 +113,34 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="sessionsTable" layoutX="242.0" layoutY="41.0" prefHeight="460.8" prefWidth="784.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn fx:id="time" editable="false" prefWidth="75.0" text="التوقيت" />
-                            <TableColumn fx:id="image" editable="false" prefWidth="75.0" text="صورة" />
-                              <TableColumn fx:id="clinicNumber" editable="false" prefWidth="75.0" text="رقم العيادة" />
-                              <TableColumn fx:id="moneyPaid" prefWidth="75.0" text="المبلغ المدفوع" />
-                              <TableColumn fx:id="confirmPayment" prefWidth="75.0" text="تاكيد الدفع" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
+                        <VBox prefHeight="617.6" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button fx:id="saveTable" mnemonicParsing="false" onMouseClicked="#saveTableData" prefHeight="26.0" prefWidth="254.0" text="حفظ">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <TableView fx:id="sessionsTable" prefHeight="10000.0" prefWidth="784.0">
+                                <columns>
+                                    <TableColumn fx:id="date" editable="false" prefWidth="75.0" text="التاريخ" />
+                                  <TableColumn fx:id="time" editable="false" prefWidth="75.0" text="التوقيت" />
+                                  <TableColumn fx:id="image" editable="false" prefWidth="75.0" text="صورة" />
+                                    <TableColumn fx:id="clinicNumber" editable="false" prefWidth="75.0" text="رقم العيادة" />
+                                    <TableColumn fx:id="moneyPaid" prefWidth="75.0" text="المبلغ المدفوع" />
+                                    <TableColumn prefWidth="75.0">
+                                       <columns>
+                                          <TableColumn fx:id="confirmPayment" prefWidth="75.0" text="تاكيد الدفع" />
+                                          <TableColumn fx:id="downloadImage" prefWidth="75.0" text="تحميل صورة" />
+                                          <TableColumn fx:id="uploadImage" prefWidth="75.0" text="رفع صورة" />
+                                       </columns>
+                                    </TableColumn>
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
             </content>

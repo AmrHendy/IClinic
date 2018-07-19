@@ -175,6 +175,7 @@ public class DisplayPatient implements Initializable {
                         return cell;
                     }
                 };
+        showProfile.setCellFactory(cellFactory);
 
     }
 }
