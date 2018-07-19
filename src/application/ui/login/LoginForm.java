@@ -1,7 +1,7 @@
 package application.ui.login;
 
 import application.ui.handler.WindowHandlers;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Window;
 import main.java.helper.AlertHelper;
 import main.java.model.UserDAO;
+import javafx.scene.input.MouseEvent;
 
 public class LoginForm {
     @FXML
@@ -22,7 +23,7 @@ public class LoginForm {
     private Button submitButton;
 
     @FXML
-    protected void handleSubmitButtonAction(ActionEvent event) {
+    protected void handleSubmitButtonAction(MouseEvent event){
         Window owner = submitButton.getScene().getWindow();
         if(nameField.getText().isEmpty()) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
@@ -41,7 +42,7 @@ public class LoginForm {
                 try {
                     WindowHandlers windowHandlers = WindowHandlers.getInstance();
                     windowHandlers.loadWindow("/application/ui/mainPage/mainPage.fxml",
-                            "Main Page", true,true, null);
+                            "Main Page", true,true, false, event);
                 }
                 catch (Exception e) {
                     //TODO:: put log4j jar for error logging

@@ -1,6 +1,7 @@
 package application.ui.displayUsers;
 
 import application.ui.handler.MessagesController;
+import application.ui.handler.UserSingedInData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -64,12 +65,13 @@ public class DisplayUser implements Initializable {
 
     @FXML
     void charEntered(KeyEvent event) {
+        return;
         //TODO:: getuser must implemented with LIKE and return multiple values.
-        String name = userName.getText();
+        /*String name = userName.getText();
         if (name != null) {
             userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser(name)));
         }
-        tmpTableData.setAll(userTable.getItems());
+        tmpTableData.setAll(userTable.getItems());*/
     }
 
     @FXML
@@ -108,12 +110,8 @@ public class DisplayUser implements Initializable {
         userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinic"));
 
-        ObservableList<User> firstTenID = FXCollections.observableArrayList();
-        for(int i = 0 ;i < limit; i++){
-            //TODO:: find by id must return only one User by id?
-            //firstTenID.add(UserDAO.getUserByID(i));
-        }
-        userTable.getItems().setAll(firstTenID);
-        //tmpTableData.setAll(userTable.getItems());
+        ObservableList<User> alreadyLoggedIn = FXCollections.observableArrayList();
+        alreadyLoggedIn.add(UserSingedInData.user);
+        userTable.setItems(alreadyLoggedIn);
     }
 }

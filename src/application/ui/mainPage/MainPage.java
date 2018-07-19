@@ -82,7 +82,7 @@ public class MainPage implements Initializable {
     public void searchPatient(MouseEvent mouseEvent) {
         try {
             windowHandlers.loadWindow("/application/ui/displayPatients/displayPatient.fxml",
-                    "Search Patients", true,true, mouseEvent);
+                    "بحث المرضى", true,true, true, mouseEvent);
 
         }
         catch (Exception e) {
@@ -93,7 +93,8 @@ public class MainPage implements Initializable {
 
     public void searchUser(MouseEvent mouseEvent) {
         try {
-            windowHandlers.loadWindow("/application/ui/displayUsers/displayUsers.fxml", "Search Users", true, true, mouseEvent);
+            windowHandlers.loadWindow("/application/ui/displayUsers/displayUsers.fxml",
+                    "بحث عن مستخدم", true, true, true, mouseEvent);
         } catch (Exception e) {
             //TODO:: put log4j jar for error logging
             e.printStackTrace();
@@ -103,7 +104,7 @@ public class MainPage implements Initializable {
 
     public void addPatient(MouseEvent mouseEvent) {
         try {
-            windowHandlers.loadWindow("/application/ui/addPatient/addPatient.fxml", "Add User", false, true, mouseEvent);
+            windowHandlers.loadWindow("/application/ui/addPatient/addPatient.fxml", "اضافة مريض", false, true, true, mouseEvent);
         } catch (Exception e) {
             //TODO:: put log4j jar for error logging
             e.printStackTrace();
@@ -112,7 +113,8 @@ public class MainPage implements Initializable {
 
     public void addUser(MouseEvent mouseEvent){
         try {
-            windowHandlers.loadWindow("/application/ui/addUsers/addUsers.fxml", "Add User", false, true, mouseEvent);
+            windowHandlers.loadWindow("/application/ui/addUsers/addUsers.fxml",
+                    "اضافة مستخدم", false, true, true, mouseEvent);
         } catch (Exception e) {
             //TODO:: put log4j jar for error logging
             e.printStackTrace();
@@ -193,7 +195,6 @@ public class MainPage implements Initializable {
         if(chooseDate.getValue() == null){
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date today = new Date();
-            System.out.println(dateFormat.format(today));
             return today;
         }
         Date ret = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());

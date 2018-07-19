@@ -1,15 +1,21 @@
 package application.ui.displayPatients;
 
 import application.ui.handler.MessagesController;
+import application.ui.handler.WindowHandlers;
+import application.ui.patientProfile.PatientProfile;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import main.java.beans.Patient;
 import main.java.beans.User;
 import main.java.model.PatientDAO;
@@ -44,6 +50,10 @@ public class DisplayPatient implements Initializable {
 
     @FXML
     private TableColumn<Patient, String> address;
+
+
+    @FXML
+    private TableColumn<Patient, String> showProfile;
 
     private ObservableList<Patient> tmpTableData;
 
@@ -123,12 +133,48 @@ public class DisplayPatient implements Initializable {
         patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
-        ObservableList<Patient> firstTenID = FXCollections.observableArrayList();
-        for(int i = 0 ;i < limit; i++){
-            //TODO:: find by id must return only one Patient?
-            //firstTenID.add(PatientDAO.findByID(i));
-        }
-        patientTable.getItems().setAll(firstTenID);
-        //tmpTableData.setAll(patientTable.getItems());
+        showProfile.setCellValueFactory(new PropertyValueFactory<>("dummy"));
+
+
+        Callback<TableColumn<Patient, String>, TableCell<Patient, String>> cellFactory
+                = //
+                new Callback<TableColumn<Patient, String>, TableCell<Patient, String>>() {
+                    @Override
+                    public TableCell call(final TableColumn<Patient, String> param) {
+                        final TableCell<Patient, String> cell = new TableCell<Patient, String>() {
+
+                            final Button btn = new Button("اظهار الملف الشخصى");
+
+                            @Override
+                            public void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (empty) {
+                                    setGraphic(null);
+                                    setText(null);
+                                } else {
+                                    btn.setOnAction(event -> {
+                                        Patient patient = getTableView().getItems().get(getIndex());
+                                        WindowHandlers windowHandlers = WindowHandlers.getInstance();
+                                        try{
+                                            windowHandlers.loadWindow("/application/ui/addPatient/patientProfile.fxml", "الملف الشخصى" ,
+                                                    true, false, false, null);
+                                            FXMLLoader loader = windowHandlers.getLoader();
+                                            PatientProfile controller = loader.getController();
+                                            controller.setPatient(patient);
+                                            controller.fillData();
+                                        }catch (Exception e){
+                                            //TODO:: log4j here.
+                                            e.printStackTrace();
+                                        }
+                                    });
+                                    setGraphic(btn);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+
     }
 }

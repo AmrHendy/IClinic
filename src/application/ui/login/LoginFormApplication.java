@@ -17,7 +17,9 @@ public class LoginFormApplication extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
         //automaticly register admin acconut if not exist
-        UserDAO.registerAdmin();
+        //TODO:: I think that we will give the application with a user already in it and this account can
+        //TODO:: add the other users after login.
+        //UserDAO.registerAdmin();
     }
 
     public static void main(String[] args) {

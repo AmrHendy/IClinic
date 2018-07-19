@@ -1,5 +1,6 @@
 package application.ui.handler;
 
+import application.ui.patientProfile.PatientProfile;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,25 +13,33 @@ public class WindowHandlers extends Application {
 
     private WindowObj prevWindow;
     private static WindowHandlers windowHandlers;
+    private Stage stage;
+    private FXMLLoader loader;
 
     private WindowHandlers(){
         this.prevWindow = new WindowObj();
     }
 
-    public void loadWindow(String windowPath, String title, boolean maximized, boolean hide, MouseEvent event) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource(windowPath));
+    public void loadWindow(String windowPath, String title, boolean maximized, boolean hide, boolean onclose, MouseEvent event) throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(windowPath));
+        Parent root = loader.load();
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root));
         stage.setMaximized(maximized);
+        stage.setResizable(maximized);
         stage.show();
+        this.stage = stage;
+        this.loader = loader;
         if(hide){
             ((Node)(event.getSource())).getScene().getWindow().hide();
             this.prevWindow.setMaximized(true);
             this.prevWindow.setScene(((Node)(event.getSource())).getScene());
             this.prevWindow.setTitle("Main Page");
         }
-        stage.setOnCloseRequest(e -> closeWindow());
+        if(onclose){
+            stage.setOnCloseRequest(e -> closeWindow());
+        }
     }
 
     @Override
@@ -48,6 +57,10 @@ public class WindowHandlers extends Application {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    public FXMLLoader getLoader() {return this.loader;}
+    public Stage getStage(){
+        return this.stage;
     }
 
     public static WindowHandlers getInstance(){
