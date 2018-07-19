@@ -5,6 +5,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.java.model.UserDAO;
+import main.java.services.PasswordEncryptionService;
+
+import java.util.Arrays;
 
 public class LoginFormApplication extends Application {
 
@@ -17,12 +20,21 @@ public class LoginFormApplication extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
         //automaticly register admin acconut if not exist
-        //TODO:: I think that we will give the application with a user already in it and this account can
-        //TODO:: add the other users after login.
-        //UserDAO.registerAdmin();
     }
 
     public static void main(String[] args) {
+        UserDAO.registerAdmin();
         launch(args);
+        /*
+        try {
+            byte[] salt = {91, 66, 64, 54, 52, 49, 102, 102, 52, 56, 52};
+            PasswordEncryptionService pw = new PasswordEncryptionService();
+            byte[] encr = pw.getEncryptedPassword("admin", salt);
+            System.out.println(Arrays.toString(encr));
+            System.out.println(pw.authenticate("admin", encr, salt));
+        } catch (Exception e) {
+
+        }
+        */
     }
 }

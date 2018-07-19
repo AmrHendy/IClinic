@@ -3,7 +3,7 @@ package main.java.model;
 import java.sql.*;
 
 public class ModelManager {
-    private static String url = "jdbc:mysql://127.0.0.1:3306/iclinic?autoReconnect=true&useSSL=false";
+    private static String url = "jdbc:mysql://localhost:3306/iclinic?autoReconnect=true&useSSL=false";
     private static String user = "root";
     private static String pass = "root";
     private static ModelManager model;

@@ -41,7 +41,7 @@ public class LoginForm {
         if(loginSuccess){
                 try {
                     WindowHandlers windowHandlers = WindowHandlers.getInstance();
-                    windowHandlers.loadWindow("/application/ui/mainPage/mainPage.fxml",
+                    windowHandlers.loadWindow("mainPage.fxml",
                             "Main Page", true,true, false, event);
                 }
                 catch (Exception e) {
