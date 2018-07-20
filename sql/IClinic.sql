@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema IClinic
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `IClinic` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `IClinic` DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci ;
 USE `IClinic` ;
 
 -- -----------------------------------------------------
