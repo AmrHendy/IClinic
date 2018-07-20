@@ -54,12 +54,11 @@ public class AppointmentDAO {
         return matched;
     }
 
-    public static ArrayList<Appointment> findByDate(Date date){
-        //TODO:: changed mm to MM as mm is the minutes and MM is the months.
+    public static ArrayList<Appointment> findByDate(Date date, int clinicNumber){
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dt.format(date);
         String query = "SELECT * FROM Appointment WHERE CAST(Appointment.date as date) = '" + formattedDate + "'"
-                        + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ORDER BY date ;";
+                        + " AND clinic_number = " + clinicNumber + " ORDER BY date ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
