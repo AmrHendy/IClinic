@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
+import main.java.beans.UserSignedInData;
 import main.java.helper.AlertHelper;
 import main.java.model.UserDAO;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +25,17 @@ public class LoginForm {
 
     @FXML
     protected void handleSubmitButtonAction(MouseEvent event){
+        try {
+            UserSignedInData.user = UserDAO.getUser("admin");
+            WindowHandlers windowHandlers = WindowHandlers.getInstance();
+            windowHandlers.loadWindow("/application/ui/mainPage/mainPage.fxml",
+                    "Main Page", true, true, false, event);
+        }
+        catch (Exception e) {
+            //TODO:: put log4j jar for error logging
+            e.printStackTrace();
+        }
+        /*
         Window owner = submitButton.getScene().getWindow();
         if(nameField.getText().isEmpty()) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
@@ -41,7 +53,7 @@ public class LoginForm {
         if(loginSuccess){
                 try {
                     WindowHandlers windowHandlers = WindowHandlers.getInstance();
-                    windowHandlers.loadWindow("mainPage.fxml",
+                    windowHandlers.loadWindow("/application/ui/mainPage/mainPage.fxml",
                             "Main Page", true,true, false, event);
                 }
                 catch (Exception e) {
@@ -53,5 +65,6 @@ public class LoginForm {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Try Again Login",
                     "Please Enter Correct UserName and Password");
         }
+        */
     }
 }

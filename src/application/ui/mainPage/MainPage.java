@@ -137,7 +137,7 @@ public class MainPage implements Initializable {
         money1.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
         //TODO:: initialize today session here.
         searchSessionsTable.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getDate())));
-        tmpTodayTableData.addAll(searchSessionsTable.getItems());
+        tmpTodayTableData.setAll(searchSessionsTable.getItems());
     }
 
 
@@ -201,8 +201,4 @@ public class MainPage implements Initializable {
         System.out.println(ret);
         return ret;
     }
-
-
-
-
 }

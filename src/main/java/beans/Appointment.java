@@ -59,7 +59,7 @@ public class Appointment {
 
 
     public String getDateString() {
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String formattedDate = dt.format(date);
         return formattedDate;
     }
@@ -69,7 +69,7 @@ public class Appointment {
     }
 
     public void setDate(String date) {
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date formattedDate = null;
         try {
             formattedDate = dt.parse(date);
@@ -144,7 +144,7 @@ public class Appointment {
     }
 
     public String getDateOnly(){
-        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dt.format(date);
         return formattedDate;
     }
