@@ -19,22 +19,11 @@ public class LoginFormApplication extends Application {
         //primaryStage.setMaximized(false);
         primaryStage.setResizable(false);
         primaryStage.show();
-        //automaticly register admin acconut if not exist
     }
 
     public static void main(String[] args) {
+        //automaticly register admin acconut if not exist
         UserDAO.registerAdmin();
         launch(args);
-        /*
-        try {
-            byte[] salt = {91, 66, 64, 54, 52, 49, 102, 102, 52, 56, 52};
-            PasswordEncryptionService pw = new PasswordEncryptionService();
-            byte[] encr = pw.getEncryptedPassword("admin", salt);
-            System.out.println(Arrays.toString(encr));
-            System.out.println(pw.authenticate("admin", encr, salt));
-        } catch (Exception e) {
-
-        }
-        */
     }
 }

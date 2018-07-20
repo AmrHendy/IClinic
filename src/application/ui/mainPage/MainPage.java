@@ -136,8 +136,8 @@ public class MainPage implements Initializable {
         patientNumber1.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
         money1.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
         //TODO:: initialize today session here.
-        searchSessionsTable.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getDate())));
-        tmpTodayTableData.setAll(searchSessionsTable.getItems());
+        todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getDate())));
+        tmpTodayTableData = searchSessionsTable.getItems();
     }
 
 
@@ -182,7 +182,7 @@ public class MainPage implements Initializable {
     @FXML
     void searchAppointment(MouseEvent event) {
         if(chooseDate.getValue() != null){
-            SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-dd");
+            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
             Date date = getDate();
             ArrayList<Appointment> list = AppointmentDAO.findByDate(date);
             searchSessionsTable.setItems(UiUtil.getAppointmentObservable(list));

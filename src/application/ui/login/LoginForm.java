@@ -25,6 +25,7 @@ public class LoginForm {
 
     @FXML
     protected void handleSubmitButtonAction(MouseEvent event){
+        /*
         try {
             UserSignedInData.user = UserDAO.getUser("admin");
             WindowHandlers windowHandlers = WindowHandlers.getInstance();
@@ -35,7 +36,8 @@ public class LoginForm {
             //TODO:: put log4j jar for error logging
             e.printStackTrace();
         }
-        /*
+        */
+
         Window owner = submitButton.getScene().getWindow();
         if(nameField.getText().isEmpty()) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
@@ -65,6 +67,5 @@ public class LoginForm {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Try Again Login",
                     "Please Enter Correct UserName and Password");
         }
-        */
     }
 }

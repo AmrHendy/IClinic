@@ -33,6 +33,7 @@ public class PatientDAO {
     }
 
     public static ArrayList<Patient> findByID(int id){
+        if(id == -1)return new ArrayList<Patient>();
         String query = "SELECT * FROM Patient WHERE id = " + id + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{

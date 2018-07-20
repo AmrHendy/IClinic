@@ -35,6 +35,7 @@ public class Appointment {
         paidCost = 0;
         comment = "";
         confirmed_paid = false;
+        patientID = -1;
     }
 
     public int getAppointmentID() {
@@ -164,18 +165,22 @@ public class Appointment {
     }
 
     public String getPatientName(){
+        if(patientID == -1) return "";
         return getPatient().getPatientName();
     }
 
-    public String getPatientFileID(){
+    public String getPatientFileID() {
+        if(patientID == -1) return "";
         return getPatient().getFile_number();
     }
 
     public String getPhoneNumber(){
+        if(patientID == -1) return "";
         return getPatient().getPhoneNumber();
     }
 
-    public String getClinicNumber(){
+    public String getClinicNumber() {
+        if(patientID == -1) return "";
         return String.valueOf(getPatient().getClinic_number());
     }
 
