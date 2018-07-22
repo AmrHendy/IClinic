@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class ModelManager {
     private static String url = "jdbc:mysql://localhost:3306/iclinic?autoReconnect=true&useSSL=false";
+    private String unicode= "&useUnicode=yes&characterEncoding=UTF-8";
     private static String user = "root";
     private static String pass = "root";
     private static ModelManager model;
@@ -24,7 +25,7 @@ public class ModelManager {
     public void startConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url, user, pass);
+            connection = DriverManager.getConnection(url+unicode, user, pass);
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

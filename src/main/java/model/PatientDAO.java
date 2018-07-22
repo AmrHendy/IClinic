@@ -4,19 +4,30 @@ import main.java.beans.Appointment;
 import main.java.beans.Patient;
 import main.java.beans.UserSignedInData;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PatientDAO {
 
-    public static boolean addPatient(Patient newPatient){
-        String query = "INSERT INTO Patient (id, name, address, birthdate, remainingCost, mobile_number, file_number, clinic_number) VALUES ( "
-                + newPatient.getPatientID() + " , " + "'" + newPatient.getPatientName() + "'" + " , "
-                + "'" + newPatient.getAddress() + "'" + " , " + "'" + newPatient.getDateString() + "'" + " , "
-                + newPatient.getRemainingCost() + " , " + "'" + newPatient.getPhoneNumber() + "'" + " , "
-                + "'" + newPatient.getFile_number() + "'" + " , " + newPatient.getClinic_number() + " );";
-        return ModelManager.getInstance().executeUpdateQuery(query);
+    public static boolean addPatient(Patient newPatient) {
+        System.out.println(" = الاسم" + newPatient.getPatientName());
+        try {
+            PreparedStatement ps = ModelManager.getInstance().getConnection().prepareStatement(
+                    "INSERT INTO Patient (Patient.name, address, birthdate, remainingCost, mobile_number, file_number, clinic_number) VALUES ( ?, ?, ?, ?, ?, ?, ? );");
+            ps.setString(1, newPatient.getPatientName());
+            ps.setString(2, newPatient.getAddress());
+            ps.setString(3, newPatient.getDateString());
+            ps.setInt(4, newPatient.getRemainingCost());
+            ps.setString(5, newPatient.getPhoneNumber());
+            ps.setString(6, newPatient.getFile_number());
+            ps.setInt(7, newPatient.getClinic_number());
+            System.out.println(ps.toString());
+            return ps.executeUpdate() == 1;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static boolean updatePatient(String oldFileNumber, Patient newPatient){
@@ -64,7 +75,7 @@ public class PatientDAO {
     }
 
     public static ArrayList<Patient> findByNameLike(String patientName){
-        String query = "SELECT * FROM Patient WHERE file_number LIKE '%" + patientName + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
+        String query = "SELECT * FROM Patient WHERE name LIKE '%" + patientName + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
