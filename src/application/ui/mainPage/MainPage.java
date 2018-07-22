@@ -1,6 +1,7 @@
 package application.ui.mainPage;
 
 import application.ui.handler.TimeGenerator;
+import application.ui.handler.UserSingedInData;
 import application.ui.handler.WindowHandlers;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -14,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import main.java.beans.Appointment;
 import main.java.model.AppointmentDAO;
+import main.java.model.UserDAO;
 import main.java.util.UiUtil;
 
 import java.net.URL;
@@ -27,6 +29,9 @@ import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 public class MainPage implements Initializable {
+
+    @FXML
+    private JFXComboBox<String> clinicNumberChooser;
 
     @FXML
     private TableView<Appointment> todaySession;
@@ -123,7 +128,10 @@ public class MainPage implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO:: get current day scheudle function here you can use Time generator in handler package.
+        UserSingedInData.user = UserDAO.getUser("admin");
+        clinicNumberChooser.setItems(FXCollections.observableArrayList(UserDAO.getClinics()));
+        clinicNumberChooser.getSelectionModel().select(UserSingedInData.user.getClinic());
+        //TODO:: get current day s`eudle function here you can use Time generator in handler package.
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         patientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
@@ -136,7 +144,7 @@ public class MainPage implements Initializable {
         patientNumber1.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
         money1.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
         //TODO:: initialize today session here.
-        todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getDate())));
+        todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getDate(), Integer.valueOf(clinicNumberChooser.getValue()))));
         tmpTodayTableData = searchSessionsTable.getItems();
     }
 
@@ -184,7 +192,7 @@ public class MainPage implements Initializable {
         if(chooseDate.getValue() != null){
             SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
             Date date = getDate();
-            ArrayList<Appointment> list = AppointmentDAO.findByDate(date);
+            ArrayList<Appointment> list = AppointmentDAO.findByDate(date, Integer.valueOf(clinicNumberChooser.getValue()));
             searchSessionsTable.setItems(UiUtil.getAppointmentObservable(list));
             tmpSearchTableData.setAll(searchSessionsTable.getItems());
         }
