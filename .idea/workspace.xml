@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33f578a9-4500-4c05-8c97-bbb537cad10d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/displayPatients/DisplayPatient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/handler/WindowHandlers.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/login/LoginForm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/login/LoginFormApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/mainPage/MainPage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/application/ui/patientProfile/PatientProfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/main/java/beans/Appointment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/main/java/model/AppointmentDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/IClinic/main/java/model/PatientDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/ui/mainPage/mainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/mainPage/mainPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/addPatient/addPatient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/addPatient/addPatient.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,10 +33,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainPage.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
+            <state relative-caret-position="197">
               <caret line="130" column="57" selection-start-line="130" selection-start-column="57" selection-end-line="130" selection-end-column="57" />
             </state>
           </provider>
@@ -64,6 +56,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="56" column="51" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddPatient.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -152,7 +156,6 @@
         <option value="$PROJECT_DIR$/src/main/java/beans/Patient.java" />
         <option value="$PROJECT_DIR$/src/application/ui/handler/MessagesController.java" />
         <option value="$PROJECT_DIR$/src/application/ui/addUsers/AddUsers.java" />
-        <option value="$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/AppointmentDAO.java" />
         <option value="$PROJECT_DIR$/src/application/ui/login/LoginFormApplication.java" />
@@ -164,6 +167,7 @@
         <option value="$PROJECT_DIR$/src/application/ui/handler/CustomImage.java" />
         <option value="$PROJECT_DIR$/src/application/ui/patientProfile/PatientProfile.java" />
         <option value="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" />
+        <option value="$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java" />
       </list>
     </option>
   </component>
@@ -520,12 +524,12 @@
       <workItem from="1531981757316" duration="1975000" />
       <workItem from="1531991174780" duration="5202000" />
       <workItem from="1531999681413" duration="649000" />
-      <workItem from="1532224165799" duration="420000" />
+      <workItem from="1532224165799" duration="1407000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115792000" />
+    <option name="totallyTimeSpent" value="116779000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -824,16 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="66" selection-start-line="66" selection-end-line="67" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/beans/Patient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -922,8 +916,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
+        <state relative-caret-position="197">
           <caret line="130" column="57" selection-start-line="130" selection-start-column="57" selection-end-line="130" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/addPatient/AddPatient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="65" column="5" lean-forward="true" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

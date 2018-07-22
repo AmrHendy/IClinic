@@ -10,10 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="328.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.addPatient.AddPatient">
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="402.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.addPatient.AddPatient">
    <children>
       <VBox layoutX="12.0" layoutY="224.0" prefHeight="621.2" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <JFXTextField fx:id="fileNumber" layoutX="20.0" layoutY="20.0" promptText="رقم الملف">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
             <JFXTextField fx:id="patientName" promptText="اسم المريض">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -34,6 +39,11 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXDatePicker>
+            <JFXTextField fx:id="requiredCost" layoutX="10.0" layoutY="330.0" promptText="المبلغ المطلوب">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </JFXTextField>
             <JFXComboBox fx:id="clinicNumber" prefWidth="6288.0" promptText="رقم العيادة">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

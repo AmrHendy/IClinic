@@ -28,6 +28,10 @@ import java.util.ResourceBundle;
 public class AddPatient implements Initializable {
     //mandatory
     @FXML
+    private JFXTextField fileNumber;
+
+    //mandatory
+    @FXML
     private JFXTextField patientName;
 
     @FXML
@@ -43,6 +47,9 @@ public class AddPatient implements Initializable {
     private JFXComboBox<String> clinicNumber;
 
     @FXML
+    private JFXTextField requiredCost;
+
+    @FXML
     private JFXButton save;
 
     @FXML
@@ -52,7 +59,7 @@ public class AddPatient implements Initializable {
     void cancel(MouseEvent event) {
         if(patientName.getText() != null || address.getText() != null ||
                 phoneNumber.getText() != null || dateOfBirth.getValue() != null
-                || clinicNumber.getValue() != null){
+                || clinicNumber.getValue() != null || fileNumber.getText() != null){
             String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
             Alert alert = MessagesController.getAlert(msg, Alert.AlertType.CONFIRMATION);
         }
@@ -67,6 +74,9 @@ public class AddPatient implements Initializable {
         LocalDate date = dateOfBirth.getValue();
         patient.setBirthdate(Date.valueOf(date));
         patient.setPhoneNumber(phoneNumber.getText());
+        patient.setFile_number(fileNumber.getText());
+        String req = (requiredCost.getText() == null) ? "0" : requiredCost.getText();
+        patient.setRemainingCost(Integer.valueOf(req));
         ArrayList<String> msgs = PatientValidator.insertingValidator(patient);
         if(msgs.size() > 0){
             Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.ERROR);
