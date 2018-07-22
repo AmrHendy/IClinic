@@ -136,6 +136,17 @@ public class PatientProfile implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        sessionsTable.getSelectionModel().setCellSelectionEnabled(true);
+        sessionsTable.setEditable(true);
+        sessionsTable.setOnKeyPressed(event -> {
+            TablePosition<Appointment, ?> pos = sessionsTable.getFocusModel().getFocusedCell();
+            if (pos != null && event.getCode().isLetterKey()) {
+                sessionsTable.edit(pos.getRow(), pos.getTableColumn());
+            }
+        });
+        //TODO:: we need to add the editable cells here (I don't know it right now).
+
         date.setCellValueFactory(new PropertyValueFactory<>("dateOnly"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         clinicNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));

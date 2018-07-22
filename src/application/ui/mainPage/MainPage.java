@@ -128,10 +128,10 @@ public class MainPage implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //TODO:: we need to add the editable cells here.
         UserSingedInData.user = UserDAO.getUser("admin");
         clinicNumberChooser.setItems(FXCollections.observableArrayList(UserDAO.getClinics()));
         clinicNumberChooser.getSelectionModel().select(UserSingedInData.user.getClinic());
-        //TODO:: get current day s`eudle function here you can use Time generator in handler package.
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         patientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));

@@ -1,5 +1,6 @@
 package application.ui.displayUsers;
 
+import application.ui.handler.EditCell;
 import application.ui.handler.MessagesController;
 import application.ui.handler.UserSingedInData;
 import javafx.collections.FXCollections;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import main.java.beans.Patient;
@@ -17,6 +19,7 @@ import main.java.model.UserDAO;
 import main.java.util.UiUtil;
 
 import java.net.URL;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -105,11 +108,24 @@ public class DisplayUser implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        userTable.getSelectionModel().setCellSelectionEnabled(true);
+        userTable.setEditable(true);
+        userTable.setOnKeyPressed(event -> {
+            TablePosition<User, ?> pos = userTable.getFocusModel().getFocusedCell();
+            if (pos != null && event.getCode().isLetterKey()) {
+                userTable.edit(pos.getRow(), pos.getTableColumn());
+            }
+        });
+
         userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        userNameColumn.setCellFactory(userNameColumn -> EditCell.createStringEditCell());
+
         clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinic"));
 
         ObservableList<User> alreadyLoggedIn = FXCollections.observableArrayList();
         alreadyLoggedIn.add(UserSingedInData.user);
         userTable.setItems(alreadyLoggedIn);
+
     }
+
 }

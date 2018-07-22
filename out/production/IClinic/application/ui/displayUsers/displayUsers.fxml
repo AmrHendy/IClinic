@@ -12,9 +12,9 @@
    <children>
       <VBox layoutX="266.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="10000.0">
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
                <items>
-                  <TextField fx:id="userName" onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="304.0" promptText="اسم المستخدم" />
+                  <TextField fx:id="userName" prefHeight="26.0" prefWidth="282.0" promptText="اسم المستخدم" />
                </items>
             </ToolBar>
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">

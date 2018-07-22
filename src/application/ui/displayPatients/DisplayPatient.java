@@ -1,5 +1,6 @@
 package application.ui.displayPatients;
 
+import application.ui.handler.EditCell;
 import application.ui.handler.MessagesController;
 import application.ui.handler.WindowHandlers;
 import application.ui.patientProfile.PatientProfile;
@@ -131,7 +132,21 @@ public class DisplayPatient implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO:: add remaining money here also.
+
+        patientTable.getSelectionModel().setCellSelectionEnabled(true);
+        patientTable.setEditable(true);
+        patientTable.setOnKeyPressed(event -> {
+            TablePosition<Patient, ?> pos = patientTable.getFocusModel().getFocusedCell();
+            if (pos != null && event.getCode().isLetterKey()) {
+                patientTable.edit(pos.getRow(), pos.getTableColumn());
+            }
+        });
+        patientFIleID.setCellFactory(tmp -> EditCell.createStringEditCell());
+        patientNameColumn.setCellFactory(tmp -> EditCell.createStringEditCell());
+        phoneNumber.setCellFactory(tmp -> EditCell.createStringEditCell());
+        address.setCellFactory(tmp -> EditCell.createStringEditCell());
+        remainingCost.setCellFactory(tmp -> EditCell.createStringEditCell());
+
         patientFIleID.setCellValueFactory(new PropertyValueFactory<>("file_number"));
         patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
