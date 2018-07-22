@@ -55,6 +55,9 @@ public class DisplayPatient implements Initializable {
     @FXML
     private TableColumn<Patient, String> showProfile;
 
+    @FXML
+    private TableColumn<Patient, String> remainingCost;
+
     private ObservableList<Patient> tmpTableData;
 
     @FXML
@@ -133,6 +136,7 @@ public class DisplayPatient implements Initializable {
         patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
+        remainingCost.setCellValueFactory(new PropertyValueFactory<>("remainingCost"));
         showProfile.setCellValueFactory(new PropertyValueFactory<>("dummy"));
 
 
@@ -176,6 +180,7 @@ public class DisplayPatient implements Initializable {
                     }
                 };
         showProfile.setCellFactory(cellFactory);
+        patientTable.setItems(FXCollections.observableArrayList(new Patient()));
 
     }
 }

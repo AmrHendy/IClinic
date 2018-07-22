@@ -63,6 +63,7 @@ public class AddUsers implements Initializable {
             msgs.add(msg);
         }
         //TODO:: add check if not inserted.
+        //check already added in line 75.
         if(!can){
             Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.ERROR);
         }else{

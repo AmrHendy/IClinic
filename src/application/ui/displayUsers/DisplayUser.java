@@ -65,13 +65,11 @@ public class DisplayUser implements Initializable {
 
     @FXML
     void charEntered(KeyEvent event) {
-        return;
-        //TODO:: getuser must implemented with LIKE and return multiple values.
-        /*String name = userName.getText();
-        if (name != null) {
+        String name = userName.getText();
+        if (name != null && name == UserSingedInData.user.getUserName()) {
             userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser(name)));
         }
-        tmpTableData.setAll(userTable.getItems());*/
+        tmpTableData.setAll(userTable.getItems());
     }
 
     @FXML

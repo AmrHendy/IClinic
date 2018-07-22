@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -11,6 +12,11 @@
    <children>
       <VBox layoutX="266.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <ToolBar prefHeight="40.0" prefWidth="200.0">
+               <items>
+                  <TextField fx:id="userName" prefHeight="26.0" prefWidth="282.0" promptText="اسم المستخدم" />
+               </items>
+            </ToolBar>
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
                <items>
                   <JFXButton onMouseClicked="#deleteUser" text="مسح مستخدم" />
