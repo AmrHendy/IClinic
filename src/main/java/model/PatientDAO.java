@@ -1,5 +1,6 @@
 package main.java.model;
 
+import application.ui.handler.UserSingedInData;
 import main.java.beans.Appointment;
 import main.java.beans.Patient;
 import main.java.beans.UserSignedInData;
@@ -22,7 +23,7 @@ public class PatientDAO {
             ps.setInt(4, newPatient.getRemainingCost());
             ps.setString(5, newPatient.getPhoneNumber());
             ps.setString(6, newPatient.getFile_number());
-            ps.setInt(7, newPatient.getClinic_number());
+            ps.setString(7, newPatient.getClinic_number());
             System.out.println(ps.toString());
             return ps.executeUpdate() == 1;
         } catch (Exception e) {
@@ -75,7 +76,7 @@ public class PatientDAO {
     }
 
     public static ArrayList<Patient> findByNameLike(String patientName){
-        String query = "SELECT * FROM Patient WHERE name LIKE '%" + patientName + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
+        String query = "SELECT * FROM Patient WHERE name LIKE '%" + patientName + "' AND clinic_number = " + UserSingedInData.user.getClinic() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -147,7 +148,7 @@ public class PatientDAO {
             patient.setRemainingCost(rs.getInt("remainingCost"));
             patient.setPhoneNumber(rs.getString("mobile_number"));
             patient.setFile_number(rs.getString("file_number"));
-            patient.setClinic_number(rs.getInt("clinic_number"));
+            patient.setClinic_number(rs.getString("clinic_number"));
             return patient;
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();

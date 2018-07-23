@@ -42,7 +42,6 @@ public class DisplayUser implements Initializable {
 
     private ObservableList<User> tmpTableData;
 
-    @FXML
     void SaveChanges(MouseEvent event) {
         boolean showMsg = false;
         ObservableList<User> list = userTable.getItems();
@@ -64,6 +63,7 @@ public class DisplayUser implements Initializable {
             MessagesController.getAlert(msg, Alert.AlertType.ERROR);
         }
         userTable.setItems(showThem);
+        userTable.refresh();
     }
 
     @FXML
@@ -112,6 +112,7 @@ public class DisplayUser implements Initializable {
         userTable.setEditable(true);
         userTable.setOnKeyPressed(event -> {
             TablePosition<User, ?> pos = userTable.getFocusModel().getFocusedCell();
+            System.out.println(pos.getRow());
             if (pos != null && event.getCode().isLetterKey()) {
                 userTable.edit(pos.getRow(), pos.getTableColumn());
             }
@@ -120,12 +121,45 @@ public class DisplayUser implements Initializable {
         userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         userNameColumn.setCellFactory(userNameColumn -> EditCell.createStringEditCell());
 
+        userNameColumn.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            User user = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, user);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            user.setUserName(value);
+            save(user);
+            userTable.refresh();
+        });
+
         clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinic"));
+        clinicNumber.setCellFactory(userNameColumn -> EditCell.createStringEditCell());
+
+        clinicNumber.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            User user = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, user);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            user.setClinic(Integer.valueOf(value));
+            save(user);
+            userTable.refresh();
+        });
 
         ObservableList<User> alreadyLoggedIn = FXCollections.observableArrayList();
         alreadyLoggedIn.add(UserSingedInData.user);
         userTable.setItems(alreadyLoggedIn);
-
+        tmpTableData = userTable.getItems();
     }
 
+    private void save(User user){
+        if(!UserDAO.updateUser(user.getUserID(), user)){
+            String msg = "لا يمكن تعديل " + user.getUserID() + ": " + user.getUserName();
+            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            userTable.setItems(tmpTableData);
+        }
+
+    }
 }

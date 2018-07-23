@@ -17,18 +17,27 @@ public class UiUtil {
 
     public static ObservableList<Patient> getPatientObservable(ArrayList<Patient> list){
         ObservableList<Patient> obs = FXCollections.observableArrayList();
+        if(list == null || list.size() == 0){
+            return obs;
+        }
         obs.addAll(list);
         return obs;
     }
 
     public static ObservableList<User> getUserObservable(ArrayList<User> list){
         ObservableList<User> obs = FXCollections.observableArrayList();
+        if(list == null || list.size() == 0){
+            return obs;
+        }
         obs.addAll(list);
         return obs;
     }
 
     public static ObservableList<Appointment> getAppointmentObservable(ArrayList<Appointment> list){
         ObservableList<Appointment> obs = FXCollections.observableArrayList();
+        if(list == null || list.size() == 0){
+            return obs;
+        }
         obs.addAll(list);
         return obs;
     }

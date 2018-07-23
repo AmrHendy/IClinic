@@ -66,13 +66,15 @@ public class DisplayPatient implements Initializable {
         String name = patientName.getText();
         String id = patientID.getText();
         if(name != null){
-            ObservableList<Patient> obs = UiUtil.getPatientObservable(PatientDAO.findByName(name, limit));
+            ObservableList<Patient> obs = UiUtil.getPatientObservable(PatientDAO.findByNameLike(name));
             patientTable.setItems(obs);
         }else if(id != null){
             Patient patient= PatientDAO.findByFileNumber(id);
+            patientTable.getItems().clear();
             patientTable.getItems().add(patient);
         }
-        tmpTableData.setAll(patientTable.getItems());
+        patientTable.refresh();
+        tmpTableData = patientTable.getItems();
     }
 
     @FXML
@@ -142,10 +144,65 @@ public class DisplayPatient implements Initializable {
             }
         });
         patientFIleID.setCellFactory(tmp -> EditCell.createStringEditCell());
+        patientFIleID.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Patient patient = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, patient);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            patient.setPatientID(Integer.valueOf(value));
+            save(patient, pos);
+            patientTable.refresh();
+        });
         patientNameColumn.setCellFactory(tmp -> EditCell.createStringEditCell());
+        patientNameColumn.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Patient patient = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, patient);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            patient.setPatientName(value);
+            save(patient, pos);
+            patientTable.refresh();
+        });
         phoneNumber.setCellFactory(tmp -> EditCell.createStringEditCell());
+        phoneNumber.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Patient patient = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, patient);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            patient.setPhoneNumber(value);
+            save(patient, pos);
+            patientTable.refresh();
+        });
         address.setCellFactory(tmp -> EditCell.createStringEditCell());
+        address.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Patient patient = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, patient);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            patient.setAddress(value);
+            save(patient, pos);
+            patientTable.refresh();
+        });
         remainingCost.setCellFactory(tmp -> EditCell.createStringEditCell());
+        remainingCost.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Patient patient = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, patient);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            patient.setRemainingCost(Integer.valueOf(value));
+            save(patient, pos);
+            patientTable.refresh();
+        });
 
         patientFIleID.setCellValueFactory(new PropertyValueFactory<>("file_number"));
         patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("patientName"));
@@ -195,7 +252,13 @@ public class DisplayPatient implements Initializable {
                     }
                 };
         showProfile.setCellFactory(cellFactory);
-        patientTable.setItems(FXCollections.observableArrayList(new Patient()));
+    }
 
+    private void save(Patient patient, int pos){
+        if(!PatientDAO.updatePatient(tmpTableData.get(pos).getFile_number(), patient)){
+            String msg = "لا يمكن تعديل " + patient.getFile_number() + ": " + patient.getPatientName();
+            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            patientTable.setItems(tmpTableData);
+        }
     }
 }

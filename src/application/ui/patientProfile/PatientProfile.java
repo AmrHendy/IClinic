@@ -99,7 +99,7 @@ public class PatientProfile implements Initializable{
         newPatient.setAddress(address.getText());
         newPatient.setPhoneNumber(phoneNumber.getText());
         newPatient.setRemainingCost(Integer.valueOf(remainingMoney.getText()));
-        newPatient.setClinic_number(Integer.valueOf(clinicNumberChooser.getValue()));
+        newPatient.setClinic_number(clinicNumberChooser.getValue());
         newPatient.setBirthdate(Date.valueOf(dateOfBirth.getValue()));
         newPatient.setFile_number(fileNumber.getText());
         if(!PatientDAO.updatePatient(fileNumber.getText(), newPatient)){

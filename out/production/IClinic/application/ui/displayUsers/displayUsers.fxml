@@ -20,7 +20,6 @@
             <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
                <items>
                   <JFXButton onMouseClicked="#deleteUser" text="مسح مستخدم" />
-                  <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#SaveChanges" text="حفظ التغيرات" />
                </items>
             </ToolBar>
             <TableView fx:id="userTable" prefHeight="10000.0">

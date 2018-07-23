@@ -8,7 +8,7 @@ public class User {
     private int clinic;
 
     public User(){
-
+        this.clinic = -1;
     }
 
     // GETTERS

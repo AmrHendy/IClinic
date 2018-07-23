@@ -12,7 +12,7 @@ public class PatientValidator {
         if(patient.getPatientName() == null){
             msgs.add("لا توجد قيمة لاسم المريض");
         }
-        if(patient.getClinic_number() == -1){
+        if(patient.getClinic_number() == null){
             msgs.add("لا توجد قيمة لرقم العيادة");
         }
         //TODO:: add phoneNumber in patient
