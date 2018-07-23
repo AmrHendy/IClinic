@@ -14,8 +14,8 @@
          <children>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
                <items>
-                  <TextField fx:id="patientID" layoutX="10.0" layoutY="10.0" onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="299.0" promptText="رقم المريض" />
-                  <TextField fx:id="patientName" onKeyTyped="#charEntered" prefHeight="26.0" prefWidth="299.0" promptText="اسم المريض" />
+                  <TextField fx:id="patientName" onKeyTyped="#nameEntered" prefHeight="26.0" prefWidth="299.0" promptText="اسم المريض" />
+                  <TextField fx:id="patientID" layoutX="10.0" layoutY="10.0" onKeyTyped="#idEntered" prefHeight="26.0" prefWidth="299.0" promptText="رقم المريض" />
                </items>
             </ToolBar>
             <ToolBar layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">

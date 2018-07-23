@@ -62,16 +62,32 @@ public class DisplayPatient implements Initializable {
     private ObservableList<Patient> tmpTableData;
 
     @FXML
-    void charEntered(KeyEvent event) {
-        String name = patientName.getText();
-        String id = patientID.getText();
-        if(name != null){
-            ObservableList<Patient> obs = UiUtil.getPatientObservable(PatientDAO.findByNameLike(name));
+    void nameEntered(KeyEvent event) {
+        String name = patientName.getText() == "" ? null : patientName.getText();
+        ObservableList<Patient> obs = null;
+        if(name != ""){
+            obs = UiUtil.getPatientObservable(PatientDAO.findByNameLike(name));
             patientTable.setItems(obs);
-        }else if(id != null){
-            Patient patient= PatientDAO.findByFileNumber(id);
+        }
+        if(obs == null || obs.size() == 0){
+            showProfile.setGraphic(null);
             patientTable.getItems().clear();
-            patientTable.getItems().add(patient);
+        }
+        patientTable.refresh();
+        tmpTableData = patientTable.getItems();
+    }
+
+    @FXML
+    void idEntered(KeyEvent event){
+        String id = patientID.getText() == "" ? null : patientID.getText();
+        Patient patient = null;
+        if(id != null){
+            patient = PatientDAO.findByFileNumber(id);
+            patientTable.setItems(FXCollections.observableArrayList(patient));
+        }
+        if(patient == null){
+            showProfile.setGraphic(null);
+            patientTable.getItems().clear();
         }
         patientTable.refresh();
         tmpTableData = patientTable.getItems();

@@ -20,7 +20,7 @@ public class Patient {
     private int remainingCost;
     private String phoneNumber;
     private String file_number;
-    private String clinic_number;
+    private int clinic_number;
 
     public Patient(){
         remainingCost = 0;
@@ -34,11 +34,11 @@ public class Patient {
         this.file_number = file_number;
     }
 
-    public String getClinic_number() {
+    public int getClinic_number() {
         return clinic_number;
     }
 
-    public void setClinic_number(String clinic_number) {
+    public void setClinic_number(int clinic_number) {
         this.clinic_number = clinic_number;
     }
 
@@ -90,6 +90,7 @@ public class Patient {
     }
 
     public void setBirthdate(String date) {
+        //TODO:: check this
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date formattedDate = null;
         try {

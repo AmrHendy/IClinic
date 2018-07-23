@@ -72,10 +72,12 @@ public class AddPatient implements Initializable {
         patient.setPatientName(patientName.getText());
         patient.setAddress(address.getText());
         LocalDate date = dateOfBirth.getValue();
-        patient.setBirthdate(Date.valueOf(date));
+        if(date != null){
+            patient.setBirthdate(Date.valueOf(date));
+        }
         patient.setPhoneNumber(phoneNumber.getText());
         patient.setFile_number(fileNumber.getText());
-        String req = (requiredCost.getText() == null) ? "0" : requiredCost.getText();
+        String req = (requiredCost.getText() == "") ? "0" : requiredCost.getText();
         patient.setRemainingCost(Integer.valueOf(req));
         ArrayList<String> msgs = PatientValidator.insertingValidator(patient);
         if(msgs.size() > 0){
@@ -84,8 +86,11 @@ public class AddPatient implements Initializable {
             if(!PatientDAO.addPatient(patient)){
                 String msg = "لا يمكن اتمام اضافة مريض اعد المحاولة.";
                 Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            }else{
+                System.out.println("here.");
             }
         }
+
     }
 
 
