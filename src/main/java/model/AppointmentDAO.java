@@ -25,7 +25,7 @@ public class AppointmentDAO {
                 + app.getPatientID() + " , " + "'" + app.getDateString() + "'" + " , "
                 + app.getPaidCost() + " , " + (app.isFinished() ? 1 : 0) + " , "
                 + "'" + app.getImageBytes() + "'" + " , " + "'" + app.getComment() + "'" + " , "
-                + (app.isConfirmedPaid() ? 1 : 0) + " , " + UserSignedInData.user.getClinic() + " );" ;
+                + (app.isConfirmedPaid() ? 1 : 0) + " , " + UserSignedInData.user.getClinicNumber() + " );" ;
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
@@ -35,12 +35,12 @@ public class AppointmentDAO {
     }
 
     public static boolean deleteAllAppointmentByPatientID(int patientID){
-        String query = "DELETE FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
+        String query = "DELETE FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
     public static ArrayList<Appointment> findByPatientID(int patientID){
-        String query = "SELECT * FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
+        String query = "SELECT * FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -119,7 +119,7 @@ public class AppointmentDAO {
             SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             String formattedDate = dt.format(appDate);
             String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
-                            + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
+                            + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
             ArrayList<Appointment> matched = new ArrayList<>();
             try{
                 ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -139,7 +139,7 @@ public class AppointmentDAO {
             SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             String formattedDate = dt.format(appDate);
             String query = "SELECT * FROM Appointment WHERE patientId = " + patient1.getPatientID() + " AND date = '" + formattedDate
-                            + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
+                            + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
             ArrayList<Appointment> matched = new ArrayList<>();
             try{
                 ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -163,7 +163,7 @@ public class AppointmentDAO {
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String formattedDate = dt.format(appDate);
         String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
-                + "' AND clinic_number = " + UserSignedInData.user.getClinic() + " ;";
+                + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -177,7 +177,7 @@ public class AppointmentDAO {
         if(matched.isEmpty())return false;
         if(!matched.get(0).isConfirmedPaid()){
             matched.get(0).setConfirmedPaid(true);
-            patient.setRemainingCost(Math.max(patient.getRemainingCost() - matched.get(0).getPaidCost(), 0));
+            patient.setRemainingCost(Math.max(Integer.parseInt(patient.getRemainingCost()) - matched.get(0).getPaidCost(), 0));
             AppointmentDAO.updateAppointmentByID(matched.get(0).getAppointmentID(), matched.get(0));
             PatientDAO.updatePatient(patient.getFile_number(), patient);
         }

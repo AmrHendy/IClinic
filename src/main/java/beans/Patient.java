@@ -56,18 +56,18 @@ public class Patient {
         return address;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
+    public String getBirthdate() {
+        return getDateString();
     }
 
     public String getDateString() {
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dt.format(birthdate);
         return formattedDate;
     }
 
-    public int getRemainingCost() {
-        return remainingCost;
+    public String getRemainingCost() {
+        return String.valueOf(remainingCost);
     }
 
     public String getPhoneNumber() { return phoneNumber; }
@@ -91,7 +91,7 @@ public class Patient {
 
     public void setBirthdate(String date) {
         //TODO:: check this
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         Date formattedDate = null;
         try {
             formattedDate = dt.parse(date);

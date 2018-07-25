@@ -28,7 +28,10 @@ public class User {
         return userName;
     }
 
-    public int getClinic() {
+    public String getClinic() {
+        return String.valueOf(clinic);
+    }
+    public int getClinicNumber() {
         return clinic;
     }
 
