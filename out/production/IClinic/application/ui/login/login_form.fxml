@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.login.LoginForm">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.login.LoginForm">
 <padding><Insets bottom="40" left="40" right="40" top="40" /></padding>
 <columnConstraints>
     <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="86.0" prefWidth="86.0">
@@ -46,7 +46,7 @@
 
 
    <!-- Add Submit Button -->
-   <Button fx:id="submitButton" defaultButton="true" onAction="#handleSubmitButtonAction" prefHeight="40" prefWidth="100" text="تأكيد" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.rowSpan="1">
+   <Button fx:id="submitButton" defaultButton="true" onMouseClicked="#handleSubmitButtonAction" prefHeight="40" prefWidth="100" text="تأكيد" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.rowSpan="1">
        <GridPane.margin>
            <Insets bottom="20" left="0" right="0" top="20" />
        </GridPane.margin>

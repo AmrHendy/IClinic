@@ -15,7 +15,7 @@ public class UserValidator {
         if(user.getUserName() == null){
             msgs.add("لا يوجد قيمة لاسم المستخدم");
         }
-        if(user.getClinic() == -1){
+        if(user.getClinic() == ""){
             msgs.add("لا توجد قيمة لرقم العيادة");
         }
         return msgs;

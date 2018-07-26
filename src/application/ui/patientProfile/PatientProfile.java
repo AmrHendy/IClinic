@@ -117,7 +117,7 @@ public class PatientProfile implements Initializable{
         ObservableList<String> list = FXCollections.observableArrayList(UserDAO.getClinics());
         clinicNumberChooser.setItems(list);
         sessionsTable.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByPatientID(Integer.valueOf(patient.getPatientID()))));
-        tmpTableData.setAll(sessionsTable.getItems());
+        tmpTableData = sessionsTable.getItems();
 
         patientName.setText(patient.getPatientName());
         address.setText(patient.getAddress());

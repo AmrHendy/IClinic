@@ -1,7 +1,5 @@
 package main.java.model;
 
-import application.ui.handler.UserSingedInData;
-import main.java.beans.Appointment;
 import main.java.beans.Patient;
 import main.java.beans.UserSignedInData;
 
@@ -76,7 +74,7 @@ public class PatientDAO {
     }
 
     public static ArrayList<Patient> findByNameLike(String patientName){
-        String query = "SELECT * FROM Patient WHERE name LIKE '%" + patientName + "' AND clinic_number = " + UserSingedInData.user.getClinicNumber() + " ;";
+        String query = "SELECT * FROM Patient WHERE name LIKE '%" + patientName + "%' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -92,7 +90,7 @@ public class PatientDAO {
 
     public static Patient findByFileNumber(String file_number){
         // we will use the current logged in user to get the clinic number and use it in the where condition
-        String query = "SELECT * FROM Patient WHERE file_number = '" + file_number + "' AND clinic_number = " + UserSingedInData.user.getClinicNumber() + " ;";
+        String query = "SELECT * FROM Patient WHERE file_number = '" + file_number + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
         ArrayList<Patient> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);

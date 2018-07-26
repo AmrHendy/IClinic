@@ -1,7 +1,6 @@
 package application.ui.mainPage;
 
-import application.ui.handler.TimeGenerator;
-import application.ui.handler.UserSingedInData;
+import application.ui.handler.MessagesController;
 import application.ui.handler.WindowHandlers;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -9,18 +8,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import main.java.beans.Appointment;
+import main.java.beans.UserSignedInData;
 import main.java.model.AppointmentDAO;
+import main.java.model.PatientDAO;
 import main.java.model.UserDAO;
 import main.java.util.UiUtil;
 
 import java.net.URL;
 import java.text.DateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -129,20 +131,131 @@ public class MainPage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO:: we need to add the editable cells here.
-        UserSingedInData.user = UserDAO.getUser("admin");
+        UserSignedInData.user = UserDAO.getUser("admin");
         clinicNumberChooser.setItems(FXCollections.observableArrayList(UserDAO.getClinics()));
-        clinicNumberChooser.getSelectionModel().select(UserSingedInData.user.getClinic());
+        clinicNumberChooser.getSelectionModel().select(UserSignedInData.user.getClinic());
+        todaySession.setOnKeyPressed(event -> {
+            TablePosition<Appointment, ?> pos = todaySession.getFocusModel().getFocusedCell();
+            if (pos != null && event.getCode().isLetterKey()) {
+                todaySession.edit(pos.getRow(), pos.getTableColumn());
+            }
+        });
+
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         patientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+        patientName.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpTodayTableData.set(pos, appointment);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.getPatient().setPatientName(value);
+            //TODO:: this function must take the appointment before and after.
+            appointment.update();
+            save(appointment,true);
+            todaySession.refresh();
+        });
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        phoneNumber.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpTodayTableData.set(pos, appointment);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.getPatient().setPhoneNumber(value);
+            //TODO:: this function must take the appointment before and after.
+            appointment.update();
+            save(appointment,true);
+            todaySession.refresh();
+        });
         patientNumber.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
+        patientNumber.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpTodayTableData.set(pos, appointment);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.getPatient().setFile_number(value);
+            //TODO:: this function must take the appointment before and after.
+            appointment.update();
+            save(appointment,true);
+            todaySession.refresh();
+        });
         money.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
+        money.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpTodayTableData.set(pos, appointment);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.setPaidCost(Integer.valueOf(value));
+            //TODO:: this function must take the appointment before and after.
+            appointment.update();
+            save(appointment,true);
+            todaySession.refresh();
+        });
 
         time1.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         patientName1.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+        patientName1.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpSearchTableData.set(pos, appointment);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.getPatient().setPatientName(value);
+            //TODO:: this function must take the appointment before and after.
+            appointment.update();
+            save(appointment,false);
+            searchSessionsTable.refresh();
+        });
         phoneNumber1.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        phoneNumber1.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpSearchTableData.set(pos, appointment);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.getPatient().setPhoneNumber(value);
+            //TODO:: this function must take the appointment before and after.
+            appointment.update();
+            save(appointment,false);
+            searchSessionsTable.refresh();
+        });
         patientNumber1.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
+        patientNumber1.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpSearchTableData.set(pos, appointment);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.getPatient().setFile_number(value);
+            //TODO:: this function must take the appointment before and after.
+            appointment.update();
+            save(appointment,false);
+            searchSessionsTable.refresh();
+        });
         money1.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
+        money1.setOnEditCommit(event -> {
+            //TODO:: test failed edit.
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpSearchTableData.set(pos, appointment);
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.setPaidCost(Integer.valueOf(value));
+            //TODO:: this function must take the appointment before and after.
+            appointment.update();
+            save(appointment,false);
+            searchSessionsTable.refresh();
+        });
         //TODO:: initialize today session here.
         todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getDate(), Integer.valueOf(clinicNumberChooser.getValue()))));
         tmpTodayTableData = searchSessionsTable.getItems();
@@ -206,7 +319,18 @@ public class MainPage implements Initializable {
             return today;
         }
         Date ret = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        System.out.println(ret);
         return ret;
+    }
+
+    private void save(Appointment appointment, boolean today){
+        if(!AppointmentDAO.updateAppointmentByID(appointment.getAppointmentID(), appointment)){
+            String msg = "لا يمكن تعديل " + appointment.getPatientFileID() + " : " + appointment.getPatient().getPatientName();
+            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            if(today){
+                todaySession.setItems(tmpTodayTableData);
+            }else{
+                searchSessionsTable.setItems(tmpSearchTableData);
+            }
+        }
     }
 }

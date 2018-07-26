@@ -2,24 +2,19 @@ package application.ui.displayUsers;
 
 import application.ui.handler.EditCell;
 import application.ui.handler.MessagesController;
-import application.ui.handler.UserSingedInData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import main.java.beans.Patient;
 import main.java.beans.User;
-import main.java.model.PatientDAO;
+import main.java.beans.UserSignedInData;
 import main.java.model.UserDAO;
-import main.java.util.UiUtil;
 
 import java.net.URL;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -69,7 +64,7 @@ public class DisplayUser implements Initializable {
     @FXML
     void charEntered(KeyEvent event) {
         String name = userName.getText();
-        if (name != null && name == UserSingedInData.user.getUserName()) {
+        if (name != null && name == UserSignedInData.user.getUserName()) {
             userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser(name)));
         }
         tmpTableData.setAll(userTable.getItems());
@@ -149,7 +144,7 @@ public class DisplayUser implements Initializable {
         });
 
         ObservableList<User> alreadyLoggedIn = FXCollections.observableArrayList();
-        alreadyLoggedIn.add(UserSingedInData.user);
+        alreadyLoggedIn.add(UserSignedInData.user);
         userTable.setItems(alreadyLoggedIn);
         tmpTableData = userTable.getItems();
     }

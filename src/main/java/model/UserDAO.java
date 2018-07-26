@@ -1,7 +1,5 @@
 package main.java.model;
 
-import application.ui.handler.UserSingedInData;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.beans.User;

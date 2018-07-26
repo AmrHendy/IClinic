@@ -225,7 +225,6 @@ public class DisplayPatient implements Initializable {
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         address.setCellValueFactory(new PropertyValueFactory<>("address"));
         remainingCost.setCellValueFactory(new PropertyValueFactory<>("remainingCost"));
-        showProfile.setCellValueFactory(new PropertyValueFactory<>("dummy"));
 
 
         Callback<TableColumn<Patient, String>, TableCell<Patient, String>> cellFactory
@@ -248,7 +247,7 @@ public class DisplayPatient implements Initializable {
                                         Patient patient = getTableView().getItems().get(getIndex());
                                         WindowHandlers windowHandlers = WindowHandlers.getInstance();
                                         try{
-                                            windowHandlers.loadWindow("/application/ui/addPatient/patientProfile.fxml", "الملف الشخصى" ,
+                                            windowHandlers.loadWindow("/application/ui/patientProfile/patientProfile.fxml", "الملف الشخصى" ,
                                                     true, false, false, null);
                                             FXMLLoader loader = windowHandlers.getLoader();
                                             PatientProfile controller = loader.getController();
