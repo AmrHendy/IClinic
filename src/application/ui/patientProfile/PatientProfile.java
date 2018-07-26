@@ -145,7 +145,6 @@ public class PatientProfile implements Initializable{
                 sessionsTable.edit(pos.getRow(), pos.getTableColumn());
             }
         });
-        //TODO:: we need to add the editable cells here (I don't know it right now).
 
         date.setCellValueFactory(new PropertyValueFactory<>("dateOnly"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
