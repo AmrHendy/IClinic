@@ -64,7 +64,7 @@ public class DisplayUser implements Initializable {
     @FXML
     void charEntered(KeyEvent event) {
         String name = userName.getText();
-        if (name != null && name == UserSignedInData.user.getUserName()) {
+        if (name != null) {
             userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser(name)));
         }
         tmpTableData.setAll(userTable.getItems());
@@ -126,8 +126,8 @@ public class DisplayUser implements Initializable {
             user.setUserName(value);
             save(user);
             userTable.refresh();
+            event.consume();
         });
-
         clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinic"));
         clinicNumber.setCellFactory(userNameColumn -> EditCell.createStringEditCell());
 
@@ -150,11 +150,10 @@ public class DisplayUser implements Initializable {
     }
 
     private void save(User user){
-        if(!UserDAO.updateUser(user.getUserID(), user)){
+        if(!user.getUserName().equals(UserSignedInData.user.getUserName()) || !UserDAO.updateUser(user.getUserID(), user)){
             String msg = "لا يمكن تعديل " + user.getUserID() + ": " + user.getUserName();
             MessagesController.getAlert(msg, Alert.AlertType.ERROR);
             userTable.setItems(tmpTableData);
         }
-
     }
 }

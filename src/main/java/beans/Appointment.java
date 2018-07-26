@@ -128,8 +128,8 @@ public class Appointment {
         }
     }
 
-    public int getPaidCost() {
-        return paidCost;
+    public String getPaidCost() {
+        return String.valueOf(paidCost);
     }
 
     public void setPaidCost(int paidCost) {

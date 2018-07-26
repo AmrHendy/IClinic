@@ -107,8 +107,8 @@ public class UserDAO {
 
     public static User getUser(String userName) {
         User user = null;
-
-        String query = "SELECT * FROM User WHERE userName = '" + userName + "';";
+        System.out.println("name = " + userName);
+        String query = "SELECT * FROM User WHERE userName LIKE '" + userName + "%';";
         ResultSet rs = null;
         try {
             rs = ModelManager.getInstance().executeQuery(query);

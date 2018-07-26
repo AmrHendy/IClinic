@@ -132,7 +132,6 @@ public class MainPage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO:: we need to add the editable cells here.
-        UserSignedInData.user = UserDAO.getUser("admin");
         clinicNumberChooser.setItems(FXCollections.observableArrayList(UserDAO.getClinics()));
         clinicNumberChooser.getSelectionModel().select(UserSignedInData.user.getClinic());
         todaySession.setOnKeyPressed(event -> {
@@ -157,7 +156,7 @@ public class MainPage implements Initializable {
             appointment.getPatient().setFile_number(value);
             //TODO:: this function must take the appointment before and after.
             AppointmentDAO.editAppointmentList(tmpTodayTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                    appointment.getDate(), appointment.getPaidCost());
+                    appointment.getDate(), Integer.parseInt(appointment.getPaidCost()));
             save(pos, appointment,true);
             todaySession.refresh();
         });
@@ -173,7 +172,7 @@ public class MainPage implements Initializable {
             appointment.setPaidCost(Integer.valueOf(value));
             //TODO:: this function must take the appointment before and after.
             AppointmentDAO.editAppointmentList(tmpTodayTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                    appointment.getDate(), appointment.getPaidCost());
+                    appointment.getDate(), Integer.parseInt(appointment.getPaidCost()));
             save(pos, appointment,true);
             todaySession.refresh();
         });
@@ -193,7 +192,7 @@ public class MainPage implements Initializable {
             appointment.getPatient().setFile_number(value);
             //TODO:: this function must take the appointment before and after.
             AppointmentDAO.editAppointmentList(tmpSearchTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                    appointment.getDate(), appointment.getPaidCost());
+                    appointment.getDate(), Integer.parseInt(appointment.getPaidCost()));
             save(pos, appointment,false);
             searchSessionsTable.refresh();
         });
@@ -209,7 +208,7 @@ public class MainPage implements Initializable {
             appointment.setPaidCost(Integer.valueOf(value));
             //TODO:: this function must take the appointment before and after.
             AppointmentDAO.editAppointmentList(tmpSearchTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                    appointment.getDate(), appointment.getPaidCost());
+                    appointment.getDate(), Integer.parseInt(appointment.getPaidCost()));
             save(pos, appointment,false);
             searchSessionsTable.refresh();
         });
@@ -280,7 +279,7 @@ public class MainPage implements Initializable {
 
     private void save(int pos, Appointment appointment, boolean today){
         if(!AppointmentDAO.editAppointmentList(tmpSearchTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                appointment.getDate(), appointment.getPaidCost())){
+                appointment.getDate(), Integer.parseInt(appointment.getPaidCost()))){
             String msg = "لا يمكن تعديل " + appointment.getPatientFileID() + " : " + appointment.getPatient().getPatientName();
             MessagesController.getAlert(msg, Alert.AlertType.ERROR);
             if(today){

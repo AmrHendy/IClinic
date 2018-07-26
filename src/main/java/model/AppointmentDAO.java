@@ -23,7 +23,7 @@ public class AppointmentDAO {
     public static boolean addAppointment(Appointment app){
         String query = "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment, confirmed_paid, clinic_number) VALUES ( "
                 + app.getPatientID() + " , " + "'" + app.getDateString() + "'" + " , "
-                + app.getPaidCost() + " , " + (app.isFinished() ? 1 : 0) + " , "
+                + Integer.parseInt(app.getPaidCost()) + " , " + (app.isFinished() ? 1 : 0) + " , "
                 + "'" + app.getImageBytes() + "'" + " , " + "'" + app.getComment() + "'" + " , "
                 + (app.isConfirmedPaid() ? 1 : 0) + " , " + UserSignedInData.user.getClinicNumber() + " );" ;
         return ModelManager.getInstance().executeUpdateQuery(query);
@@ -177,7 +177,7 @@ public class AppointmentDAO {
         if(matched.isEmpty())return false;
         if(!matched.get(0).isConfirmedPaid()){
             matched.get(0).setConfirmedPaid(true);
-            patient.setRemainingCost(Math.max(Integer.parseInt(patient.getRemainingCost()) - matched.get(0).getPaidCost(), 0));
+            patient.setRemainingCost(Math.max(Integer.parseInt(patient.getRemainingCost()) - Integer.parseInt(matched.get(0).getPaidCost()), 0));
             AppointmentDAO.updateAppointmentByID(matched.get(0).getAppointmentID(), matched.get(0));
             PatientDAO.updatePatient(patient.getFile_number(), patient);
         }

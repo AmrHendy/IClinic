@@ -31,6 +31,7 @@ public class User {
     public String getClinic() {
         return String.valueOf(clinic);
     }
+
     public int getClinicNumber() {
         return clinic;
     }
