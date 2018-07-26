@@ -3,6 +3,7 @@ package main.java.model;
 import main.java.beans.Patient;
 import main.java.beans.UserSignedInData;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,18 +12,21 @@ import java.util.ArrayList;
 public class PatientDAO {
 
     public static boolean addPatient(Patient newPatient) {
-        System.out.println(" = الاسم" + newPatient.getPatientName());
         try {
             PreparedStatement ps = ModelManager.getInstance().getConnection().prepareStatement(
                     "INSERT INTO Patient (Patient.name, address, birthdate, remainingCost, mobile_number, file_number, clinic_number) VALUES ( ?, ?, ?, ?, ?, ?, ? );");
             ps.setString(1, newPatient.getPatientName());
             ps.setString(2, newPatient.getAddress());
-            ps.setString(3, newPatient.getDateString());
+            if(newPatient.getDateString().isEmpty()){
+                ps.setDate(3, null);
+            }
+            else{
+                ps.setString(3, newPatient.getDateString());
+            }
             ps.setInt(4, Integer.parseInt(newPatient.getRemainingCost()));
             ps.setString(5, newPatient.getPhoneNumber());
             ps.setString(6, newPatient.getFile_number());
             ps.setInt(7, newPatient.getClinic_number());
-            System.out.println(ps.toString());
             return ps.executeUpdate() == 1;
         } catch (Exception e) {
             return false;
@@ -33,7 +37,7 @@ public class PatientDAO {
         String query = "UPDATE Patient SET "
                         + "name = '" + newPatient.getPatientName() + "' , "
                         + "address = '" + newPatient.getAddress() + "' , "
-                        + "birthdate = '" + newPatient.getDateString() + "' , "
+                        + (newPatient.getDateString().isEmpty() ? "" : "birthdate = '" + newPatient.getDateString() + "' , ")
                         + "remainingCost = " + Integer.parseInt(newPatient.getRemainingCost()) + " , "
                         + "mobile_number = '" + newPatient.getPhoneNumber() + "' , "
                         + "file_number = '" + newPatient.getFile_number() + "' , "

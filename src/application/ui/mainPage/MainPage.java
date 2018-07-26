@@ -21,6 +21,7 @@ import main.java.model.AppointmentDAO;
 import main.java.model.PatientDAO;
 import main.java.model.UserDAO;
 import main.java.util.UiUtil;
+import org.w3c.dom.UserDataHandler;
 
 import java.net.URL;
 import java.text.DateFormat;
@@ -132,6 +133,10 @@ public class MainPage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO:: we need to add the editable cells here.
+        todaySession.getSelectionModel().setCellSelectionEnabled(true);
+        todaySession.setEditable(true);
+        searchSessionsTable.getSelectionModel().setCellSelectionEnabled(true);
+        searchSessionsTable.setEditable(true);
         clinicNumberChooser.setItems(FXCollections.observableArrayList(UserDAO.getClinics()));
         clinicNumberChooser.getSelectionModel().select(UserSignedInData.user.getClinic());
         todaySession.setOnKeyPressed(event -> {
@@ -141,23 +146,25 @@ public class MainPage implements Initializable {
             }
         });
 
+        searchSessionsTable.setOnKeyPressed(event -> {
+            TablePosition<Appointment, ?> pos = searchSessionsTable.getFocusModel().getFocusedCell();
+            if (pos != null && event.getCode().isLetterKey()) {
+                searchSessionsTable.edit(pos.getRow(), pos.getTableColumn());
+            }
+        });
+
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         patientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         patientNumber.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
         patientNumber.setCellFactory(patienNumber -> EditCell.createStringEditCell());
         patientNumber.setOnEditCommit(event -> {
-            //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
             tmpTodayTableData.set(pos, appointment);
-            final String value = event.getNewValue() != null ?
-                    event.getNewValue() : event.getOldValue();
-            appointment.getPatient().setFile_number(value);
-            //TODO:: this function must take the appointment before and after.
-            AppointmentDAO.editAppointmentList(tmpTodayTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                    appointment.getDate(), Integer.parseInt(appointment.getPaidCost()));
-            save(pos, appointment,true);
+            final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
+            final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
+            editFileNumber(appointment, oldValue, newValue, true);
             todaySession.refresh();
         });
         money.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
@@ -167,13 +174,8 @@ public class MainPage implements Initializable {
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
             tmpTodayTableData.set(pos, appointment);
-            final String value = event.getNewValue() != null ?
-                    event.getNewValue() : event.getOldValue();
-            appointment.setPaidCost(Integer.valueOf(value));
-            //TODO:: this function must take the appointment before and after.
-            AppointmentDAO.editAppointmentList(tmpTodayTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                    appointment.getDate(), Integer.parseInt(appointment.getPaidCost()));
-            save(pos, appointment,true);
+            final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
+            editPaidCost(appointment, newValue, true);
             todaySession.refresh();
         });
 
@@ -181,40 +183,31 @@ public class MainPage implements Initializable {
         patientName1.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber1.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         patientNumber1.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
-        patientNumber1.setCellFactory(patienNumber -> EditCell.createStringEditCell());
+        patientNumber1.setCellFactory(patienNumber1 -> EditCell.createStringEditCell());
         patientNumber1.setOnEditCommit(event -> {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
             tmpSearchTableData.set(pos, appointment);
-            final String value = event.getNewValue() != null ?
-                    event.getNewValue() : event.getOldValue();
-            appointment.getPatient().setFile_number(value);
-            //TODO:: this function must take the appointment before and after.
-            AppointmentDAO.editAppointmentList(tmpSearchTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                    appointment.getDate(), Integer.parseInt(appointment.getPaidCost()));
-            save(pos, appointment,false);
+            final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
+            final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
+            editFileNumber(appointment, oldValue, newValue, false);
             searchSessionsTable.refresh();
         });
         money1.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
-        money1.setCellFactory(patienNumber -> EditCell.createStringEditCell());
+        money1.setCellFactory(money1 -> EditCell.createStringEditCell());
         money1.setOnEditCommit(event -> {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
             tmpSearchTableData.set(pos, appointment);
-            final String value = event.getNewValue() != null ?
-                    event.getNewValue() : event.getOldValue();
-            appointment.setPaidCost(Integer.valueOf(value));
-            //TODO:: this function must take the appointment before and after.
-            AppointmentDAO.editAppointmentList(tmpSearchTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
-                    appointment.getDate(), Integer.parseInt(appointment.getPaidCost()));
-            save(pos, appointment,false);
+            final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
+            editPaidCost(appointment, newValue, false);
             searchSessionsTable.refresh();
         });
         //TODO:: initialize today session here.
         todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
-        tmpTodayTableData = searchSessionsTable.getItems();
+        tmpTodayTableData = todaySession.getItems();
     }
 
 
@@ -277,21 +270,31 @@ public class MainPage implements Initializable {
         return today;
     }
 
-    private void save(int pos, Appointment appointment, boolean today){
-        if(!AppointmentDAO.editAppointmentList(tmpSearchTableData.get(pos).getPatientFileID(), appointment.getPatientFileID(),
+    private void editFileNumber(Appointment appointment, String oldValue, String newValue, boolean today){
+        if(!AppointmentDAO.editAppointmentList(oldValue, newValue,
                 appointment.getDate(), Integer.parseInt(appointment.getPaidCost()))){
-            String msg = "لا يمكن تعديل " + appointment.getPatientFileID() + " : " + appointment.getPatient().getPatientName();
+            String msg = "لا يمكن تعديل ";
             MessagesController.getAlert(msg, Alert.AlertType.ERROR);
             if(today){
                 todaySession.setItems(tmpTodayTableData);
             }else{
                 searchSessionsTable.setItems(tmpSearchTableData);
             }
-        }else{
-            if(today){
-                todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
-            }else{
-                searchAppointment(null);
+        }
+
+    }
+
+    private void editPaidCost(Appointment appointment, String newValue, boolean today){
+        if(appointment.getPatient() != null && appointment.getPatient().getFile_number() != null){
+            if(!AppointmentDAO.editAppointmentList(appointment.getPatient().getFile_number(), appointment.getPatient().getFile_number(),
+                    appointment.getDate(), Integer.valueOf(newValue))){
+                String msg = "لا يمكن تعديل ";
+                MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                if(today){
+                    todaySession.setItems(tmpTodayTableData);
+                }else{
+                    searchSessionsTable.setItems(tmpSearchTableData);
+                }
             }
         }
     }

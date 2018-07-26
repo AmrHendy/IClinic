@@ -102,17 +102,16 @@ public class PatientProfile implements Initializable{
         newPatient.setClinic_number(Integer.valueOf(clinicNumberChooser.getValue()));
         newPatient.setBirthdate(Date.valueOf(dateOfBirth.getValue()));
         newPatient.setFile_number(fileNumber.getText());
-        if(!PatientDAO.updatePatient(fileNumber.getText(), newPatient)){
+        if(!PatientDAO.updatePatient(patient.getFile_number(), newPatient)){
             String msg = "لم تنجح العملية.";
             Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
         }else{
             String msg = "تمت العملية بنجاح.";
             Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
         }
-
     }
 
-    public void fillData(){
+    public void fillData() {
 
         ObservableList<String> list = FXCollections.observableArrayList(UserDAO.getClinics());
         clinicNumberChooser.setItems(list);
@@ -124,8 +123,10 @@ public class PatientProfile implements Initializable{
         phoneNumber.setText(patient.getPhoneNumber());
         remainingMoney.setText(String.valueOf(patient.getRemainingCost()));
         clinicNumberChooser.getSelectionModel().select(patient.getClinic_number());
-        LocalDate date = LocalDate.parse(patient.getDateString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        dateOfBirth.setValue(date);
+        if (!patient.getDateString().isEmpty()){
+            LocalDate date = LocalDate.parse(patient.getDateString(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dateOfBirth.setValue(date);
+        }
         fileNumber.setText(patient.getFile_number());
 
     }

@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.channels.SelectableChannel;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -21,12 +23,23 @@ import java.util.Date;
 public class AppointmentDAO {
 
     public static boolean addAppointment(Appointment app){
-        String query = "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment, confirmed_paid, clinic_number) VALUES ( "
-                + app.getPatientID() + " , " + "'" + app.getDateString() + "'" + " , "
-                + Integer.parseInt(app.getPaidCost()) + " , " + (app.isFinished() ? 1 : 0) + " , "
-                + "'" + app.getImageBytes() + "'" + " , " + "'" + app.getComment() + "'" + " , "
-                + (app.isConfirmedPaid() ? 1 : 0) + " , " + UserSignedInData.user.getClinicNumber() + " );" ;
-        return ModelManager.getInstance().executeUpdateQuery(query);
+        try{
+            PreparedStatement pst = ModelManager.getInstance().getConnection().prepareStatement(
+                    "INSERT INTO Appointment (patientId, date, paidCost, finished, image, comment, confirmed_paid, clinic_number) VALUES "
+                            + "( ?, ?, ?, ?, ?, ?, ?, ?);");
+            pst.setInt(1, app.getPatientID());
+            pst.setString(2, app.getDateString());
+            pst.setInt(3, Integer.parseInt(app.getPaidCost()));
+            pst.setInt(4, app.isFinished() ? 1 : 0);
+            pst.setBytes(5, app.getImageBytes());
+            pst.setString(6, app.getComment());
+            pst.setInt(7, app.isConfirmedPaid() ? 1 : 0);
+            pst.setInt(8, UserSignedInData.user.getClinicNumber());
+            return pst.executeUpdate() == 1;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public static boolean deleteAppointmentByID(int id){
@@ -106,11 +119,12 @@ public class AppointmentDAO {
         if(patientFileIDBefore.isEmpty()){
             //insert
             Patient patient = PatientDAO.findByFileNumber(patientFileIDAfter);
+            if(patient == null) return false;
             Appointment app = new Appointment();
             app.setPatientID(patient.getPatientID());
             app.setDate(appDate);
             app.setPaidCost(paidCost);
-            //TODO add clinic numebr
+            app.setClinicNumber(UserSignedInData.user.getClinicNumber());
             return AppointmentDAO.addAppointment(app);
         }
         else if(patientFileIDAfter.isEmpty()){

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -102,6 +103,7 @@ public class Appointment {
     }
 
     public byte[] getImageBytes() {
+        if(image == null)return null;
         byte[] bytes = null;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
@@ -157,11 +159,11 @@ public class Appointment {
     }
 
     public Patient getPatient(){
-        Patient patient = PatientDAO.findByID(patientID).get(0);
-        if(patient == null){
-            patient = new Patient();
+        ArrayList<Patient> arr = PatientDAO.findByID(patientID);
+        if(arr.isEmpty()){
+            return null;
         }
-        return patient;
+        return arr.get(0);
     }
 
     public String getPatientName(){

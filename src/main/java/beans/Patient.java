@@ -61,9 +61,14 @@ public class Patient {
     }
 
     public String getDateString() {
+        if(birthdate == null)return "";
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dt.format(birthdate);
         return formattedDate;
+    }
+
+    public Date getDate(){
+        return birthdate;
     }
 
     public String getRemainingCost() {
@@ -91,6 +96,10 @@ public class Patient {
 
     public void setBirthdate(String date) {
         //TODO:: check this
+        if(date == null || date.isEmpty()){
+            this.birthdate = null;
+            return;
+        }
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         Date formattedDate = null;
         try {

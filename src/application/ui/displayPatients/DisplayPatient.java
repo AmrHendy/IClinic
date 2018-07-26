@@ -167,7 +167,7 @@ public class DisplayPatient implements Initializable {
             tmpTableData.set(pos, patient);
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
-            patient.setPatientID(Integer.valueOf(value));
+            patient.setFile_number(value);
             save(patient, pos);
             patientTable.refresh();
         });
