@@ -80,12 +80,12 @@ public class DisplayPatient implements Initializable {
     @FXML
     void idEntered(KeyEvent event){
         String id = patientID.getText() == "" ? null : patientID.getText();
-        Patient patient = null;
+        ObservableList<Patient> obs = null;
         if(id != null){
-            patient = PatientDAO.findByFileNumber(id);
-            patientTable.setItems(FXCollections.observableArrayList(patient));
+            obs = UiUtil.getPatientObservable(PatientDAO.findByFileNumberLike(id));
+            patientTable.setItems(obs);
         }
-        if(patient == null){
+        if(obs == null || obs.size() == 0){
             showProfile.setGraphic(null);
             patientTable.getItems().clear();
         }

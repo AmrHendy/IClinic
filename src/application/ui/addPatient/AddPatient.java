@@ -77,7 +77,7 @@ public class AddPatient implements Initializable {
         }
         patient.setPhoneNumber(phoneNumber.getText());
         patient.setFile_number(fileNumber.getText());
-        String req = (requiredCost.getText() == "") ? "0" : requiredCost.getText();
+        String req = (requiredCost.getText().isEmpty()) ? "0" : requiredCost.getText();
         patient.setRemainingCost(Integer.valueOf(req));
         ArrayList<String> msgs = PatientValidator.insertingValidator(patient);
         if(msgs.size() > 0){
