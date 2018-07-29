@@ -162,7 +162,7 @@ public class UserDAO {
             byte[] salt = pw.generateSalt();
             user.setSalt(salt);
             user.setUserName("admin");
-            user.setClinic(1);
+            user.setClinic(0);
             user.setEncryptedPassword(pw.getEncryptedPassword("admin", salt));
             return register(user);
         } catch(Exception e){

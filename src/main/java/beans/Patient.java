@@ -117,4 +117,18 @@ public class Patient {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    protected Patient clone() throws CloneNotSupportedException {
+        Patient patient = new Patient();
+        patient.setFile_number(this.getFile_number());
+        patient.setRemainingCost(Integer.parseInt(this.getRemainingCost()));
+        patient.setClinic_number(this.getClinic_number());
+        patient.setBirthdate(this.getBirthdate());
+        patient.setAddress(this.getAddress());
+        patient.setPatientID(this.getPatientID());
+        patient.setPatientName(this.getPatientName());
+        patient.setPhoneNumber(this.getPhoneNumber());
+        return patient;
+    }
 }

@@ -63,4 +63,14 @@ public class User {
                 + "encryptedPassword: " + encryptedPassword + "\n"
                 + "salt: " + salt + "\n";
     }
+
+    protected User clone() throws CloneNotSupportedException {
+        User user = new User();
+        user.setEncryptedPassword(getEncryptedPassword());
+        user.setClinic(getClinicNumber());
+        user.setUserName(getUserName());
+        user.setSalt(getSalt());
+        user.setUserID(getUserID());
+        return user;
+    }
 }
