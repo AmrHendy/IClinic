@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `IClinic`.`Patient` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(125) NULL,
+  `name` VARCHAR(125) NOT NULL,
   `address` VARCHAR(45) NULL,
   `birthdate` DATE NULL,
   `remainingCost` INT NULL DEFAULT 0,
@@ -61,17 +61,18 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`Appointment` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `patientId` INT NOT NULL,
   `date` DATETIME NOT NULL,
-  `paidCost` INT NULL DEFAULT 0,
+  `paidCost` INT NOT NULL DEFAULT 0,
   `finished` TINYINT NULL DEFAULT 0,
   `image` LONGBLOB NULL,
   `comment` VARCHAR(125) NULL,
   `confirmed_paid` TINYINT NULL DEFAULT 0,
   `clinic_number` INT NOT NULL,
-  PRIMARY KEY (`id`),
   INDEX `patient_index` (`patientId` ASC),
   INDEX `date_index` (`date` ASC),
   INDEX `finished_index` (`finished` ASC),
   INDEX `fk_appointment_clinic_number_idx` (`clinic_number` ASC),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  PRIMARY KEY (`date`, `clinic_number`),
   CONSTRAINT `fk_appointment_patient_id`
     FOREIGN KEY (`patientId`)
     REFERENCES `IClinic`.`Patient` (`id`)
