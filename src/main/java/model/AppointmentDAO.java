@@ -92,7 +92,7 @@ public class AppointmentDAO {
             Appointment app = new Appointment();
             app.setDate(calendar.getTime());
             calendar.add(Calendar.MINUTE, 30);
-            if(index < matched.size() && matched.get(index).getDateString() == app.getDateString()){
+            if(index < matched.size() && matched.get(index).getDateString().equals(app.getDateString())){
                 result.add(matched.get(index));
                 index++;
             }
@@ -130,7 +130,7 @@ public class AppointmentDAO {
         else if(patientFileIDAfter.isEmpty()){
             //delete
             Patient patient = PatientDAO.findByFileNumber(patientFileIDBefore);
-            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String formattedDate = dt.format(appDate);
             String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
                             + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
@@ -150,7 +150,7 @@ public class AppointmentDAO {
             //update
             Patient patient1 = PatientDAO.findByFileNumber(patientFileIDBefore);
             Patient patient2 = PatientDAO.findByFileNumber(patientFileIDAfter);
-            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String formattedDate = dt.format(appDate);
             String query = "SELECT * FROM Appointment WHERE patientId = " + patient1.getPatientID() + " AND date = '" + formattedDate
                             + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
@@ -174,7 +174,7 @@ public class AppointmentDAO {
 
     public static boolean confirmPaidCost(String patientFileID, Date appDate){
         Patient patient = PatientDAO.findByFileNumber(patientFileID);
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String formattedDate = dt.format(appDate);
         String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
                 + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";

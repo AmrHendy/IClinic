@@ -61,17 +61,26 @@ public class Appointment {
 
 
     public String getDateString() {
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String formattedDate = dt.format(date);
         return formattedDate;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        if (date == null) {
+            this.date = null;
+            return;
+        }
+        try {
+            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            this.date = dt.parse(dt.format(date));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setDate(String date) {
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date formattedDate = null;
         try {
             formattedDate = dt.parse(date);
@@ -122,6 +131,10 @@ public class Appointment {
     }
 
     public void setImage(byte[] bytes) {
+        if(bytes == null){
+            image = null;
+            return;
+        }
         InputStream in = new ByteArrayInputStream(bytes);
         try {
             this.image = ImageIO.read(in);
@@ -153,7 +166,7 @@ public class Appointment {
     }
 
     public String getTimeOnly(){
-        SimpleDateFormat dt = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dt = new SimpleDateFormat("HH:mm");
         String formattedDate = dt.format(date);
         return formattedDate;
     }
