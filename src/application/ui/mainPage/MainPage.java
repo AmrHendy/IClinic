@@ -133,6 +133,7 @@ public class MainPage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO:: we need to add the editable cells here.
+        UserSignedInData.user = UserDAO.getUser("admin");
         todaySession.getSelectionModel().setCellSelectionEnabled(true);
         todaySession.setEditable(true);
         searchSessionsTable.getSelectionModel().setCellSelectionEnabled(true);
@@ -161,7 +162,7 @@ public class MainPage implements Initializable {
         patientNumber.setOnEditCommit(event -> {
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
-            tmpTodayTableData.set(pos, appointment);
+            tmpTodayTableData.set(pos, appointment.clone());
             final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
             final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
             editFileNumber(appointment, oldValue, newValue, true);
@@ -173,7 +174,7 @@ public class MainPage implements Initializable {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
-            tmpTodayTableData.set(pos, appointment);
+            tmpTodayTableData.set(pos, appointment.clone());
             final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
             editPaidCost(appointment, newValue, true);
             todaySession.refresh();
@@ -188,7 +189,7 @@ public class MainPage implements Initializable {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
-            tmpSearchTableData.set(pos, appointment);
+            tmpSearchTableData.set(pos, appointment.clone());
             final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
             final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
             editFileNumber(appointment, oldValue, newValue, false);
@@ -200,7 +201,7 @@ public class MainPage implements Initializable {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
-            tmpSearchTableData.set(pos, appointment);
+            tmpSearchTableData.set(pos, appointment.clone());
             final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
             editPaidCost(appointment, newValue, false);
             searchSessionsTable.refresh();

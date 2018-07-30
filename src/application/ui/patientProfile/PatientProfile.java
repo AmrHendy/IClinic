@@ -137,23 +137,13 @@ public class PatientProfile implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        sessionsTable.getSelectionModel().setCellSelectionEnabled(true);
-        sessionsTable.setEditable(true);
-        sessionsTable.setOnKeyPressed(event -> {
-            TablePosition<Appointment, ?> pos = sessionsTable.getFocusModel().getFocusedCell();
-            if (pos != null && event.getCode().isLetterKey()) {
-                sessionsTable.edit(pos.getRow(), pos.getTableColumn());
-            }
-        });
-
         date.setCellValueFactory(new PropertyValueFactory<>("dateOnly"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         clinicNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         moneyPaid.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
-        confirmPayment.setCellValueFactory(new PropertyValueFactory<>("dummy1"));
-        uploadImage.setCellValueFactory(new PropertyValueFactory<>("dummy2"));
-        downloadImage.setCellValueFactory(new PropertyValueFactory<>("dummy3"));
+        //confirmPayment.setCellValueFactory(new PropertyValueFactory<>("dummy1"));
+        //uploadImage.setCellValueFactory(new PropertyValueFactory<>("dummy2"));
+        //downloadImage.setCellValueFactory(new PropertyValueFactory<>("dummy3"));
         image.setCellValueFactory(new PropertyValueFactory<CustomImage, ImageView>("image"));
 
         confirmPayment.setCellFactory(getConfirm());
@@ -179,11 +169,8 @@ public class PatientProfile implements Initializable{
                                     setText(null);
                                 } else {
                                     btn.setOnAction(event -> {
-                                        //TODO:: add confirmation action here.
-                                        //take the following code as a guide for you to get the current appointment.
-                                        /*Person person = getTableView().getItems().get(getIndex());
-                                        System.out.println(person.getFirstName()
-                                                + "   " + person.getLastName());*/
+                                        Appointment appointment = getTableView().getItems().get(getIndex());
+                                        AppointmentDAO.confirmPaidCost(appointment.getPatientFileID(), appointment.getDate());
                                     });
                                     setGraphic(btn);
                                     setText(null);

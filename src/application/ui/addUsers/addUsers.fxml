@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="349.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.addUsers.AddUsers">
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="300.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ui.addUsers.AddUsers">
    <children>
       <VBox prefHeight="236.0" prefWidth="600.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -18,16 +19,16 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </JFXTextField>
-            <JFXTextField fx:id="password" layoutX="20.0" layoutY="20.0" promptText="رقم المرور">
+            <JFXPasswordField fx:id="password" promptText="رقم المرور">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
-            </JFXTextField>
-            <JFXTextField fx:id="confirmPassword" layoutX="10.0" layoutY="56.0" promptText="تاكيد رقم المرور">
+            </JFXPasswordField>
+            <JFXPasswordField fx:id="confirmPassword" promptText="تاكيد كلمة المرور">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
-            </JFXTextField>
+            </JFXPasswordField>
             <JFXComboBox fx:id="clinicNumber" prefWidth="632.8" promptText="رقم العيادة">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

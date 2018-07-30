@@ -2,6 +2,7 @@ package application.ui.addUsers;
 
 import application.ui.handler.MessagesController;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,10 +28,10 @@ public class AddUsers implements Initializable {
 
     //mandatory and equal confirm password.
     @FXML
-    private JFXTextField password;
+    private JFXPasswordField password;
 
     @FXML
-    private JFXTextField confirmPassword;
+    private JFXPasswordField confirmPassword;
 
     //mandatory
     @FXML

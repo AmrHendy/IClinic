@@ -203,8 +203,7 @@ public class Appointment {
         this.clinicNumber = clinicNumber;
     }
 
-    @Override
-    protected Appointment clone() throws CloneNotSupportedException {
+    public Appointment clone() {
         Appointment app = new Appointment();
         app.setClinicNumber(Integer.parseInt(this.getClinicNumber()));
         app.setPaidCost(Integer.parseInt(this.getPaidCost()));
