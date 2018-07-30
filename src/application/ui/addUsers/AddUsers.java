@@ -35,14 +35,17 @@ public class AddUsers implements Initializable {
 
     //mandatory
     @FXML
-    private JFXComboBox<String> clinicNumber;
+    private JFXTextField clinicNumber;
 
     @FXML
     void cancel(MouseEvent event) {
+        return;
+        /*
         if(userName.getText() != null || password.getText() != null || confirmPassword.getText() != null || clinicNumber.getValue() != null){
             String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
             Alert alert = MessagesController.getAlert(msg, Alert.AlertType.CONFIRMATION);
         }
+         */
     }
 
     @FXML
@@ -69,7 +72,7 @@ public class AddUsers implements Initializable {
             Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.ERROR);
         }else{
             User user = new User();
-            user.setClinic(Integer.valueOf(clinicNumber.getValue()));
+            user.setClinic(Integer.valueOf(clinicNumber.getText()));
             user.setEncryptedPassword(enc);
             user.setSalt(salt);
             user.setUserName(userName.getText());
@@ -97,7 +100,7 @@ public class AddUsers implements Initializable {
             msg = "رقم المرور اقل عن اربعة حروف او ارقام";
             msgs.add(msg);
         }
-        if(clinicNumber.getValue() == null){
+        if(clinicNumber.getText() == null){
             msg = "يجب اختيار رقم عيادة للمريض";
             msgs.add(msg);
         }
@@ -106,8 +109,5 @@ public class AddUsers implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO:: how to add new clinic
-        ObservableList<String> options = FXCollections.observableArrayList(UserDAO.getClinics());
-        clinicNumber.getItems().addAll(options);
     }
 }
