@@ -205,7 +205,7 @@ public class Appointment {
 
     public Appointment clone() {
         Appointment app = new Appointment();
-        app.setClinicNumber(Integer.parseInt(this.getClinicNumber()));
+        if(getClinicNumber() != "") app.setClinicNumber(Integer.parseInt(getClinicNumber()));
         app.setPaidCost(Integer.parseInt(this.getPaidCost()));
         app.setConfirmedPaid(this.isConfirmedPaid());
         app.setDate(this.getDate());
