@@ -79,6 +79,9 @@ public class AddUsers implements Initializable {
             if(!UserDAO.register(user)){
                 msg = "لا يمكن اتمام اضافة مستخدم اعد المحاولة.";
                 Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            }else{
+                msg = "تمت اضافة مستخدم جديد.";
+                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
             }
         }
     }

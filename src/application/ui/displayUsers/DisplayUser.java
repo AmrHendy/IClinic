@@ -120,7 +120,7 @@ public class DisplayUser implements Initializable {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             User user = event.getTableView().getItems().get(pos);
-            tmpTableData.set(pos, user);
+            tmpTableData.set(pos, user.clone());
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
             user.setUserName(value);
