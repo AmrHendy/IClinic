@@ -67,7 +67,6 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXButton onMouseClicked="#saveInToday" prefHeight="26.0" prefWidth="194.0" text="حفظ" />
                         <TableView fx:id="todaySession" layoutX="218.0" layoutY="33.0" prefHeight="519.0" prefWidth="10000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
                           <columns>
                               <TableColumn fx:id="time" editable="false" prefWidth="75.0" text="التوقيت" />
@@ -92,11 +91,6 @@
                               <JFXDatePicker fx:id="chooseDate" prefWidth="10000.0" />
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <JFXButton onMouseClicked="#saveInSearch" prefHeight="26.0" prefWidth="194.0" text="حفظ">
-                                       <HBox.margin>
-                                          <Insets left="10.0" right="10.0" top="10.0" />
-                                       </HBox.margin>
-                                    </JFXButton>
                                     <JFXButton onMouseClicked="#searchAppointment" prefHeight="26.0" prefWidth="194.0" text="بحث">
                                        <HBox.margin>
                                           <Insets left="10.0" right="10.0" top="10.0" />

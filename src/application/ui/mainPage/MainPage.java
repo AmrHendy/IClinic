@@ -158,7 +158,7 @@ public class MainPage implements Initializable {
         patientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         patientNumber.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
-        patientNumber.setCellFactory(patienNumber -> EditCell.createStringEditCell());
+        patientNumber.setCellFactory(patientName -> EditCell.createStringEditCell());
         patientNumber.setOnEditCommit(event -> {
             int pos = event.getTablePosition().getRow();
             Appointment appointment = event.getTableView().getItems().get(pos);
@@ -184,7 +184,7 @@ public class MainPage implements Initializable {
         patientName1.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         phoneNumber1.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         patientNumber1.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
-        patientNumber1.setCellFactory(patienNumber1 -> EditCell.createStringEditCell());
+        patientNumber1.setCellFactory(patientName1 -> EditCell.createStringEditCell());
         patientNumber1.setOnEditCommit(event -> {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
@@ -275,7 +275,7 @@ public class MainPage implements Initializable {
         if(!AppointmentDAO.editAppointmentList(oldValue, newValue,
                 appointment.getDate(), Integer.parseInt(appointment.getPaidCost()))){
             String msg = "لا يمكن تعديل ";
-            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             if(today){
                 todaySession.setItems(tmpTodayTableData);
             }else{

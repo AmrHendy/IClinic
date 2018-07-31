@@ -119,7 +119,7 @@ public class DisplayPatient implements Initializable {
             }
         }
         if(showMsg){
-            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             patientTable.setItems(remaining);
         }
     }
@@ -266,13 +266,16 @@ public class DisplayPatient implements Initializable {
                         return cell;
                     }
                 };
+        patientTable.setItems(UiUtil.getPatientObservable(PatientDAO.findByFileNumberLike("")));
+        patientTable.refresh();
+        tmpTableData = patientTable.getItems();
         showProfile.setCellFactory(cellFactory);
     }
 
     private void save(Patient patient, int pos){
         if(!PatientDAO.updatePatient(tmpTableData.get(pos).getFile_number(), patient)){
             String msg = "لا يمكن تعديل " + patient.getFile_number() + ": " + patient.getPatientName();
-            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             patientTable.setItems(tmpTableData);
         }
     }

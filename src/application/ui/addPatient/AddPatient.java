@@ -61,7 +61,7 @@ public class AddPatient implements Initializable {
                 phoneNumber.getText() != null || dateOfBirth.getValue() != null
                 || clinicNumber.getValue() != null || fileNumber.getText() != null){
             String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
-            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.CONFIRMATION);
+            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
         }
     }
 
@@ -81,11 +81,11 @@ public class AddPatient implements Initializable {
         patient.setRemainingCost(Integer.valueOf(req));
         ArrayList<String> msgs = PatientValidator.insertingValidator(patient);
         if(msgs.size() > 0){
-            Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.ERROR);
+            Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.INFORMATION);
         }else{
             if(!PatientDAO.addPatient(patient)){
                 String msg = "لا يمكن اتمام اضافة مريض اعد المحاولة.";
-                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             }else{
                 System.out.println("here.");
             }

@@ -69,7 +69,7 @@ public class AddUsers implements Initializable {
         //TODO:: add check if not inserted.
         //check already added in line 75.
         if(!can){
-            Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.ERROR);
+            Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.INFORMATION);
         }else{
             User user = new User();
             user.setClinic(Integer.valueOf(clinicNumber.getText()));
@@ -78,10 +78,10 @@ public class AddUsers implements Initializable {
             user.setUserName(userName.getText());
             if(!UserDAO.register(user)){
                 msg = "لا يمكن اتمام اضافة مستخدم اعد المحاولة.";
-                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             }else{
                 msg = "تمت اضافة مستخدم جديد.";
-                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             }
         }
     }

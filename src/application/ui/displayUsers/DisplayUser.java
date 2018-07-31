@@ -55,7 +55,7 @@ public class DisplayUser implements Initializable {
             }
         }
         if (showMsg) {
-            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
         }
         userTable.setItems(showThem);
         userTable.refresh();
@@ -96,7 +96,7 @@ public class DisplayUser implements Initializable {
             }
         }
         if (showMsg) {
-            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             userTable.setItems(remaining);
         }
     }
@@ -142,17 +142,16 @@ public class DisplayUser implements Initializable {
             save(user);
             userTable.refresh();
         });
-
-        ObservableList<User> alreadyLoggedIn = FXCollections.observableArrayList();
-        alreadyLoggedIn.add(UserSignedInData.user);
-        userTable.setItems(alreadyLoggedIn);
+        userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser("")));
+        userTable.refresh();
+        tmpTableData = userTable.getItems();
         tmpTableData = userTable.getItems();
     }
 
     private void save(User user){
         if(!user.getUserName().equals(UserSignedInData.user.getUserName()) || !UserDAO.updateUser(user.getUserID(), user)){
             String msg = "لا يمكن تعديل " + user.getUserID() + ": " + user.getUserName();
-            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             userTable.setItems(tmpTableData);
         }
     }

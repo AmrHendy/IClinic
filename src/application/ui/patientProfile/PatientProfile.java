@@ -104,10 +104,10 @@ public class PatientProfile implements Initializable{
         newPatient.setFile_number(fileNumber.getText());
         if(!PatientDAO.updatePatient(patient.getFile_number(), newPatient)){
             String msg = "لم تنجح العملية.";
-            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
         }else{
             String msg = "تمت العملية بنجاح.";
-            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
         }
     }
 
@@ -139,7 +139,7 @@ public class PatientProfile implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         date.setCellValueFactory(new PropertyValueFactory<>("dateOnly"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
-        clinicNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinic_number"));
         moneyPaid.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
         //confirmPayment.setCellValueFactory(new PropertyValueFactory<>("dummy1"));
         //uploadImage.setCellValueFactory(new PropertyValueFactory<>("dummy2"));
@@ -215,7 +215,7 @@ public class PatientProfile implements Initializable{
                                             } catch (IOException e) {
                                                 //TODO:: put log4j here.
                                                 String msg = "لم يتم حفظ الصورة.";
-                                                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                                                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
                                             }
                                         }
 
@@ -264,7 +264,7 @@ public class PatientProfile implements Initializable{
                                             } catch (IOException e) {
                                                 //TODO:: add log4j here.
                                                 String msg = "لم يتم تحميل الصورة.";
-                                                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                                                Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
                                             }
                                         }
                                     });
@@ -310,7 +310,7 @@ public class PatientProfile implements Initializable{
             }
         }
         if(showMsg){
-            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
         }
         sessionsTable.setItems(showThem);
     }
