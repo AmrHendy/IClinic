@@ -111,7 +111,7 @@ public class AppointmentDAO {
         return delete && add;
     }
 
-    public static boolean editAppointmentList(String patientFileIDBefore, String patientFileIDAfter, Date appDate, int paidCost){
+    public static boolean editAppointmentList(String patientFileIDBefore, String patientFileIDAfter, Date appDate, int paidCost, Appointment app){
         if(patientFileIDBefore.isEmpty() && patientFileIDAfter.isEmpty()){
             return true;
         }
@@ -120,12 +120,14 @@ public class AppointmentDAO {
             //insert
             Patient patient = PatientDAO.findByFileNumber(patientFileIDAfter);
             if(patient == null) return false;
-            Appointment app = new Appointment();
-            app.setPatientID(patient.getPatientID());
-            app.setDate(appDate);
-            app.setPaidCost(paidCost);
-            app.setClinicNumber(UserSignedInData.user.getClinicNumber());
-            return AppointmentDAO.addAppointment(app);
+            Appointment appp = new Appointment();
+            appp.setPatientID(patient.getPatientID());
+            appp.setDate(appDate);
+            appp.setPaidCost(paidCost);
+            appp.setClinicNumber(UserSignedInData.user.getClinicNumber());
+            boolean status = AppointmentDAO.addAppointment(app);
+            if(status) app = appp;
+            return status;
         }
         else if(patientFileIDAfter.isEmpty()){
             //delete
@@ -144,7 +146,12 @@ public class AppointmentDAO {
             } catch (SQLException e){
                 e.printStackTrace();
             }
-            return deleteAppointmentByID(matched.get(0).getAppointmentID());
+            boolean status = deleteAppointmentByID(matched.get(0).getAppointmentID());
+            if(status){
+                app = new Appointment();
+                app.setDate(appDate);
+            }
+            return status;
         }
         else{
             //update
@@ -164,11 +171,13 @@ public class AppointmentDAO {
             } catch (SQLException e){
                 e.printStackTrace();
             }
-            Appointment app = new Appointment();
-            app.setPatientID(patient2.getPatientID());
-            app.setDate(appDate);
-            app.setPaidCost(paidCost);
-            return updateAppointmentByID(matched.get(0).getAppointmentID(), app);
+            Appointment appp = new Appointment();
+            appp.setPatientID(patient2.getPatientID());
+            appp.setDate(appDate);
+            appp.setPaidCost(paidCost);
+            boolean status = updateAppointmentByID(matched.get(0).getAppointmentID(), appp);
+            if(status) app = appp;
+            return status;
         }
     }
 
