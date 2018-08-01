@@ -11,6 +11,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UserDAO {
@@ -132,6 +133,27 @@ public class UserDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static ArrayList<User> findByName(String userName) {
+        ArrayList<User> matched = new ArrayList<>();
+        String query = "SELECT * FROM User WHERE userName LIKE '" + userName + "%';";
+        try{
+            ResultSet rs = ModelManager.getInstance().executeQuery(query);
+            while (rs.next()) {
+                User user = new User();
+                user.setUserID(rs.getInt("id"));
+                user.setUserName(rs.getString("userName"));
+                user.setEncryptedPassword(rs.getBytes("password"));
+                user.setSalt(rs.getBytes("salt"));
+                user.setClinic(rs.getInt("clinic"));
+                matched.add(user);
+            }
+            rs.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return matched;
     }
 
     public static boolean deleteUser(String userName){

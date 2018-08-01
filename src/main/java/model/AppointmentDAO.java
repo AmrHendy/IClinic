@@ -198,6 +198,33 @@ public class AppointmentDAO {
         return true;
     }
 
+
+    public static boolean confirmFinished(String patientFileID, Date appDate){
+        Patient patient = PatientDAO.findByFileNumber(patientFileID);
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String formattedDate = dt.format(appDate);
+        String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
+                + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
+        ArrayList<Appointment> matched = new ArrayList<>();
+        try{
+            ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+            while (resultSet.next()) {
+                matched.add(buildAppointment(resultSet));
+            }
+            resultSet.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        if(matched.isEmpty())return false;
+        if(!matched.get(0).isFinished()){
+            matched.get(0).setFinished(true);
+        }
+        else{
+            matched.get(0).setFinished(false);
+        }
+        return AppointmentDAO.updateAppointmentByID(matched.get(0).getAppointmentID(), matched.get(0));
+    }
+
     private static Appointment buildAppointment(ResultSet rs){
         Appointment app = new Appointment();
         try {
