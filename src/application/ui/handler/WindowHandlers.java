@@ -2,12 +2,16 @@ package application.ui.handler;
 
 import application.ui.patientProfile.PatientProfile;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class WindowHandlers extends Application {
 
@@ -15,6 +19,8 @@ public class WindowHandlers extends Application {
     private static WindowHandlers windowHandlers;
     private Stage stage;
     private FXMLLoader loader;
+
+    private DoubleProperty fontSize = new SimpleDoubleProperty(10);
 
     private WindowHandlers(){
         this.prevWindow = new WindowObj();
@@ -25,9 +31,12 @@ public class WindowHandlers extends Application {
         Parent root = loader.load();
         Stage stage = new Stage();
         stage.setTitle(title);
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         stage.setMaximized(maximized);
         stage.setResizable(maximized);
+        fontSize.bind(scene.widthProperty().add(scene.heightProperty()).divide(150));
+        root.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
         stage.show();
         this.stage = stage;
         this.loader = loader;
@@ -40,6 +49,7 @@ public class WindowHandlers extends Application {
         if(onclose){
             stage.setOnCloseRequest(e -> closeWindow());
         }
+
     }
 
     @Override
