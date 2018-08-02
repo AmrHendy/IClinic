@@ -2,6 +2,8 @@ package main.java.beans;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
 import main.java.model.PatientDAO;
 
 import javax.imageio.ImageIO;
@@ -111,8 +113,12 @@ public class Appointment {
         this.finished.set(finished);
     }
 
-    public Image getImage() {
-        return image;
+    public ImageView getImage() {
+        if(image == null)return null;
+        javafx.scene.image.Image fxImage = SwingFXUtils.toFXImage((BufferedImage) image, null);
+        ImageView imageView = new ImageView();
+        imageView.setImage(fxImage);
+        return imageView;
     }
 
     public byte[] getImageBytes() {
@@ -130,8 +136,12 @@ public class Appointment {
         return bytes;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImage(ImageView imageView){
+        if(imageView == null){
+            this.image = null;
+            return;
+        }
+        this.image = SwingFXUtils.fromFXImage(imageView.getImage(), null);
     }
 
     public void setImage(byte[] bytes) {
