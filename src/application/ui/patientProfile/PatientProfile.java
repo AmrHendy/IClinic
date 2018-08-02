@@ -211,6 +211,7 @@ public class PatientProfile implements Initializable  {
                                     setGraphic(null);
                                     setText(null);
                                 } else {
+                                    btn.setDisable(getTableRow().getItem().isConfirmedPaid());
                                     btn.setOnAction(event -> {
                                         Appointment appointment = getTableView().getItems().get(getIndex());
                                         AppointmentDAO.confirmPaidCost(appointment.getPatientFileID(), appointment.getDate());
@@ -334,7 +335,7 @@ public class PatientProfile implements Initializable  {
     }
 
 
-    @FXML
+
     void saveTableData(MouseEvent event) {
         boolean showMsg = false;
         ObservableList<Appointment> list = sessionsTable.getItems();

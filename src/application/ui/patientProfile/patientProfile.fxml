@@ -115,11 +115,6 @@
                      <children>
                         <VBox prefHeight="617.6" prefWidth="978.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Button fx:id="saveTable" mnemonicParsing="false" onMouseClicked="#saveTableData" prefHeight="26.0" prefWidth="254.0" text="حفظ">
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </VBox.margin>
-                              </Button>
                               <TableView fx:id="sessionsTable" prefHeight="10000.0" prefWidth="784.0">
                                 <columns>
                                     <TableColumn fx:id="date" editable="false" prefWidth="75.0" text="التاريخ" />

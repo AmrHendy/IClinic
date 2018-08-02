@@ -51,10 +51,10 @@ keda ana hzbt el database .. enta b2a htlwn emta ??  enta btget el appointments 
 19) lma b3ml search bdate tany byt3ly el apps s7 bs ell edit bt3ha msh s7 ,, 3mlt debug l2tk msh bt3ml call l editAppointmentList zbtha
 
 // sf7t el glsat ely fe el profile
-20) mtnsash zorar el confirm pay 5ly el state bt3th zy app.isConfirmedPaid() y3ny lw kant false f5las 5ley disable mynf3sh y3ml click tany
-21) rkm el 3yada bta3 kol el glsat fady
-22) mtnsash tdef 5ant el comment 3shan lw 3wz yshof kol mred eih el tsh5es bta3o
-23) zorar el 7fz ely fo2 5als hl leh action wla mlhosh lzma
+20) mtnsash zorar el confirm pay 5ly el state bt3th zy app.isConfirmedPaid() y3ny lw kant false f5las 5ley disable mynf3sh y3ml click tany -done
+21) rkm el 3yada bta3 kol el glsat fady -done
+22) mtnsash tdef 5ant el comment 3shan lw 3wz yshof kol mred eih el tsh5es bta3o -done
+23) zorar el 7fz ely fo2 5als hl leh action wla mlhosh lzma -done
 24) el images msh sh3'ala w msh bydrb exeption fmsh 3arf eih el moshkla // 2oly btnady anho function 3ndy w 23ml test at2kd anha sh3'ala w enta at2kd mn goz2k feha brdo
 
 
