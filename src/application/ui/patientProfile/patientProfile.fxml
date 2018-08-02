@@ -125,19 +125,17 @@
                                     <TableColumn fx:id="date" editable="false" prefWidth="75.0" text="التاريخ" />
                                   <TableColumn fx:id="time" editable="false" prefWidth="75.0" text="التوقيت" />
                                   <TableColumn fx:id="image" editable="false" prefWidth="75.0" text="صورة" />
-                                    <TableColumn fx:id="clinicNumber" editable="false" prefWidth="75.0" text="رقم العيادة" />
-                                    <TableColumn fx:id="moneyPaid" prefWidth="75.0" text="المبلغ المدفوع" />
-                                    <TableColumn prefWidth="75.0">
+                                    <TableColumn fx:id="clinicNumber" editable="false" prefWidth="42.39996337890625" text="العيادة" />
+                                    <TableColumn fx:id="moneyPaid" prefWidth="124.79998779296875" text="المبلغ المدفوع" />
+                                    <TableColumn fx:id="comment" prefWidth="359.1999877929687" text="التشخيص" />
+                                    <TableColumn editable="false" prefWidth="294.4000244140625">
                                        <columns>
-                                          <TableColumn fx:id="confirmPayment" prefWidth="75.0" text="تاكيد الدفع" />
-                                          <TableColumn fx:id="downloadImage" prefWidth="75.0" text="تحميل صورة" />
-                                          <TableColumn fx:id="uploadImage" prefWidth="75.0" text="رفع صورة" />
+                                          <TableColumn fx:id="confirmPayment" editable="false" prefWidth="75.0" text="تاكيد الدفع" />
+                                          <TableColumn fx:id="downloadImage" editable="false" prefWidth="75.0" text="تحميل صورة" />
+                                          <TableColumn fx:id="uploadImage" editable="false" prefWidth="75.0" text="رفع صورة" />
                                        </columns>
                                     </TableColumn>
                                 </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
                               </TableView>
                            </children>
                         </VBox>

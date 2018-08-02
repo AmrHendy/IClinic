@@ -3,6 +3,7 @@ package application.ui.patientProfile;
 
 import application.ui.displayPatients.DisplayPatient;
 import application.ui.handler.CustomImage;
+import application.ui.handler.EditCell;
 import application.ui.handler.MessagesController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -83,6 +84,9 @@ public class PatientProfile implements Initializable  {
     private TableColumn<Appointment, String> uploadImage;
 
     @FXML
+    private TableColumn<Appointment, String> comment;
+
+    @FXML
     private JFXDatePicker dateOfBirth;
 
     @FXML
@@ -145,15 +149,49 @@ public class PatientProfile implements Initializable  {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        sessionsTable.setEditable(true);
+        sessionsTable.getSelectionModel().setCellSelectionEnabled(true);
         date.setCellValueFactory(new PropertyValueFactory<>("dateOnly"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinicNumber"));
         moneyPaid.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
+        moneyPaid.setCellFactory(money -> EditCell.createStringEditCell());
+        moneyPaid.setOnEditCommit(event -> {
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, appointment.clone());
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.setPaidCost(Integer.valueOf(value));
+            editComment(pos, appointment);
+            sessionsTable.refresh();
+        });
         image.setCellValueFactory(new PropertyValueFactory<CustomImage, ImageView>("image"));
-
+        comment.setCellValueFactory(new PropertyValueFactory<>("comment"));
+        comment.setCellFactory(comment -> EditCell.createStringEditCell());
+        comment.setOnEditCommit(event -> {
+            int pos = event.getTablePosition().getRow();
+            Appointment appointment = event.getTableView().getItems().get(pos);
+            tmpTableData.set(pos, appointment.clone());
+            final String value = event.getNewValue() != null ?
+                    event.getNewValue() : event.getOldValue();
+            appointment.setComment(value);
+            editComment(pos, appointment);
+            sessionsTable.refresh();
+        });
         confirmPayment.setCellFactory(getConfirm());
         downloadImage.setCellFactory(getDownload());
         uploadImage.setCellFactory(getUpload());
+    }
+
+    private void editComment(int pos, Appointment appointment){
+        if(!AppointmentDAO.updateAppointmentByID(appointment.getAppointmentID(), appointment)) {
+            String msg = "لم يتم التعديل";
+            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            sessionsTable.setItems(tmpTableData);
+        }else{
+            sessionsTable.getItems().set(pos, appointment);
+        }
     }
 
     private Callback<TableColumn<Appointment, String>, TableCell<Appointment, String>> getConfirm(){
