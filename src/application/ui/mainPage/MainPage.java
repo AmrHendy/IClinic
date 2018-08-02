@@ -133,7 +133,7 @@ public class MainPage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO:: we need to add the editable cells here.
-        UserSignedInData.user = UserDAO.getUser("admin");
+        //UserSignedInData.user = UserDAO.getUser("admin");
         todaySession.getSelectionModel().setCellSelectionEnabled(true);
         todaySession.setEditable(true);
         searchSessionsTable.getSelectionModel().setCellSelectionEnabled(true);
