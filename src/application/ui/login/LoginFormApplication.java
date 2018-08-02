@@ -1,4 +1,5 @@
 package application.ui.login;
+import application.ui.handler.Configuration;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -14,7 +15,6 @@ import java.util.Arrays;
 
 public class LoginFormApplication extends Application {
 
-    private DoubleProperty fontSize = new SimpleDoubleProperty(10);
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -22,8 +22,7 @@ public class LoginFormApplication extends Application {
         primaryStage.setTitle("IClinic");
         Scene scene = new Scene(root, 500, 500);
         primaryStage.setScene(scene);
-        fontSize.bind(scene.widthProperty().add(scene.heightProperty()).divide(150));
-        root.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+        root.styleProperty().bind(Bindings.concat("-fx-font-size: ", Configuration.FONT_SIZE));
         //primaryStage.setMaximized(false);
         primaryStage.setResizable(false);
         primaryStage.show();

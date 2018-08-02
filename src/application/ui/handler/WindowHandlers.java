@@ -20,7 +20,6 @@ public class WindowHandlers extends Application {
     private Stage stage;
     private FXMLLoader loader;
 
-    private DoubleProperty fontSize = new SimpleDoubleProperty(10);
 
     private WindowHandlers(){
         this.prevWindow = new WindowObj();
@@ -35,8 +34,7 @@ public class WindowHandlers extends Application {
         stage.setScene(scene);
         stage.setMaximized(maximized);
         stage.setResizable(maximized);
-        fontSize.bind(scene.widthProperty().add(scene.heightProperty()).divide(150));
-        root.styleProperty().bind(Bindings.concat("-fx-font-size: ", fontSize.asString()));
+        root.styleProperty().bind(Bindings.concat("-fx-font-size: ", Configuration.FONT_SIZE));
         stage.show();
         this.stage = stage;
         this.loader = loader;

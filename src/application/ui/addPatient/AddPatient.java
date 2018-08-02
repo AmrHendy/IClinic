@@ -61,7 +61,10 @@ public class AddPatient implements Initializable {
                 phoneNumber.getText() != null || dateOfBirth.getValue() != null
                 || clinicNumber.getValue() != null || fileNumber.getText() != null){
             String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
-            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "" + msg + "", ButtonType.OK, ButtonType.CANCEL);
+            if(alert.getResult() == ButtonType.OK){
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+            }
         }
     }
 
