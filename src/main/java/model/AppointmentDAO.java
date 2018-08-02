@@ -125,8 +125,13 @@ public class AppointmentDAO {
             appp.setDate(appDate);
             appp.setPaidCost(paidCost);
             appp.setClinicNumber(UserSignedInData.user.getClinicNumber());
-            boolean status = AppointmentDAO.addAppointment(app);
-            if(status) app = appp;
+            boolean status = AppointmentDAO.addAppointment(appp);
+            if(status){
+                app.setPatientID(patient.getPatientID());
+                app.setDate(appDate);
+                app.setPaidCost(paidCost);
+                app.setClinicNumber(UserSignedInData.user.getClinicNumber());
+            }
             return status;
         }
         else if(patientFileIDAfter.isEmpty()){
@@ -148,8 +153,13 @@ public class AppointmentDAO {
             }
             boolean status = deleteAppointmentByID(matched.get(0).getAppointmentID());
             if(status){
-                app = new Appointment();
                 app.setDate(appDate);
+                app.setPatientID(-1);
+                app.setFinished(false);
+                app.setComment("");
+                app.setAppointmentID(-1);
+                app.setPaidCost(0);
+                app.setClinicNumber(-1);
             }
             return status;
         }
@@ -176,7 +186,11 @@ public class AppointmentDAO {
             appp.setDate(appDate);
             appp.setPaidCost(paidCost);
             boolean status = updateAppointmentByID(matched.get(0).getAppointmentID(), appp);
-            if(status) app = appp;
+            if(status){
+                app.setPatientID(patient2.getPatientID());
+                app.setDate(appDate);
+                app.setPaidCost(paidCost);
+            }
             return status;
         }
     }
