@@ -164,7 +164,7 @@ public class PatientProfile implements Initializable  {
                     public TableCell call(final TableColumn<Appointment, String> param) {
                         final TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
 
-                            final Button btn = new Button("Confirm Payment");
+                            final Button btn = new Button("تاكيد الدفع");
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -196,7 +196,7 @@ public class PatientProfile implements Initializable  {
                     public TableCell call(final TableColumn<Appointment, String> param) {
                         final TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
 
-                            final Button btn = new Button("Save Image");
+                            final Button btn = new Button("رفع صورة");
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -245,7 +245,7 @@ public class PatientProfile implements Initializable  {
                     public TableCell call(final TableColumn<Appointment, String> param) {
                         final TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
 
-                            final Button btn = new Button("Save Image");
+                            final Button btn = new Button("تنزيل الصورة");
 
                             @Override
                             public void updateItem(String item, boolean empty) {

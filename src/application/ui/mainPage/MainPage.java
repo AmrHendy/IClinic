@@ -5,31 +5,30 @@ import application.ui.handler.MessagesController;
 import application.ui.handler.WindowHandlers;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import main.java.beans.Appointment;
 import main.java.beans.UserSignedInData;
 import main.java.model.AppointmentDAO;
-import main.java.model.PatientDAO;
+
 import main.java.model.UserDAO;
 import main.java.util.UiUtil;
-import org.w3c.dom.UserDataHandler;
 
 import java.net.URL;
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 public class MainPage implements Initializable {
@@ -56,6 +55,9 @@ public class MainPage implements Initializable {
     private TableColumn<Appointment, String> money;
 
     @FXML
+    private TableColumn<Appointment, String> attended;
+
+    @FXML
     private JFXDatePicker chooseDate;
 
     @FXML
@@ -75,6 +77,9 @@ public class MainPage implements Initializable {
 
     @FXML
     private TableColumn<Appointment, String> money1;
+
+    @FXML
+    private TableColumn<Appointment, String> attended1;
 
     private ObservableList<Appointment> tmpTodayTableData;
 
@@ -179,6 +184,8 @@ public class MainPage implements Initializable {
             editPaidCost(pos, appointment, newValue, true);
             todaySession.refresh();
         });
+        attended.setCellFactory(getFinished());
+        attended.setStyle( "-fx-alignment: CENTER;");
 
         time1.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
         patientName1.setCellValueFactory(new PropertyValueFactory<>("patientName"));
@@ -206,6 +213,8 @@ public class MainPage implements Initializable {
             editPaidCost(pos, appointment, newValue, false);
             searchSessionsTable.refresh();
         });
+        attended1.setCellFactory(getFinished());
+        attended1.setStyle( "-fx-alignment: CENTER;");
         //TODO:: initialize today session here.
         todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
         tmpTodayTableData = todaySession.getItems();
@@ -256,7 +265,7 @@ public class MainPage implements Initializable {
             Date date = getDate();
             ArrayList<Appointment> list = AppointmentDAO.findByDate(date, Integer.valueOf(clinicNumberChooser.getValue()));
             searchSessionsTable.setItems(UiUtil.getAppointmentObservable(list));
-            tmpSearchTableData.setAll(searchSessionsTable.getItems());
+            tmpSearchTableData = searchSessionsTable.getItems();
         }
     }
 
@@ -295,7 +304,7 @@ public class MainPage implements Initializable {
         if(appointment.getPatient() != null && appointment.getPatient().getFile_number() != null){
             if(!AppointmentDAO.editAppointmentList(appointment.getPatient().getFile_number(), appointment.getPatient().getFile_number(),
                     appointment.getDate(), Integer.valueOf(newValue), appointment)){
-                String msg = "لا يمكن تعديل ";
+                String msg = "لا يمكن تعديل";
                 MessagesController.getAlert(msg, Alert.AlertType.ERROR);
                 if(today){
                     todaySession.setItems(tmpTodayTableData);
@@ -310,5 +319,60 @@ public class MainPage implements Initializable {
                 }
             }
         }
+    }
+
+    private Callback<TableColumn<Appointment, String>, TableCell<Appointment, String>> getFinished(){
+        Callback<TableColumn<Appointment, String>, TableCell<Appointment, String>> cellFactory
+                = //
+                new Callback<TableColumn<Appointment, String>, TableCell<Appointment, String>>() {
+                    @Override
+                    public TableCell call(final TableColumn<Appointment, String> param) {
+                        final TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
+
+                            final CheckBox checkBox = new CheckBox();
+
+                            @Override
+                            public void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                TableRow<Appointment> currentRow = getTableRow();
+                                if(currentRow == null || currentRow.getItem() == null || currentRow.getItem().getPatientFileID().equals("")) {
+                                    checkBox.setDisable(true);
+                                }else {
+                                    checkBox.setDisable(false);
+                                    checkBox.setSelected(currentRow.getItem().isFinished());
+                                    getTableRow().setStyle(currentRow.getItem().isFinished() ? "-fx-background-color:red" : "-fx-background-color:white");
+                                }
+                                if (empty) {
+                                    setGraphic(null);
+                                    setText(null);
+                                } else {
+                                    checkBox.setOnMouseClicked(event -> {
+                                        Appointment appointment = getTableView().getItems().get(getIndex());
+                                        if(appointment.getPatientFileID().equals("")){
+                                           checkBox.setDisable(true);
+                                        }else {
+                                            checkBox.setDisable(false);
+                                            if(AppointmentDAO.confirmFinished(appointment.getPatientFileID(), appointment.getDate())){
+                                                check(appointment);
+                                            }else {
+                                                MessagesController.getAlert("فشل تحديث القيمة.", Alert.AlertType.ERROR);
+                                            }
+                                        }
+                                    });
+                                    setGraphic(checkBox);
+                                    setText(null);
+                                }
+                            }
+
+                            private void check(Appointment appointment){
+                                getTableRow().setStyle(!appointment.isFinished() ? "-fx-background-color:red" : "-fx-background-color:white");
+                                checkBox.setSelected(!appointment.isFinished());
+                                appointment.setFinished(!appointment.isFinished());
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        return cellFactory;
     }
 }

@@ -25,7 +25,7 @@ public class WindowHandlers extends Application {
         this.prevWindow = new WindowObj();
     }
 
-    public void loadWindow(String windowPath, String title, boolean maximized, boolean hide, boolean onclose, MouseEvent event) throws Exception{
+    public void loadWindow(String windowPath, String title, boolean maximized, boolean hide, boolean onClose, MouseEvent event) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource(windowPath));
         Parent root = loader.load();
         Stage stage = new Stage();
@@ -44,8 +44,7 @@ public class WindowHandlers extends Application {
             this.prevWindow.setScene(((Node)(event.getSource())).getScene());
             this.prevWindow.setTitle("Main Page");
         }
-        if(onclose){
-            //stage.setOnCloseRequest(e -> closeWindow());
+        if(onClose){
             stage.setOnHiding(e -> closeWindow());
         }
 

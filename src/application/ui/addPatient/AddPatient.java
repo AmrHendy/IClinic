@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import main.java.beans.Patient;
 import main.java.beans.User;
 import main.java.model.PatientDAO;
@@ -57,15 +59,16 @@ public class AddPatient implements Initializable {
 
     @FXML
     void cancel(MouseEvent event) {
-        if(patientName.getText() != null || address.getText() != null ||
-                phoneNumber.getText() != null || dateOfBirth.getValue() != null
-                || clinicNumber.getValue() != null || fileNumber.getText() != null){
+        if(!patientName.getText().equals("") || !address.getText().equals("")||
+                !phoneNumber.getText().equals("")|| dateOfBirth.getValue() != null
+                || clinicNumber.getValue() != null || !fileNumber.getText().equals("")){
             String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "" + msg + "", ButtonType.OK, ButtonType.CANCEL);
+            alert.showAndWait();
             if(alert.getResult() == ButtonType.OK){
                 ((Node)(event.getSource())).getScene().getWindow().hide();
-                return;
             }
+            return;
         }
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }

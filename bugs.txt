@@ -36,13 +36,13 @@ w brdo nady elfunction fe el awl bfady "" 3shan yzhr kolo fe el bdaya -done
 
 // sf7t add user
 12) zorar el cancel msh by3ml action zbto -done
-13) el rsala ely bttl3 feha yes w no w cancel kolhom byrg3ony l nfs sf7t el add ,, eih el fr2 bnehom keda
+13) el rsala ely bttl3 feha yes w no w cancel kolhom byrg3ony l nfs sf7t el add ,, eih el fr2 bnehom keda -done
 
 // sf7t add patient
-14) nfs moshklt 11 w 12 zbt el rsayl w el action bt3ha
+14) nfs moshklt 11 w 12 zbt el rsayl w el action bt3ha -done
 
-// sf7t gdwl el mw3ed
-15) brdo el refresh msh sh3'al lesa
+// sf7t gdwl el mw3ed 
+15) brdo el refresh msh sh3'al lesa 
 16) 3wz 23ml adaft m3ad fb2f fe 5ant rkm el mlf w bktb rkm el mlf w b'3t enter bytl3ly error .. anma lw ktbt rkm el mlf w mn 3'yr enter d3't bl mouse bra btt3ml 3ady (fe gdwl el patient mtzbta by3ml update 3ady lma b3ml enter 3shan enter ashl)
 17) mtnsah zorar m7drsh ,, lma yd3't 3la el zorar htnady el function bta3t AppointmentDAO.confirmFinished() deh bta5d zy confirmPaidCost()
 keda ana hzbt el database .. enta b2a htlwn emta ??  enta btget el appointments mny 23ml check lw app.isFinished() rg3t true yb2a keda m7drsh fs3tha tlwno ba7mr b2a     ... 5ly el zorar dymn enable w dymn lma y3ml click nady confirmFinished w ana b3ml 3ks el prev state ..
@@ -56,3 +56,11 @@ keda ana hzbt el database .. enta b2a htlwn emta ??  enta btget el appointments 
 22) mtnsash tdef 5ant el comment 3shan lw 3wz yshof kol mred eih el tsh5es bta3o
 23) zorar el 7fz ely fo2 5als hl leh action wla mlhosh lzma
 24) el images msh sh3'ala w msh bydrb exeption fmsh 3arf eih el moshkla // 2oly btnady anho function 3ndy w 23ml test at2kd anha sh3'ala w enta at2kd mn goz2k feha brdo
+
+
+
+------------------
+can't add any appointment the following error happen.
+--Cannot add or update a child row: a foreign key constraint fails (`iclinic`.`appointment`, CONSTRAINT `fk_appointment_patient_id 
+note that the patient already exist test it on your computer.
+

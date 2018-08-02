@@ -1,5 +1,7 @@
 package main.java.beans;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import main.java.model.PatientDAO;
 
 import javax.imageio.ImageIO;
@@ -17,7 +19,7 @@ public class Appointment {
     private int appointmentID;
     private int patientID;
     private Date date;
-    private Boolean finished;
+    private SimpleBooleanProperty finished;
     private Image image;
     private int paidCost;
     private String comment;
@@ -31,7 +33,7 @@ public class Appointment {
     private String phoneNumber;
 
     public Appointment(){
-        finished = false;
+        finished = new SimpleBooleanProperty(false);
         image = null;
         paidCost = 0;
         comment = "";
@@ -100,11 +102,13 @@ public class Appointment {
     }
 
     public Boolean isFinished() {
-        return finished;
+        return finished.getValue();
     }
 
+    public BooleanProperty finishedProperty() { return finished; }
+
     public void setFinished(Boolean finished) {
-        this.finished = finished;
+        this.finished.set(finished);
     }
 
     public Image getImage() {

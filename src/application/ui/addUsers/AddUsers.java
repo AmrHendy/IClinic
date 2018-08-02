@@ -39,13 +39,16 @@ public class AddUsers implements Initializable {
 
     @FXML
     void cancel(MouseEvent event) {
-        return;
-        /*
-        if(userName.getText() != null || password.getText() != null || confirmPassword.getText() != null || clinicNumber.getValue() != null){
+        if(!userName.getText().equals("") || !password.getText().equals("") || !confirmPassword.getText().equals("") || !clinicNumber.getText().equals("")){
             String msg = "جميع البيانات لم يتم حفظها هل انت متاكد انك تريد الخروج؟";
-            Alert alert = MessagesController.getAlert(msg, Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "" + msg + "", ButtonType.OK, ButtonType.CANCEL);
+            alert.showAndWait();
+            if(alert.getResult() == ButtonType.OK){
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+            }
+            return;
         }
-         */
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
