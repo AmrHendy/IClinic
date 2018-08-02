@@ -69,7 +69,7 @@ public class PatientProfile implements Initializable  {
     private TableColumn<Appointment, String> time;
 
     @FXML
-    private TableColumn<CustomImage, ImageView> image;
+    private TableColumn<Appointment, ImageView> image;
 
     @FXML
     private TableColumn<Appointment, String> moneyPaid;
@@ -166,7 +166,7 @@ public class PatientProfile implements Initializable  {
             editComment(pos, appointment);
             sessionsTable.refresh();
         });
-        image.setCellValueFactory(new PropertyValueFactory<CustomImage, ImageView>("image"));
+        image.setCellValueFactory(new PropertyValueFactory<Appointment, ImageView>("image"));
         comment.setCellValueFactory(new PropertyValueFactory<>("comment"));
         comment.setCellFactory(comment -> EditCell.createStringEditCell());
         comment.setOnEditCommit(event -> {
@@ -207,11 +207,13 @@ public class PatientProfile implements Initializable  {
                             @Override
                             public void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
+                                if(getTableRow() != null && getTableRow().getItem() != null){
+                                    btn.setDisable(getTableRow().getItem().isConfirmedPaid());
+                                }
                                 if (empty) {
                                     setGraphic(null);
                                     setText(null);
                                 } else {
-                                    btn.setDisable(getTableRow().getItem().isConfirmedPaid());
                                     btn.setOnAction(event -> {
                                         Appointment appointment = getTableView().getItems().get(getIndex());
                                         AppointmentDAO.confirmPaidCost(appointment.getPatientFileID(), appointment.getDate());
@@ -235,7 +237,7 @@ public class PatientProfile implements Initializable  {
                     public TableCell call(final TableColumn<Appointment, String> param) {
                         final TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
 
-                            final Button btn = new Button("رفع صورة");
+                            final Button btn = new Button("تنزيل صورة");
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -245,6 +247,8 @@ public class PatientProfile implements Initializable  {
                                     setText(null);
                                 } else {
                                     btn.setOnAction(event -> {
+                                        //download image
+
                                         Appointment appointment = getTableView().getItems().get(getIndex());
                                         java.awt.Image image = appointment.getImage();
                                         FileChooser fileChooser = new FileChooser();
@@ -284,7 +288,7 @@ public class PatientProfile implements Initializable  {
                     public TableCell call(final TableColumn<Appointment, String> param) {
                         final TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
 
-                            final Button btn = new Button("تنزيل الصورة");
+                            final Button btn = new Button("رفع الصورة");
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -294,6 +298,7 @@ public class PatientProfile implements Initializable  {
                                     setText(null);
                                 } else {
                                     btn.setOnAction(event -> {
+                                        //upload image.
                                         Appointment appointment = getTableView().getItems().get(getIndex());
 
                                         final FileChooser fileChooser = new FileChooser();
@@ -303,7 +308,7 @@ public class PatientProfile implements Initializable  {
                                                 Image img = ImageIO.read(file);
                                                 appointment.setImage(img);
                                                 sessionsTable.getItems().set(getIndex(), appointment);
-                                                tmpTableData.setAll(sessionsTable.getItems());
+                                                tmpTableData  = sessionsTable.getItems() ;
                                                 sessionsTable.refresh();
                                             } catch (IOException e) {
                                                 //TODO:: add log4j here.
