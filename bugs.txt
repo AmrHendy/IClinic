@@ -1,4 +1,4 @@
-1) el refresh fe tables msh byt3ml brdo
+1) el refresh fe tables msh byt3ml brdo -done and tested kindly retest it again.
 2) dymn byft7 3la 3yada 0 b3'd el nzr 3n men ely 3ml log in ana soft el code 3ndy w mfhosh moshkla ,, at2kd ank msh bt3ml set l UserSignedIn fe ay 7ta 3ndk .. ana bs ely b3'yro
 3) el mfrod el patients yzhro kolhom awl mft7 sf7t b7s 3n mred w mktbsh 7aga ,, bs msh sh3'ala lazem aktb 7aga w b3dha ams7ha
 4) nfs rkm 3 fe el users

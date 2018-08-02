@@ -124,7 +124,7 @@ public class DisplayUser implements Initializable {
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
             user.setUserName(value);
-            save(user);
+            save(pos, user);
             userTable.refresh();
             event.consume();
         });
@@ -139,20 +139,21 @@ public class DisplayUser implements Initializable {
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
             user.setClinic(Integer.valueOf(value));
-            save(user);
+            save(pos, user);
             userTable.refresh();
         });
         userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser("")));
         userTable.refresh();
         tmpTableData = userTable.getItems();
-        tmpTableData = userTable.getItems();
     }
 
-    private void save(User user){
+    private void save(int pos, User user){
         if(!user.getUserName().equals(UserSignedInData.user.getUserName()) || !UserDAO.updateUser(user.getUserID(), user)){
             String msg = "لا يمكن تعديل " + user.getUserID() + ": " + user.getUserName();
             MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             userTable.setItems(tmpTableData);
+        }else{
+            userTable.getItems().set(pos, user);
         }
     }
 }

@@ -164,7 +164,7 @@ public class DisplayPatient implements Initializable {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Patient patient = event.getTableView().getItems().get(pos);
-            tmpTableData.set(pos, patient);
+            tmpTableData.set(pos, patient.clone());
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
             patient.setFile_number(value);
@@ -176,7 +176,7 @@ public class DisplayPatient implements Initializable {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Patient patient = event.getTableView().getItems().get(pos);
-            tmpTableData.set(pos, patient);
+            tmpTableData.set(pos, patient.clone());
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
             patient.setPatientName(value);
@@ -188,7 +188,7 @@ public class DisplayPatient implements Initializable {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Patient patient = event.getTableView().getItems().get(pos);
-            tmpTableData.set(pos, patient);
+            tmpTableData.set(pos, patient.clone());
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
             patient.setPhoneNumber(value);
@@ -200,7 +200,7 @@ public class DisplayPatient implements Initializable {
             //TODO:: test failed edit.
             int pos = event.getTablePosition().getRow();
             Patient patient = event.getTableView().getItems().get(pos);
-            tmpTableData.set(pos, patient);
+            tmpTableData.set(pos, patient.clone());
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
             patient.setAddress(value);
@@ -277,6 +277,8 @@ public class DisplayPatient implements Initializable {
             String msg = "لا يمكن تعديل " + patient.getFile_number() + ": " + patient.getPatientName();
             MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             patientTable.setItems(tmpTableData);
+        }else{
+            patientTable.getItems().set(pos, patient);
         }
     }
 }

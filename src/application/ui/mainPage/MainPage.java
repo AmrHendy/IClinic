@@ -133,7 +133,7 @@ public class MainPage implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO:: we need to add the editable cells here.
-        //UserSignedInData.user = UserDAO.getUser("admin");
+        UserSignedInData.user = UserDAO.getUser("admin");
         todaySession.getSelectionModel().setCellSelectionEnabled(true);
         todaySession.setEditable(true);
         searchSessionsTable.getSelectionModel().setCellSelectionEnabled(true);
@@ -165,7 +165,7 @@ public class MainPage implements Initializable {
             tmpTodayTableData.set(pos, appointment.clone());
             final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
             final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
-            editFileNumber(appointment, oldValue, newValue, true);
+            editFileNumber(pos, appointment, oldValue, newValue, true);
             todaySession.refresh();
         });
         money.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
@@ -176,7 +176,7 @@ public class MainPage implements Initializable {
             Appointment appointment = event.getTableView().getItems().get(pos);
             tmpTodayTableData.set(pos, appointment.clone());
             final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
-            editPaidCost(appointment, newValue, true);
+            editPaidCost(pos, appointment, newValue, true);
             todaySession.refresh();
         });
 
@@ -192,7 +192,7 @@ public class MainPage implements Initializable {
             tmpSearchTableData.set(pos, appointment.clone());
             final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
             final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
-            editFileNumber(appointment, oldValue, newValue, false);
+            editFileNumber(pos, appointment, oldValue, newValue, false);
             searchSessionsTable.refresh();
         });
         money1.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
@@ -203,7 +203,7 @@ public class MainPage implements Initializable {
             Appointment appointment = event.getTableView().getItems().get(pos);
             tmpSearchTableData.set(pos, appointment.clone());
             final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
-            editPaidCost(appointment, newValue, false);
+            editPaidCost(pos, appointment, newValue, false);
             searchSessionsTable.refresh();
         });
         //TODO:: initialize today session here.
@@ -271,9 +271,9 @@ public class MainPage implements Initializable {
         return today;
     }
 
-    private void editFileNumber(Appointment appointment, String oldValue, String newValue, boolean today){
+    private void editFileNumber(int pos, Appointment appointment, String oldValue, String newValue, boolean today){
         if(!AppointmentDAO.editAppointmentList(oldValue, newValue,
-                appointment.getDate(), Integer.parseInt(appointment.getPaidCost()))){
+                appointment.getDate(), Integer.parseInt(appointment.getPaidCost()), appointment)){
             String msg = "لا يمكن تعديل ";
             MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             if(today){
@@ -281,20 +281,32 @@ public class MainPage implements Initializable {
             }else{
                 searchSessionsTable.setItems(tmpSearchTableData);
             }
+        }else{
+            if(today){
+                todaySession.getItems().set(pos, appointment);
+            }else{
+                searchSessionsTable.getItems().set(pos, appointment);
+            }
         }
 
     }
 
-    private void editPaidCost(Appointment appointment, String newValue, boolean today){
+    private void editPaidCost(int pos, Appointment appointment, String newValue, boolean today){
         if(appointment.getPatient() != null && appointment.getPatient().getFile_number() != null){
             if(!AppointmentDAO.editAppointmentList(appointment.getPatient().getFile_number(), appointment.getPatient().getFile_number(),
-                    appointment.getDate(), Integer.valueOf(newValue))){
+                    appointment.getDate(), Integer.valueOf(newValue), appointment)){
                 String msg = "لا يمكن تعديل ";
                 MessagesController.getAlert(msg, Alert.AlertType.ERROR);
                 if(today){
                     todaySession.setItems(tmpTodayTableData);
                 }else{
                     searchSessionsTable.setItems(tmpSearchTableData);
+                }
+            }else{
+                if(today){
+                    todaySession.getItems().set(pos, appointment);
+                }else{
+                    searchSessionsTable.getItems().set(pos, appointment);
                 }
             }
         }

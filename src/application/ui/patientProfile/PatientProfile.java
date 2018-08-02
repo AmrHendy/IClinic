@@ -139,11 +139,8 @@ public class PatientProfile implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         date.setCellValueFactory(new PropertyValueFactory<>("dateOnly"));
         time.setCellValueFactory(new PropertyValueFactory<>("timeOnly"));
-        clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinic_number"));
+        clinicNumber.setCellValueFactory(new PropertyValueFactory<>("clinicNumber"));
         moneyPaid.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
-        //confirmPayment.setCellValueFactory(new PropertyValueFactory<>("dummy1"));
-        //uploadImage.setCellValueFactory(new PropertyValueFactory<>("dummy2"));
-        //downloadImage.setCellValueFactory(new PropertyValueFactory<>("dummy3"));
         image.setCellValueFactory(new PropertyValueFactory<CustomImage, ImageView>("image"));
 
         confirmPayment.setCellFactory(getConfirm());

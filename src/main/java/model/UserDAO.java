@@ -109,7 +109,7 @@ public class UserDAO {
     public static User getUser(String userName) {
         User user = null;
         System.out.println("name = " + userName);
-        String query = "SELECT * FROM User WHERE userName LIKE '" + userName + "%';";
+        String query = "SELECT * FROM User WHERE userName LIKE '%" + userName + "%';";
         ResultSet rs = null;
         try {
             rs = ModelManager.getInstance().executeQuery(query);
@@ -137,7 +137,7 @@ public class UserDAO {
 
     public static ArrayList<User> findByName(String userName) {
         ArrayList<User> matched = new ArrayList<>();
-        String query = "SELECT * FROM User WHERE userName LIKE '" + userName + "%';";
+        String query = "SELECT * FROM User WHERE userName LIKE '%" + userName + "%';";
         try{
             ResultSet rs = ModelManager.getInstance().executeQuery(query);
             while (rs.next()) {
