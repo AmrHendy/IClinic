@@ -297,7 +297,6 @@ public class MainPage implements Initializable {
                 searchSessionsTable.getItems().set(pos, appointment);
             }
         }
-
     }
 
     private void editPaidCost(int pos, Appointment appointment, String newValue, boolean today){

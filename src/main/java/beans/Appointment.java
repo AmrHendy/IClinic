@@ -115,10 +115,14 @@ public class Appointment {
 
     public ImageView getImage() {
         if(image == null)return null;
-        javafx.scene.image.Image fxImage = SwingFXUtils.toFXImage((BufferedImage) image, null);
+        javafx.scene.image.Image fxImage = SwingFXUtils.toFXImage( adjustBufferedImage((BufferedImage) image, 100, 100), null);
         ImageView imageView = new ImageView();
         imageView.setImage(fxImage);
         return imageView;
+    }
+
+    public BufferedImage getBufferdImage(){
+        return (BufferedImage) image;
     }
 
     public byte[] getImageBytes() {
@@ -229,5 +233,14 @@ public class Appointment {
         app.setImage(this.getImage());
         app.setFinished(this.isFinished());
         return app;
+    }
+
+    private BufferedImage adjustBufferedImage(BufferedImage img, int newW, int newH){
+        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+        BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = dimg.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return dimg;
     }
 }

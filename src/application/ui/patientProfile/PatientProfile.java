@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDatePicker;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -250,16 +251,17 @@ public class PatientProfile implements Initializable  {
                                         //download image
 
                                         Appointment appointment = getTableView().getItems().get(getIndex());
-                                        java.awt.Image image = appointment.getImage();
+                                        BufferedImage img = appointment.getBufferdImage();
                                         FileChooser fileChooser = new FileChooser();
                                         fileChooser.setTitle("Select an Image");
+                                        fileChooser.setInitialFileName("" + appointment.getPatientName() + " : " + appointment.getDateString() + ".jpg");
                                         fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
                                         File file = fileChooser.showSaveDialog(getScene().getWindow());
                                         if(file != null){
                                             String name = file.getName();
                                             String extension = name.substring(1+name.lastIndexOf(".")).toLowerCase();
                                             try {
-                                                ImageIO.write(toBufferedImage(image), extension, file);
+                                                ImageIO.write(img, extension, file);
                                             } catch (IOException e) {
                                                 //TODO:: put log4j here.
                                                 String msg = "لم يتم حفظ الصورة.";
@@ -305,8 +307,12 @@ public class PatientProfile implements Initializable  {
                                         File file = fileChooser.showOpenDialog(getScene().getWindow());
                                         if (file != null) {
                                             try {
-                                                Image img = ImageIO.read(file);
-                                                appointment.setImage(img);
+                                                BufferedImage img = ImageIO.read(file);
+                                                javafx.scene.image.Image fxImage = SwingFXUtils.toFXImage(img, null);
+                                                javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView();
+                                                imageView.setImage(fxImage);
+                                                appointment.setImage(imageView);
+                                                AppointmentDAO.updateAppointmentByID(appointment.getAppointmentID(), appointment);
                                                 sessionsTable.getItems().set(getIndex(), appointment);
                                                 tmpTableData  = sessionsTable.getItems() ;
                                                 sessionsTable.refresh();
@@ -328,16 +334,6 @@ public class PatientProfile implements Initializable  {
         return cellFactory;
     }
 
-    private BufferedImage toBufferedImage(Image img){
-        if (img instanceof BufferedImage) {
-            return (BufferedImage) img;
-        }
-        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D bGr = bimage.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
-        return bimage;
-    }
 
 
 
