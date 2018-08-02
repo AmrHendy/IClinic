@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33f578a9-4500-4c05-8c97-bbb537cad10d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bugs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bugs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/ui/handler/WindowHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/handler/WindowHandlers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/ui/login/LoginFormApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/login/LoginFormApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -101,6 +99,15 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="DisplayUser.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="67" column="84" selection-start-line="67" selection-start-column="84" selection-end-line="67" selection-end-column="84" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="PatientDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/model/PatientDAO.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -113,7 +120,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginFormApplication.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LoginFormApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/ui/login/LoginFormApplication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -145,8 +152,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>charEntered</find>
-      <find>phoneNum</find>
       <find>getPhoneNumber</find>
       <find>phoneNumber</find>
       <find>PatientMobile</find>
@@ -175,6 +180,8 @@
       <find>clinic_number</find>
       <find>clinicNumber</find>
       <find>observable</find>
+      <find>user.getUserName()</find>
+      <find>char</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -227,13 +234,13 @@
         <option value="$PROJECT_DIR$/src/application/ui/addUsers/AddUsers.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/AppointmentDAO.java" />
         <option value="$PROJECT_DIR$/src/application/ui/handler/MessagesController.java" />
-        <option value="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" />
         <option value="$PROJECT_DIR$/src/application/ui/patientProfile/PatientProfile.java" />
         <option value="$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java" />
         <option value="$PROJECT_DIR$/src/application/ui/handler/WindowHandlers.java" />
         <option value="$PROJECT_DIR$/src/application/ui/login/LoginFormApplication.java" />
+        <option value="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" />
       </list>
     </option>
   </component>
@@ -564,15 +571,16 @@
       <workItem from="1532624421947" duration="1535000" />
       <workItem from="1533007721810" duration="2273000" />
       <workItem from="1533133245288" duration="671000" />
-      <workItem from="1533199609801" duration="8910000" />
+      <workItem from="1533199609801" duration="9178000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152583000" />
+    <option name="totallyTimeSpent" value="152851000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="8" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -584,11 +592,11 @@
       <window_info anchor="right" id="Maven Projects" order="5" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28317374" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28317374" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1907552" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1907552" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Learn" order="6" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
@@ -953,13 +961,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="144" column="73" selection-start-line="144" selection-start-column="73" selection-end-line="144" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/PatientDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -1036,6 +1037,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="67" column="84" selection-start-line="67" selection-start-column="84" selection-end-line="67" selection-end-column="84" />
         </state>
       </provider>
     </entry>

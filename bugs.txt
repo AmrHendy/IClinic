@@ -23,12 +23,12 @@ mtnsah tkbr el 5t -Modified take a look
 
 // gdwl el patient  ===> el refresh sh3'al kowys bs fe el bugs deh
 7) lma 23ml update l rkm el mlf fe gdwl el patient msh byrda bytl3ly message m3 ano rkm mlf msh mwgod y3ny el mfrod 3ady -test and nothing happended
-8) msh rady y3ml update l el mbl3' el motbky mn el gdwl
+8) msh rady y3ml update l el mbl3' el motbky mn el gdwl -tested and nothing happend.
 
 // sf7t el profile w el t3del fe el bynat ==> kolha sh3'ala tammam ela el bug deh
-9) ana w2f fe sf7t el gdwl bta3t el patient w 3mlt show profile w 3dlt fe profile w 3mlt save w b3dha 2flt sf7t el profile bygbly el gdwl bs msh el s7 (y3ny bygbly el data el adema abl m3dlha fenta m7tag tnady el refresh hna b2a wla eih)
+9) ana w2f fe sf7t el gdwl bta3t el patient w 3mlt show profile w 3dlt fe profile w 3mlt save w b3dha 2flt sf7t el profile bygbly el gdwl bs msh el s7 (y3ny bygbly el data el adema abl m3dlha fenta m7tag tnady el refresh hna b2a wla eih) -done
 10) grbt 23ml el edit fe el profile ,, el t3del msh byzhr mm grbt 22fl el brnamg w 2fl tany brdo msh byzhr shklo drb 5als 
-fe 25r nos5a kan sh3'al shof eih el t3'yer
+fe 25r nos5a kan sh3'al shof eih el t3'yer -done but test it again please.
 
 // sf7t gdwl el users
 11) el users msh byzhro kolhom 3shan a7na bnady function UserDAO.getUser() w deh btrg3 user wa7d fdah 3'lt ,, ana 3mltlk function asmha UserDAO.findByName()  w deh btrg3lk ArrayList<User> zy mkona 3mlen fe patient w t7tothm fe table

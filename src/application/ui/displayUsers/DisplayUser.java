@@ -65,7 +65,7 @@ public class DisplayUser implements Initializable {
     void charEntered(KeyEvent event) {
         String name = userName.getText();
         if (name != null) {
-            userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser(name)));
+            userTable.setItems(FXCollections.observableArrayList(UserDAO.findByName(name)));
         }
         tmpTableData.setAll(userTable.getItems());
     }
@@ -142,7 +142,7 @@ public class DisplayUser implements Initializable {
             save(pos, user);
             userTable.refresh();
         });
-        userTable.setItems(FXCollections.observableArrayList(UserDAO.getUser("")));
+        userTable.setItems(FXCollections.observableArrayList(UserDAO.findByName("")));
         userTable.refresh();
         tmpTableData = userTable.getItems();
     }
