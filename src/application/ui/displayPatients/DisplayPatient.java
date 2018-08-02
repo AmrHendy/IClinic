@@ -23,11 +23,13 @@ import main.java.model.PatientDAO;
 import main.java.model.UserDAO;
 import main.java.util.UiUtil;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class DisplayPatient implements Initializable {
+public class DisplayPatient implements Initializable, PropertyChangeListener {
 
     private final int limit = 10;
 
@@ -60,6 +62,10 @@ public class DisplayPatient implements Initializable {
     private TableColumn<Patient, String> remainingCost;
 
     private ObservableList<Patient> tmpTableData;
+
+    private int selectedPos;
+
+    private Patient patient;
 
     @FXML
     void nameEntered(KeyEvent event) {
@@ -244,7 +250,8 @@ public class DisplayPatient implements Initializable {
                                     setText(null);
                                 } else {
                                     btn.setOnAction(event -> {
-                                        Patient patient = getTableView().getItems().get(getIndex());
+                                        selectedPos = getIndex();
+                                        patient = getTableView().getItems().get(getIndex());
                                         WindowHandlers windowHandlers = WindowHandlers.getInstance();
                                         try{
                                             windowHandlers.loadWindow("/application/ui/patientProfile/patientProfile.fxml", "الملف الشخصى" ,
@@ -252,7 +259,7 @@ public class DisplayPatient implements Initializable {
                                             FXMLLoader loader = windowHandlers.getLoader();
                                             PatientProfile controller = loader.getController();
                                             controller.setPatient(patient);
-                                            controller.fillData();
+                                            controller.fillData(DisplayPatient.this);
                                         }catch (Exception e){
                                             //TODO:: log4j here.
                                             e.printStackTrace();
@@ -279,6 +286,14 @@ public class DisplayPatient implements Initializable {
             patientTable.setItems(tmpTableData);
         }else{
             patientTable.getItems().set(pos, patient);
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getSource() instanceof PatientProfile){
+            Patient newPatient = (Patient) evt.getNewValue();
+            patientTable.getItems().set(selectedPos, newPatient);
         }
     }
 }

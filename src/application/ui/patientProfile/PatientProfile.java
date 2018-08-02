@@ -1,10 +1,12 @@
 package application.ui.patientProfile;
 
 
+import application.ui.displayPatients.DisplayPatient;
 import application.ui.handler.CustomImage;
 import application.ui.handler.MessagesController;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ import javax.imageio.ImageIO;
 import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +39,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class PatientProfile implements Initializable{
+public class PatientProfile implements Initializable  {
 
 
     @FXML
@@ -89,6 +92,8 @@ public class PatientProfile implements Initializable{
 
     private ObservableList<Appointment> tmpTableData;
 
+    private DisplayPatient controller;
+
     @FXML
     private TableColumn<?, ?> date;
 
@@ -100,7 +105,9 @@ public class PatientProfile implements Initializable{
         newPatient.setPhoneNumber(phoneNumber.getText());
         newPatient.setRemainingCost(Integer.valueOf(remainingMoney.getText()));
         newPatient.setClinic_number(Integer.valueOf(clinicNumberChooser.getValue()));
-        newPatient.setBirthdate(Date.valueOf(dateOfBirth.getValue()));
+        if(dateOfBirth.getValue() != null){
+            newPatient.setBirthdate(Date.valueOf(dateOfBirth.getValue()));
+        }
         newPatient.setFile_number(fileNumber.getText());
         if(!PatientDAO.updatePatient(patient.getFile_number(), newPatient)){
             String msg = "لم تنجح العملية.";
@@ -108,10 +115,11 @@ public class PatientProfile implements Initializable{
         }else{
             String msg = "تمت العملية بنجاح.";
             Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
+            controller.propertyChange(new PropertyChangeEvent(this, "all", patient, newPatient));
         }
     }
 
-    public void fillData() {
+    public void fillData(DisplayPatient controller) {
 
         ObservableList<String> list = FXCollections.observableArrayList(UserDAO.getClinics());
         clinicNumberChooser.setItems(list);
@@ -128,7 +136,7 @@ public class PatientProfile implements Initializable{
             dateOfBirth.setValue(date);
         }
         fileNumber.setText(patient.getFile_number());
-
+        this.controller = controller;
     }
 
     public void setPatient(Patient patient){
