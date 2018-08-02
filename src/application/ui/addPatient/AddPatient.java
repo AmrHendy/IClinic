@@ -64,8 +64,10 @@ public class AddPatient implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "" + msg + "", ButtonType.OK, ButtonType.CANCEL);
             if(alert.getResult() == ButtonType.OK){
                 ((Node)(event.getSource())).getScene().getWindow().hide();
+                return;
             }
         }
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
@@ -90,7 +92,7 @@ public class AddPatient implements Initializable {
                 String msg = "لا يمكن اتمام اضافة مريض اعد المحاولة.";
                 Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             }else{
-                System.out.println("here.");
+                ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         }
 

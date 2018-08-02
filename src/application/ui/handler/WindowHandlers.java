@@ -45,7 +45,8 @@ public class WindowHandlers extends Application {
             this.prevWindow.setTitle("Main Page");
         }
         if(onclose){
-            stage.setOnCloseRequest(e -> closeWindow());
+            //stage.setOnCloseRequest(e -> closeWindow());
+            stage.setOnHiding(e -> closeWindow());
         }
 
     }

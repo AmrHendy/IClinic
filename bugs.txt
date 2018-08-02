@@ -32,10 +32,10 @@ fe 25r nos5a kan sh3'al shof eih el t3'yer -done but test it again please.
 
 // sf7t gdwl el users
 11) el users msh byzhro kolhom 3shan a7na bnady function UserDAO.getUser() w deh btrg3 user wa7d fdah 3'lt ,, ana 3mltlk function asmha UserDAO.findByName()  w deh btrg3lk ArrayList<User> zy mkona 3mlen fe patient w t7tothm fe table
-w brdo nady elfunction fe el awl bfady "" 3shan yzhr kolo fe el bdaya
+w brdo nady elfunction fe el awl bfady "" 3shan yzhr kolo fe el bdaya -done
 
 // sf7t add user
-12) zorar el cancel msh by3ml action zbto
+12) zorar el cancel msh by3ml action zbto -done
 13) el rsala ely bttl3 feha yes w no w cancel kolhom byrg3ony l nfs sf7t el add ,, eih el fr2 bnehom keda
 
 // sf7t add patient
