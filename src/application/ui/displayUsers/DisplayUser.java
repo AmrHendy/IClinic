@@ -90,42 +90,44 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
         alert.showAndWait();
         if(alert.getResult() == ButtonType.CANCEL){
             return;
-        }
-        boolean finished = true;
-        boolean showMsg = false;
-        ArrayList<String> msg = new ArrayList<String>();
-        ObservableList<User> remaining = FXCollections.observableArrayList();
-        for (int i = 0; i < userTable.getSelectionModel().getSelectedCells().size(); i++) {
-            TablePosition pos = userTable.getSelectionModel().getSelectedCells().get(i);
-            int row = pos.getRow();
-            User user = userTable.getItems().get(row);
-            if(user.getUserName().equals(UserSignedInData.user.getUserName())){
-                finished = UserDAO.deleteUser(user.getUserName());
-                if (!finished) {
+        }else if(alert.getResult() == ButtonType.OK){
+
+            boolean finished = true;
+            boolean showMsg = false;
+            ArrayList<String> msg = new ArrayList<String>();
+            ObservableList<User> remaining = FXCollections.observableArrayList();
+            for (int i = 0; i < userTable.getSelectionModel().getSelectedCells().size(); i++) {
+                TablePosition pos = userTable.getSelectionModel().getSelectedCells().get(i);
+                int row = pos.getRow();
+                User user = userTable.getItems().get(row);
+                if(user.getUserName().equals(UserSignedInData.user.getUserName())){
+                    finished = UserDAO.deleteUser(user.getUserName());
+                    if (!finished) {
+                        msg.add("لا يمكن مسح " + user.getUserName());
+                        remaining.add(user);
+                        showMsg = true;
+                    } else {
+                        userTable.getItems().set(row, null);
+                        message = "لقد قمت بحذف المستخدم الحالى البرنامج سوف يغلق نفسة اعد الدخول مرة اخرى.";
+                        MessagesController.getAlert(message, Alert.AlertType.INFORMATION);
+                    }
+                }else{
                     msg.add("لا يمكن مسح " + user.getUserName());
-                    remaining.add(user);
                     showMsg = true;
-                } else {
-                    userTable.getItems().set(row, null);
-                    message = "لقد قمت بحذف المستخدم الحالى البرنامج سوف يغلق نفسة اعد الدخول مرة اخرى.";
-                    MessagesController.getAlert(message, Alert.AlertType.INFORMATION);
                 }
-            }else{
-                msg.add("لا يمكن مسح " + user.getUserName());
-                showMsg = true;
             }
-        }
-        for (int i = 0; i < userTable.getItems().size(); i++) {
-            User user = userTable.getItems().get(i);
-            if (user != null) {
-                remaining.add(user);
+            for (int i = 0; i < userTable.getItems().size(); i++) {
+                User user = userTable.getItems().get(i);
+                if (user != null) {
+                    remaining.add(user);
+                }
             }
+            if (showMsg) {
+                MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
+                userTable.setItems(remaining);
+            }
+            System.exit(0);
         }
-        if (showMsg) {
-            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
-            userTable.setItems(remaining);
-        }
-        System.exit(0);
     }
 
     @Override

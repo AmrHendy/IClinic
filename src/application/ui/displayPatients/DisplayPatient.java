@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.java.beans.Appointment;
@@ -102,32 +103,41 @@ public class DisplayPatient implements Initializable, PropertyChangeListener {
 
     @FXML
     void deletePatients(MouseEvent event) {
-        boolean finished = true;
-        boolean showMsg = false;
-        ArrayList<String> msg = new ArrayList<String>();
-        ObservableList<Patient> remaining = FXCollections.observableArrayList();
-        for (int i = 0; i < patientTable.getSelectionModel().getSelectedCells().size(); i++) {
-            TablePosition pos = patientTable.getSelectionModel().getSelectedCells().get(i);
-            int row = pos.getRow();
-            Patient patient= patientTable.getItems().get(row);
-            finished = PatientDAO.deletePatient(patient.getPatientID());
-            if(!finished){
-                msg.add("لا يمكن مسح " + patient.getPatientID() + " " + patient.getPatientName());
-                remaining.add(patient);
-                showMsg = true;
-            }else{
-                patientTable.getItems().set(row, null);
+        String message = "هل تريد مسح المريض؟ سيتم مسح كل الجلسات المرتبطة به هل انت متاكد؟";
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "" + message + "", ButtonType.OK, ButtonType.CANCEL);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.CANCEL){
+            return;
+        }else if(alert.getResult() == ButtonType.OK){
+
+            boolean finished = true;
+            boolean showMsg = false;
+            ArrayList<String> msg = new ArrayList<String>();
+            ObservableList<Patient> remaining = FXCollections.observableArrayList();
+            for (int i = 0; i < patientTable.getSelectionModel().getSelectedCells().size(); i++) {
+                TablePosition pos = patientTable.getSelectionModel().getSelectedCells().get(i);
+                int row = pos.getRow();
+                Patient patient= patientTable.getItems().get(row);
+                finished = PatientDAO.deletePatient(patient.getPatientID());
+                if(!finished){
+                    msg.add("لا يمكن مسح " + patient.getPatientID() + " " + patient.getPatientName());
+                    remaining.add(patient);
+                    showMsg = true;
+                }else{
+                    patientTable.getItems().set(row, null);
+                }
             }
-        }
-        for(int i = 0 ;i < patientTable.getItems().size(); i++){
-            Patient patient = patientTable.getItems().get(i);
-            if(patient != null){
-                remaining.add(patient);
+            for(int i = 0 ;i < patientTable.getItems().size(); i++){
+                Patient patient = patientTable.getItems().get(i);
+                if(patient != null){
+                    remaining.add(patient);
+                }
             }
-        }
-        if(showMsg){
-            MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
-            patientTable.setItems(remaining);
+            if(showMsg){
+                MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
+                patientTable.setItems(remaining);
+            }
         }
     }
 
