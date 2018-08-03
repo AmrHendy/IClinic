@@ -21,7 +21,6 @@
             <ToolBar layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
                <items>
                   <JFXButton onMouseClicked="#deletePatients" text="مسح مريض" />
-                  <JFXButton layoutX="10.0" layoutY="10.0" onMouseClicked="#saveChanges" text="حفظ التغيرات" />
                </items>
             </ToolBar>
             <TableView fx:id="patientTable" prefHeight="1000.0" prefWidth="600.0">

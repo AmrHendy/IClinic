@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33f578a9-4500-4c05-8c97-bbb537cad10d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/displayPatients/displayPatient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/displayPatients/displayPatient.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,10 +32,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DisplayUser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainPage.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="396" column="8" selection-start-line="396" selection-start-column="8" selection-end-line="396" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DisplayUser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
+            <state relative-caret-position="694">
               <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
             </state>
           </provider>
@@ -44,7 +56,7 @@
       <file leaf-file-name="DisplayPatient.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="745">
+            <state relative-caret-position="-2434">
               <caret line="140" column="9" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -153,9 +165,9 @@
         <option value="$PROJECT_DIR$/src/application/ui/handler/WindowObj.java" />
         <option value="$PROJECT_DIR$/src/application/ui/mainPage/Main.java" />
         <option value="$PROJECT_DIR$/src/application/ui/handler/WindowHandlers.java" />
-        <option value="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" />
         <option value="$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java" />
         <option value="$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java" />
+        <option value="$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java" />
       </list>
     </option>
   </component>
@@ -505,12 +517,12 @@
       <workItem from="1533227053122" duration="5962000" />
       <workItem from="1533239940195" duration="1789000" />
       <workItem from="1533277898969" duration="9450000" />
-      <workItem from="1533290782848" duration="7331000" />
+      <workItem from="1533290782848" duration="7827000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186147000" />
+    <option name="totallyTimeSpent" value="186643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -969,19 +981,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java">
+    <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="220" column="55" selection-start-line="220" selection-start-column="55" selection-end-line="220" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="694">
+          <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/ui/displayPatients/DisplayPatient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="745">
+        <state relative-caret-position="-2434">
           <caret line="140" column="9" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -989,10 +998,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/ui/displayUsers/DisplayUser.java">
+    <entry file="file://$PROJECT_DIR$/src/application/ui/mainPage/MainPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+        <state relative-caret-position="306">
+          <caret line="396" column="8" selection-start-line="396" selection-start-column="8" selection-end-line="396" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

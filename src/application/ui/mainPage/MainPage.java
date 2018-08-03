@@ -392,8 +392,8 @@ public class MainPage implements Initializable {
     }
 
     public void reloadClinics(){
-        //clinicNumberChooser.getSelectionModel().select(UserSignedInData.user.getClinic());
         clinicNumberChooser.getItems().clear();
         clinicNumberChooser.setItems(FXCollections.observableArrayList(UserDAO.getClinics()));
+        clinicNumberChooser.getSelectionModel().select(UserSignedInData.user.getClinic());
     }
 }
