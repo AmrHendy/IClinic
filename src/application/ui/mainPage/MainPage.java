@@ -351,7 +351,7 @@ public class MainPage implements Initializable {
                                 }else {
                                     checkBox.setDisable(false);
                                     checkBox.setSelected(currentRow.getItem().isFinished());
-                                    getTableRow().setStyle(currentRow.getItem().isFinished() ? "-fx-background-color:red" : "-fx-background-color:white");
+                                    getTableRow().setStyle(currentRow.getItem().isFinished() ? "-fx-background-color:red" : "-fx-selection-bar-non-focused:salmon");
                                 }
                                 if (empty) {
                                     setGraphic(null);
@@ -376,7 +376,7 @@ public class MainPage implements Initializable {
                             }
 
                             private void check(Appointment appointment){
-                                getTableRow().setStyle(!appointment.isFinished() ? "-fx-background-color:red" : "-fx-background-color:white");
+                                getTableRow().setStyle(!appointment.isFinished() ? "-fx-background-color:red" : "-fx-selection-bar-non-focused:salmon");
                                 checkBox.setSelected(!appointment.isFinished());
                                 appointment.setFinished(!appointment.isFinished());
                             }
