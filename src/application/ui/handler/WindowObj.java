@@ -7,6 +7,7 @@ public class WindowObj {
     private Scene scene;
     private String title;
     private Boolean maximized;
+    private Object controller;
 
     public void setScene(Scene scene) {
         this.scene = scene;
@@ -30,6 +31,14 @@ public class WindowObj {
 
     public Boolean getMaximized() {
         return maximized;
+    }
+
+    public Object getController(){
+        return this.controller;
+    }
+
+    public void setController(Object controller){
+        this.controller = controller;
     }
 
 

@@ -5,6 +5,7 @@ import application.ui.handler.MessagesController;
 import application.ui.handler.WindowHandlers;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.java.beans.Appointment;
 import main.java.beans.UserSignedInData;
@@ -94,6 +96,7 @@ public class MainPage implements Initializable {
     }
 
 
+
     public void searchPatient(MouseEvent mouseEvent) {
         try {
             windowHandlers.loadWindow("/application/ui/displayPatients/displayPatient.fxml",
@@ -138,7 +141,6 @@ public class MainPage implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TODO:: we need to add the editable cells here.
         UserSignedInData.user = UserDAO.getUser("admin");
         todaySession.getSelectionModel().setCellSelectionEnabled(true);
         todaySession.setEditable(true);
@@ -216,9 +218,11 @@ public class MainPage implements Initializable {
         });
 
         clinicNumberChooser.setOnAction(e -> {
-            todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
-            tmpTodayTableData = todaySession.getItems();
-            todaySession.refresh();
+            if(clinicNumberChooser.getValue() != null){
+                todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
+                tmpTodayTableData = todaySession.getItems();
+                todaySession.refresh();
+            }
         });
 
         attended1.setCellFactory(getFinished());
@@ -385,5 +389,11 @@ public class MainPage implements Initializable {
                     }
                 };
         return cellFactory;
+    }
+
+    public void reloadClinics(){
+        //clinicNumberChooser.getSelectionModel().select(UserSignedInData.user.getClinic());
+        clinicNumberChooser.getItems().clear();
+        clinicNumberChooser.setItems(FXCollections.observableArrayList(UserDAO.getClinics()));
     }
 }

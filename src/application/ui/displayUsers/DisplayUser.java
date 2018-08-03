@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.util.Callback;
 import main.java.beans.User;
 import main.java.beans.UserSignedInData;
@@ -83,6 +84,13 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
 
     @FXML
     void deleteUser(MouseEvent event) {
+        String message = "هل تريد مسح اسم المستخدم؟ سيتم مسح كل المرضى و كل الجلسات المرتبطة بهم هل انت متاكد؟";
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "" + message + "", ButtonType.OK, ButtonType.CANCEL);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.CANCEL){
+            return;
+        }
         boolean finished = true;
         boolean showMsg = false;
         ArrayList<String> msg = new ArrayList<String>();
@@ -91,13 +99,20 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
             TablePosition pos = userTable.getSelectionModel().getSelectedCells().get(i);
             int row = pos.getRow();
             User user = userTable.getItems().get(row);
-            finished = UserDAO.deleteUser(user.getUserName());
-            if (!finished) {
+            if(user.getUserName().equals(UserSignedInData.user.getUserName())){
+                finished = UserDAO.deleteUser(user.getUserName());
+                if (!finished) {
+                    msg.add("لا يمكن مسح " + user.getUserName());
+                    remaining.add(user);
+                    showMsg = true;
+                } else {
+                    userTable.getItems().set(row, null);
+                    message = "لقد قمت بحذف المستخدم الحالى البرنامج سوف يغلق نفسة اعد الدخول مرة اخرى.";
+                    MessagesController.getAlert(message, Alert.AlertType.INFORMATION);
+                }
+            }else{
                 msg.add("لا يمكن مسح " + user.getUserName());
-                remaining.add(user);
                 showMsg = true;
-            } else {
-                userTable.getItems().set(row, null);
             }
         }
         for (int i = 0; i < userTable.getItems().size(); i++) {
@@ -110,6 +125,7 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
             MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
             userTable.setItems(remaining);
         }
+        System.exit(0);
     }
 
     @Override

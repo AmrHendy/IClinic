@@ -1,5 +1,6 @@
 package application.ui.handler;
 
+import application.ui.mainPage.MainPage;
 import application.ui.patientProfile.PatientProfile;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -19,6 +20,7 @@ public class WindowHandlers extends Application {
     private static WindowHandlers windowHandlers;
     private Stage stage;
     private FXMLLoader loader;
+    private MainPage mainPageController;
 
 
     private WindowHandlers(){
@@ -42,10 +44,14 @@ public class WindowHandlers extends Application {
             ((Node)(event.getSource())).getScene().getWindow().hide();
             this.prevWindow.setMaximized(true);
             this.prevWindow.setScene(((Node)(event.getSource())).getScene());
-            this.prevWindow.setTitle("Main Page");
+            this.prevWindow.setTitle("الصفحة الرئيسة");
         }
         if(onClose){
             stage.setOnHiding(e -> closeWindow());
+        }
+        //if mainPage store the controller.
+        if(windowPath.equals("/application/ui/mainPage/mainPage.fxml")){
+            this.mainPageController = loader.getController();
         }
 
     }
@@ -62,6 +68,7 @@ public class WindowHandlers extends Application {
             stage.setScene(this.prevWindow.getScene());
             stage.setMaximized(prevWindow.getMaximized());
             stage.show();
+            this.mainPageController.reloadClinics();
         }catch (Exception e){
             e.printStackTrace();
         }

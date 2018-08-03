@@ -85,6 +85,7 @@ public class AddUsers implements Initializable {
             }else{
                 msg = "تمت اضافة مستخدم جديد.";
                 Alert alert = MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
+                ((Node)(event.getSource())).getScene().getWindow().hide();
             }
         }
     }

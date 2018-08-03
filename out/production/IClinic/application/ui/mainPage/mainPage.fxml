@@ -21,11 +21,11 @@
    <right>
       <VBox prefHeight="582.0" prefWidth="190.0" BorderPane.alignment="CENTER">
          <children>
-            <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#searchPatient" prefHeight="99.0" prefWidth="210.0" text="بحث عن مريض و اضافة جلسة">
+            <Button contentDisplay="TOP" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#searchPatient" prefHeight="99.0" prefWidth="210.0" text="بحث عن مريض">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../imgs/search.png" />
+                        <Image url="@imgs/search.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -34,7 +34,7 @@
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../imgs/search.png" />
+                        <Image url="@imgs/search.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -42,7 +42,7 @@
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../imgs/if_add_user_309049.png" />
+                        <Image url="@imgs/if_add_user_309049.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -51,7 +51,7 @@
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../imgs/if_add_user_309049.png" />
+                        <Image url="@imgs/if_add_user_309049.png" />
                      </image>
                   </ImageView>
                </graphic>
