@@ -215,7 +215,6 @@ public class MainPage implements Initializable {
         });
         attended1.setCellFactory(getFinished());
         attended1.setStyle( "-fx-alignment: CENTER;");
-        //TODO:: initialize today session here.
         todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
         tmpTodayTableData = todaySession.getItems();
     }

@@ -2,7 +2,6 @@ package application.ui.patientProfile;
 
 
 import application.ui.displayPatients.DisplayPatient;
-import application.ui.handler.CustomImage;
 import application.ui.handler.EditCell;
 import application.ui.handler.MessagesController;
 import com.jfoenix.controls.JFXComboBox;
@@ -29,7 +28,6 @@ import main.java.util.UiUtil;
 
 import javax.imageio.ImageIO;
 import javax.swing.text.html.ImageView;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
@@ -249,17 +247,17 @@ public class PatientProfile implements Initializable  {
                                 } else {
                                     btn.setOnAction(event -> {
                                         //download image
-
                                         Appointment appointment = getTableView().getItems().get(getIndex());
                                         BufferedImage img = appointment.getBufferdImage();
                                         FileChooser fileChooser = new FileChooser();
                                         fileChooser.setTitle("Select an Image");
-                                        fileChooser.setInitialFileName("" + appointment.getPatientName() + " : " + appointment.getDateString() + ".jpg");
+                                        fileChooser.setInitialFileName("(" + appointment.getPatientName() + ")(" + appointment.getDateOnly()
+                                                + "(" + appointment.getTimeOnly().replace(":", ";") + ")" + ".png");
                                         fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg"));
                                         File file = fileChooser.showSaveDialog(getScene().getWindow());
                                         if(file != null){
-                                            String name = file.getName();
-                                            String extension = name.substring(1+name.lastIndexOf(".")).toLowerCase();
+                                            //String name = file.getName();
+                                            String extension = "png";
                                             try {
                                                 ImageIO.write(img, extension, file);
                                             } catch (IOException e) {

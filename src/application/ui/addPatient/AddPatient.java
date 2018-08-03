@@ -87,6 +87,9 @@ public class AddPatient implements Initializable {
         patient.setFile_number(fileNumber.getText());
         String req = (requiredCost.getText().isEmpty()) ? "0" : requiredCost.getText();
         patient.setRemainingCost(Integer.valueOf(req));
+        if(clinicNumber.getValue() != null){
+            patient.setClinic_number(Integer.valueOf(clinicNumber.getValue()));
+        }
         ArrayList<String> msgs = PatientValidator.insertingValidator(patient);
         if(msgs.size() > 0){
             Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.INFORMATION);
