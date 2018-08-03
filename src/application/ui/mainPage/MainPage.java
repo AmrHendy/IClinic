@@ -168,24 +168,34 @@ public class MainPage implements Initializable {
         patientNumber.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
         patientNumber.setCellFactory(patientName -> EditCell.createStringEditCell());
         patientNumber.setOnEditCommit(event -> {
-            int pos = event.getTablePosition().getRow();
-            Appointment appointment = event.getTableView().getItems().get(pos);
-            tmpTodayTableData.set(pos, appointment.clone());
-            final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
-            final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
-            editFileNumber(pos, appointment, oldValue, newValue, true);
-            todaySession.refresh();
+            try{
+
+                int pos = event.getTablePosition().getRow();
+                Appointment appointment = event.getTableView().getItems().get(pos);
+                tmpTodayTableData.set(pos, appointment.clone());
+                final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
+                final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
+                editFileNumber(pos, appointment, oldValue, newValue, true);
+                todaySession.refresh();
+            }catch (Exception e){
+                //TODO:: add log4j here.
+                e.printStackTrace();
+            }
         });
         money.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
         money.setCellFactory(money -> EditCell.createStringEditCell());
         money.setOnEditCommit(event -> {
-            //TODO:: test failed edit.
-            int pos = event.getTablePosition().getRow();
-            Appointment appointment = event.getTableView().getItems().get(pos);
-            tmpTodayTableData.set(pos, appointment.clone());
-            final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
-            editPaidCost(pos, appointment, newValue, true);
-            todaySession.refresh();
+            try{
+
+                int pos = event.getTablePosition().getRow();
+                Appointment appointment = event.getTableView().getItems().get(pos);
+                tmpTodayTableData.set(pos, appointment.clone());
+                final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
+                editPaidCost(pos, appointment, newValue, true);
+                todaySession.refresh();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         });
         attended.setCellFactory(getFinished());
         attended.setStyle( "-fx-alignment: CENTER;");
@@ -196,25 +206,32 @@ public class MainPage implements Initializable {
         patientNumber1.setCellValueFactory(new PropertyValueFactory<>("patientFileID"));
         patientNumber1.setCellFactory(patientName1 -> EditCell.createStringEditCell());
         patientNumber1.setOnEditCommit(event -> {
-            //TODO:: test failed edit.
-            int pos = event.getTablePosition().getRow();
-            Appointment appointment = event.getTableView().getItems().get(pos);
-            tmpSearchTableData.set(pos, appointment.clone());
-            final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
-            final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
-            editFileNumber(pos, appointment, oldValue, newValue, false);
-            searchSessionsTable.refresh();
+            try{
+
+                int pos = event.getTablePosition().getRow();
+                Appointment appointment = event.getTableView().getItems().get(pos);
+                tmpSearchTableData.set(pos, appointment.clone());
+                final String oldValue = event.getOldValue() == null ? "" : event.getOldValue();
+                final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
+                editFileNumber(pos, appointment, oldValue, newValue, false);
+                searchSessionsTable.refresh();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         });
         money1.setCellValueFactory(new PropertyValueFactory<>("paidCost"));
         money1.setCellFactory(money1 -> EditCell.createStringEditCell());
         money1.setOnEditCommit(event -> {
-            //TODO:: test failed edit.
-            int pos = event.getTablePosition().getRow();
-            Appointment appointment = event.getTableView().getItems().get(pos);
-            tmpSearchTableData.set(pos, appointment.clone());
-            final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
-            editPaidCost(pos, appointment, newValue, false);
-            searchSessionsTable.refresh();
+            try{
+                int pos = event.getTablePosition().getRow();
+                Appointment appointment = event.getTableView().getItems().get(pos);
+                tmpSearchTableData.set(pos, appointment.clone());
+                final String newValue = event.getNewValue() == null ? "" : event.getNewValue();
+                editPaidCost(pos, appointment, newValue, false);
+                searchSessionsTable.refresh();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         });
 
         clinicNumberChooser.setOnAction(e -> {
