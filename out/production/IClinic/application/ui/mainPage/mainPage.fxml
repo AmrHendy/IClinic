@@ -57,7 +57,7 @@
                </graphic>
             </Button>
             <Label text="رقم العيادة:" />
-            <JFXComboBox fx:id="clinicNumberChooser" prefHeight="26.0" prefWidth="194.0" />
+            <JFXComboBox fx:id="clinicNumberChooser" onAction="#refreshTableWithNewClinic" prefHeight="26.0" prefWidth="194.0" />
          </children></VBox>
    </right>
    <center>

@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -213,6 +214,13 @@ public class MainPage implements Initializable {
             editPaidCost(pos, appointment, newValue, false);
             searchSessionsTable.refresh();
         });
+
+        clinicNumberChooser.setOnAction(e -> {
+            todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
+            tmpTodayTableData = todaySession.getItems();
+            todaySession.refresh();
+        });
+
         attended1.setCellFactory(getFinished());
         attended1.setStyle( "-fx-alignment: CENTER;");
         todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
@@ -237,6 +245,11 @@ public class MainPage implements Initializable {
         }
         searchSessionsTable.setItems(remaining);
         tmpSearchTableData.setAll(remaining);
+    }
+
+    @FXML
+    void refreshTableWithNewClinic(ActionEvent event) {
+
     }
 
     @FXML
