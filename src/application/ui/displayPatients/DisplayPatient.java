@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import main.java.beans.Appointment;
 import main.java.beans.Patient;
 import main.java.beans.User;
 import main.java.model.PatientDAO;
@@ -291,7 +292,11 @@ public class DisplayPatient implements Initializable, PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if(evt.getSource() instanceof PatientProfile){
+        System.out.println(evt.getPropertyName().equals("paidCost"));
+        if(evt.getPropertyName().equals("all") && evt.getSource() instanceof PatientProfile){
+            Patient newPatient = (Patient) evt.getNewValue();
+            patientTable.getItems().set(selectedPos, newPatient);
+        }else if(evt.getPropertyName().equals("paidCost") && evt.getSource() instanceof PatientProfile){
             Patient newPatient = (Patient) evt.getNewValue();
             patientTable.getItems().set(selectedPos, newPatient);
         }

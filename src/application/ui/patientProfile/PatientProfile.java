@@ -215,7 +215,16 @@ public class PatientProfile implements Initializable  {
                                 } else {
                                     btn.setOnAction(event -> {
                                         Appointment appointment = getTableView().getItems().get(getIndex());
-                                        AppointmentDAO.confirmPaidCost(appointment.getPatientFileID(), appointment.getDate());
+                                        if(!AppointmentDAO.confirmPaidCost(appointment.getPatientFileID(), appointment.getDate())){
+                                            String msg = "لم يتم تاكيد الدفع.";
+                                            MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                                            event.consume();
+                                        }else {
+                                            btn.setDisable(true);
+                                            appointment.setConfirmedPaid(true);
+                                            controller.propertyChange(new PropertyChangeEvent(PatientProfile.this, "paidCost", null, appointment.getPatient()));
+                                            sessionsTable.getItems().set(getIndex(), appointment);
+                                        }
                                     });
                                     setGraphic(btn);
                                     setText(null);
