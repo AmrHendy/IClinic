@@ -29,7 +29,7 @@ public class Appointment {
 
     private String patientName;
     private String patientFileID;
-    private int clinicNumber;
+    private String clinicNumber;
     private Date dateOnly;
     private Date timeOnly;
     private String phoneNumber;
@@ -214,16 +214,16 @@ public class Appointment {
 
     public String getClinicNumber() {
         if(patientID == -1) return "";
-        return String.valueOf(getPatient().getClinic_number());
+        return getPatient().getClinic_number();
     }
 
-    public void setClinicNumber(int clinicNumber){
+    public void setClinicNumber(String clinicNumber){
         this.clinicNumber = clinicNumber;
     }
 
     public Appointment clone() {
         Appointment app = new Appointment();
-        if(getClinicNumber() != "") app.setClinicNumber(Integer.parseInt(getClinicNumber()));
+        if(getClinicNumber() != "") app.setClinicNumber(getClinicNumber());
         app.setPaidCost(Integer.parseInt(this.getPaidCost()));
         app.setConfirmedPaid(this.isConfirmedPaid());
         app.setDate(this.getDate());

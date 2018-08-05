@@ -69,9 +69,7 @@ public class UserDAO {
                 pst.setString(1, user.getUserName());
                 pst.setBytes(2, user.getEncryptedPassword());
                 pst.setBytes(3, user.getSalt());
-                pst.setInt(4, user.getClinicNumber());
-                System.out.println("Salt1 = " + Arrays.toString(user.getSalt()));
-                System.out.println("Encr1 = " + Arrays.toString(user.getEncryptedPassword()));
+                pst.setString(4, user.getClinicNumber());
                 if (pst.executeUpdate() == 1) {
                     status = true;
                 }
@@ -92,7 +90,7 @@ public class UserDAO {
                     "UPDATE User SET userName = ?, password = ?, clinic = ? WHERE id = ?;");
             pst.setString(1, newUser.getUserName());
             pst.setBytes(2, newUser.getEncryptedPassword());
-            pst.setInt(3, newUser.getClinicNumber());
+            pst.setString(3, newUser.getClinicNumber());
             pst.setInt(4, id);
 
             if (pst.executeUpdate() == 1) {
@@ -125,7 +123,7 @@ public class UserDAO {
                 user.setUserName(rs.getString("userName"));
                 user.setEncryptedPassword(rs.getBytes("password"));
                 user.setSalt(rs.getBytes("salt"));
-                user.setClinic(rs.getInt("clinic"));
+                user.setClinic(rs.getString("clinic"));
             }
             rs.close();
             return user;
@@ -146,7 +144,7 @@ public class UserDAO {
                 user.setUserName(rs.getString("userName"));
                 user.setEncryptedPassword(rs.getBytes("password"));
                 user.setSalt(rs.getBytes("salt"));
-                user.setClinic(rs.getInt("clinic"));
+                user.setClinic(rs.getString("clinic"));
                 matched.add(user);
             }
             rs.close();
@@ -184,7 +182,7 @@ public class UserDAO {
             byte[] salt = pw.generateSalt();
             user.setSalt(salt);
             user.setUserName("admin");
-            user.setClinic(0);
+            user.setClinic("admin");
             user.setEncryptedPassword(pw.getEncryptedPassword("admin", salt));
             return register(user);
         } catch(Exception e){

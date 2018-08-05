@@ -5,10 +5,10 @@ public class User {
     private byte[] encryptedPassword;
     private byte[] salt;
     private String userName;
-    private int clinic;
+    private String clinic;
 
     public User(){
-        this.clinic = -1;
+        this.clinic = "";
     }
 
     // GETTERS
@@ -29,10 +29,10 @@ public class User {
     }
 
     public String getClinic() {
-        return String.valueOf(clinic);
+        return clinic;
     }
 
-    public int getClinicNumber() {
+    public String getClinicNumber() {
         return clinic;
     }
 
@@ -54,7 +54,7 @@ public class User {
         this.userID = userID;
     }
 
-    public void setClinic(int clinic) { this.clinic = clinic; }
+    public void setClinic(String clinic) { this.clinic = clinic; }
 
     @Override
     public String toString() {

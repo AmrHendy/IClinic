@@ -20,7 +20,7 @@ public class Patient {
     private int remainingCost;
     private String phoneNumber;
     private String file_number;
-    private int clinic_number;
+    private String clinic_number;
 
     public Patient(){
         remainingCost = 0;
@@ -34,11 +34,11 @@ public class Patient {
         this.file_number = file_number;
     }
 
-    public int getClinic_number() {
+    public String getClinic_number() {
         return clinic_number;
     }
 
-    public void setClinic_number(int clinic_number) {
+    public void setClinic_number(String clinic_number) {
         this.clinic_number = clinic_number;
     }
 

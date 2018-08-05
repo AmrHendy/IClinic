@@ -26,7 +26,7 @@ public class AppointmentDAO {
             pst.setBytes(5, app.getImageBytes());
             pst.setString(6, app.getComment());
             pst.setInt(7, app.isConfirmedPaid() ? 1 : 0);
-            pst.setInt(8, UserSignedInData.user.getClinicNumber());
+            pst.setString(8, UserSignedInData.user.getClinicNumber());
             return pst.executeUpdate() == 1;
         } catch (SQLException e){
             e.printStackTrace();
@@ -40,12 +40,12 @@ public class AppointmentDAO {
     }
 
     public static boolean deleteAllAppointmentByPatientID(int patientID){
-        String query = "DELETE FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
+        String query = "DELETE FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = '" + UserSignedInData.user.getClinicNumber() + "' ;";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }
 
     public static ArrayList<Appointment> findByPatientID(int patientID){
-        String query = "SELECT * FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
+        String query = "SELECT * FROM Appointment WHERE patientId = " + patientID + " AND clinic_number = '" + UserSignedInData.user.getClinicNumber() + "' ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -59,11 +59,11 @@ public class AppointmentDAO {
         return matched;
     }
 
-    public static ArrayList<Appointment> findByDate(Date date, int clinicNumber){
+    public static ArrayList<Appointment> findByDate(Date date, String clinicNumber){
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dt.format(date);
         String query = "SELECT * FROM Appointment WHERE CAST(Appointment.date as date) = '" + formattedDate + "'"
-                        + " AND clinic_number = " + clinicNumber + " ORDER BY date ;";
+                        + " AND clinic_number = '" + clinicNumber + "' ORDER BY date ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -132,7 +132,7 @@ public class AppointmentDAO {
             SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String formattedDate = dt.format(appDate);
             String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
-                            + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
+                            + "' AND clinic_number = '" + UserSignedInData.user.getClinicNumber() + "' ;";
             ArrayList<Appointment> matched = new ArrayList<>();
             try{
                 ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -151,7 +151,7 @@ public class AppointmentDAO {
                 app.setComment("");
                 app.setAppointmentID(-1);
                 app.setPaidCost(0);
-                app.setClinicNumber(-1);
+                app.setClinicNumber("");
             }
             return status;
         }
@@ -162,7 +162,7 @@ public class AppointmentDAO {
             SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String formattedDate = dt.format(appDate);
             String query = "SELECT * FROM Appointment WHERE patientId = " + patient1.getPatientID() + " AND date = '" + formattedDate
-                            + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
+                            + "' AND clinic_number = '" + UserSignedInData.user.getClinicNumber() + "' ;";
             ArrayList<Appointment> matched = new ArrayList<>();
             try{
                 ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -192,7 +192,7 @@ public class AppointmentDAO {
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String formattedDate = dt.format(appDate);
         String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
-                + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
+                + "' AND clinic_number = '" + UserSignedInData.user.getClinicNumber() + "' ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -219,7 +219,7 @@ public class AppointmentDAO {
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String formattedDate = dt.format(appDate);
         String query = "SELECT * FROM Appointment WHERE patientId = " + patient.getPatientID() + " AND date = '" + formattedDate
-                + "' AND clinic_number = " + UserSignedInData.user.getClinicNumber() + " ;";
+                + "' AND clinic_number = '" + UserSignedInData.user.getClinicNumber() + "' ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
@@ -256,7 +256,7 @@ public class AppointmentDAO {
             app.setComment(rs.getString("comment"));
 
             app.setConfirmedPaid(rs.getBoolean("confirmed_paid"));
-            app.setClinicNumber(rs.getInt("clinic_number"));
+            app.setClinicNumber(rs.getString("clinic_number"));
             return app;
         } catch (SQLException | NullPointerException e) {
             e.printStackTrace();

@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema IClinic
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `IClinic` DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci ;
+CREATE SCHEMA IF NOT EXISTS `IClinic` DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
 USE `IClinic` ;
 
 -- -----------------------------------------------------
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`User` (
   `userName` VARCHAR(125) NOT NULL,
   `password` BLOB NOT NULL,
   `salt` BLOB NOT NULL,
-  `clinic` INT NOT NULL,
+  `clinic` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `name_index` (`userName` ASC),
   UNIQUE INDEX `userName_UNIQUE` (`userName` ASC),
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`Patient` (
   `remainingCost` INT NULL DEFAULT 0,
   `mobile_number` VARCHAR(45) NULL,
   `file_number` VARCHAR(45) NOT NULL,
-  `clinic_number` INT NOT NULL,
+  `clinic_number` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `name_index` (`name` ASC),
   UNIQUE INDEX `file_id_UNIQUE` (`file_number` ASC),
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `IClinic`.`Appointment` (
   `image` LONGBLOB NULL,
   `comment` VARCHAR(125) NULL,
   `confirmed_paid` TINYINT NULL DEFAULT 0,
-  `clinic_number` INT NOT NULL,
+  `clinic_number` VARCHAR(45) NOT NULL,
   INDEX `patient_index` (`patientId` ASC),
   INDEX `date_index` (`date` ASC),
   INDEX `finished_index` (`finished` ASC),
