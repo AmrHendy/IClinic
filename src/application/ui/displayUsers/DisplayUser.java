@@ -167,7 +167,7 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
             tmpTableData.set(pos, user.clone());
             final String value = event.getNewValue() != null ?
                     event.getNewValue() : event.getOldValue();
-            user.setClinic(Integer.valueOf(value));
+            user.setClinic(value);
             save(pos, user);
             userTable.refresh();
         });

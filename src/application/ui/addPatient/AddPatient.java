@@ -88,7 +88,7 @@ public class AddPatient implements Initializable {
         String req = (requiredCost.getText().isEmpty()) ? "0" : requiredCost.getText();
         patient.setRemainingCost(Integer.valueOf(req));
         if(clinicNumber.getValue() != null){
-            patient.setClinic_number(Integer.valueOf(clinicNumber.getValue()));
+            patient.setClinic_number(clinicNumber.getValue());
         }
         ArrayList<String> msgs = PatientValidator.insertingValidator(patient);
         if(msgs.size() > 0){

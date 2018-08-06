@@ -236,7 +236,7 @@ public class MainPage implements Initializable {
 
         clinicNumberChooser.setOnAction(e -> {
             if(clinicNumberChooser.getValue() != null){
-                todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
+                todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), clinicNumberChooser.getValue())));
                 tmpTodayTableData = todaySession.getItems();
                 todaySession.refresh();
             }
@@ -244,7 +244,7 @@ public class MainPage implements Initializable {
 
         attended1.setCellFactory(getFinished());
         attended1.setStyle( "-fx-alignment: CENTER;");
-        todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), Integer.valueOf(clinicNumberChooser.getValue()))));
+        todaySession.setItems(UiUtil.getAppointmentObservable(AppointmentDAO.findByDate(getToday(), clinicNumberChooser.getValue())));
         tmpTodayTableData = todaySession.getItems();
     }
 
@@ -296,7 +296,7 @@ public class MainPage implements Initializable {
     void searchAppointment(MouseEvent event) {
         if(chooseDate.getValue() != null){
             Date date = getDate();
-            ArrayList<Appointment> list = AppointmentDAO.findByDate(date, Integer.valueOf(clinicNumberChooser.getValue()));
+            ArrayList<Appointment> list = AppointmentDAO.findByDate(date, clinicNumberChooser.getValue());
             searchSessionsTable.setItems(UiUtil.getAppointmentObservable(list));
             tmpSearchTableData = searchSessionsTable.getItems();
         }

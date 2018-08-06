@@ -75,7 +75,7 @@ public class AddUsers implements Initializable {
             Alert alert = MessagesController.getAlert(msgs, Alert.AlertType.INFORMATION);
         }else{
             User user = new User();
-            user.setClinic(Integer.valueOf(clinicNumber.getText()));
+            user.setClinic(clinicNumber.getText());
             user.setEncryptedPassword(enc);
             user.setSalt(salt);
             user.setUserName(userName.getText());
