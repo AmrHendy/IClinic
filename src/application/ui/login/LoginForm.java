@@ -25,29 +25,16 @@ public class LoginForm {
 
     @FXML
     protected void handleSubmitButtonAction(MouseEvent event){
-        /*
-        try {
-            UserSignedInData.user = UserDAO.getUser("admin");
-            WindowHandlers windowHandlers = WindowHandlers.getInstance();
-            windowHandlers.loadWindow("/application/ui/mainPage/mainPage.fxml",
-                    "Main Page", true, true, false, event);
-        }
-        catch (Exception e) {
-            //TODO:: put log4j jar for error logging
-            e.printStackTrace();
-        }
-        */
-
         Window owner = submitButton.getScene().getWindow();
         if(nameField.getText().isEmpty()) {
-            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
-                    "Please enter your name");
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "خطأ فى تسجيل الدخول",
+                    "من فضلك ادخل اسم المستخدم");
             return;
         }
 
         if(passwordField.getText().isEmpty()) {
-            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
-                    "Please enter a password");
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "خطأ فى تسجيل الدخول",
+                    "من فضلك ادخل كلمة المرور");
             return;
         }
 
@@ -64,8 +51,8 @@ public class LoginForm {
                 }
         }
         else{
-            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Try Again Login",
-                    "Please Enter Correct UserName and Password");
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "خطأ فى تسجيل الدخول",
+                    "تأكد من ادخال اسم المستخدم و كلمة المرور صحيحة");
         }
     }
 }
