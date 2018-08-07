@@ -30,7 +30,7 @@ public class LoginFormApplication extends Application {
 
     public static void main(String[] args) {
         //automaticly register admin acconut if not exist
-        //UserDAO.registerAdmin();
+        UserDAO.registerAdmin();
         launch(args);
     }
 }

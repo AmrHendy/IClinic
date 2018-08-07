@@ -9,8 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import main.java.beans.User;
 import main.java.beans.UserSignedInData;
+import main.java.model.UserDAO;
 import main.java.services.PasswordEncryptionService;
+import org.w3c.dom.UserDataHandler;
 
 import java.beans.PropertyChangeEvent;
 
@@ -43,24 +46,15 @@ public class EditPassword {
     @FXML
     void save(ActionEvent event) {
         if(currentPassword.getText().equals("") || newPassword.getText().equals("") || confirmNewPassword.getText().equals("")
-                || !newPassword.getText().equals(confirmNewPassword.getText())){
+                || !newPassword.getText().equals(confirmNewPassword.getText()) || newPassword.getText().length() < 4){
             MessagesController.getAlert("فشل تحديث كلمة المرور. تاكد من ادخال القيم الصحيحة.", Alert.AlertType.ERROR);
             return;
         }
-        PasswordEncryptionService encryptionService = new PasswordEncryptionService();
-        byte[] enc = {};
-        byte[] salt = {};
-        try{
-            salt = UserSignedInData.user.getSalt();
-            enc = encryptionService.getEncryptedPassword(currentPassword.getText(), salt);
-            if(!encryptionService.authenticate(currentPassword.getText(), enc, salt)){
-                String msg = "لا يمكن اتمام التسجيل اعد المحاولة.";
-                MessagesController.getAlert(msg, Alert.AlertType.ERROR);
-                return;
-            }
-        } catch (Exception e) {
+        User user = UserSignedInData.user.clone();
+        if(!UserDAO.login(UserSignedInData.user.getUserName(), currentPassword.getText())){
             String msg = "لا يمكن اتمام التسجيل اعد المحاولة.";
             MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+            UserSignedInData.user = user;
             return;
         }
         displayUser.propertyChange(new PropertyChangeEvent(this, "password", null, newPassword.getText()));

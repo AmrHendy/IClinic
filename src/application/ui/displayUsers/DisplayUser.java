@@ -49,6 +49,8 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
 
     private ObservableList<User> tmpTableData;
 
+    private int pos;
+
     void SaveChanges(MouseEvent event) {
         boolean showMsg = false;
         ObservableList<User> list = userTable.getItems();
@@ -110,6 +112,7 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
                         userTable.getItems().set(row, null);
                         message = "لقد قمت بحذف المستخدم الحالى البرنامج سوف يغلق نفسة اعد الدخول مرة اخرى.";
                         MessagesController.getAlert(message, Alert.AlertType.INFORMATION);
+                        System.exit(0);
                     }
                 }else{
                     msg.add("لا يمكن مسح " + user.getUserName());
@@ -126,7 +129,6 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
                 MessagesController.getAlert(msg, Alert.AlertType.INFORMATION);
                 userTable.setItems(remaining);
             }
-            System.exit(0);
         }
     }
 
@@ -212,32 +214,12 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
                                             //download image
                                             try {
                                                 newEditedPassword = "";
+                                                pos = getIndex();
                                                 WindowHandlers windowHandlers = WindowHandlers.getInstance();
                                                 windowHandlers.loadWindow("/application/ui/editPassword/editPassword.fxml",
                                                         "تعديل كلمة المرور", false, false, false, null);
                                                 EditPassword editPassword = windowHandlers.getLoader().getController();
                                                 editPassword.addObserver(DisplayUser.this);
-                                                if(newEditedPassword != null && !newEditedPassword.equals("")){
-                                                    User user = getTableView().getItems().get(getIndex());
-                                                    PasswordEncryptionService encryptionService = new PasswordEncryptionService();
-                                                    byte[] enc = {};
-                                                    byte[] salt = {};
-                                                    try{
-                                                        salt = encryptionService.generateSalt();
-                                                        enc = encryptionService.getEncryptedPassword(newEditedPassword, salt);
-                                                    } catch (Exception e) {
-                                                        String msg = "لا يمكن اتمام العملية اعد المحاولة.";
-                                                        MessagesController.getAlert(msg, Alert.AlertType.ERROR);
-                                                        event.consume();
-                                                    }
-                                                    user.setSalt(salt);
-                                                    user.setEncryptedPassword(enc);
-                                                    if(!UserDAO.updateUser(user.getUserID(), user)){
-                                                        String msg = "لا يمكن اتمام العملية اعد المحاولة.";
-                                                        MessagesController.getAlert(msg, Alert.AlertType.ERROR);
-                                                        event.consume();
-                                                    }
-                                                }
                                             } catch (Exception e) {
                                                 //TODO:: add log4j jar here.
                                             }
@@ -260,6 +242,25 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
         if(evt.getSource() instanceof EditPassword){
             //TODO:: edit the clicked user and UserSigned here.
             this.newEditedPassword = (String) evt.getNewValue();
+            if(!newEditedPassword.equals("")){
+                //User user = userTable.getItems().get(this.pos);
+                PasswordEncryptionService encryptionService = new PasswordEncryptionService();
+                byte[] enc = {};
+                byte[] salt = {};
+                try{
+                    salt = UserSignedInData.user.getSalt();
+                    enc = encryptionService.getEncryptedPassword(newEditedPassword, salt);
+                } catch (Exception e) {
+                    String msg = "لا يمكن اتمام العملية اعد المحاولة.";
+                    MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                }
+                UserSignedInData.user.setSalt(salt);
+                UserSignedInData.user.setEncryptedPassword(enc);
+                if(!UserDAO.updateUser(UserSignedInData.user.getUserID(), UserSignedInData.user)){
+                    String msg = "لا يمكن اتمام العملية اعد المحاولة.";
+                    MessagesController.getAlert(msg, Alert.AlertType.ERROR);
+                }
+            }
         }
     }
 }
