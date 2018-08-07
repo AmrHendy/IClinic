@@ -85,6 +85,7 @@ public class UserDAO {
     }
 
     public static boolean updateUser(int id, User newUser) {
+        System.out.println("update user");
         try {
             PreparedStatement pst = ModelManager.getInstance().getConnection().prepareStatement(
                     "UPDATE User SET userName = ?, password = ?, clinic = ? WHERE id = ?;");
@@ -155,6 +156,7 @@ public class UserDAO {
     }
 
     public static boolean deleteUser(String userName){
+        System.out.println("Delete " + userName);
         String query = "DELETE FROM User WHERE userName = '" + userName + "' ;";
         return ModelManager.getInstance().executeUpdateQuery(query);
     }

@@ -141,7 +141,6 @@ public class MainPage implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserSignedInData.user = UserDAO.getUser("admin");
         todaySession.getSelectionModel().setCellSelectionEnabled(true);
         todaySession.setEditable(true);
         searchSessionsTable.getSelectionModel().setCellSelectionEnabled(true);
