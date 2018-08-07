@@ -64,9 +64,21 @@ public class AppointmentDAO {
         String formattedDate = dt.format(date);
         String query = "SELECT * FROM Appointment WHERE CAST(Appointment.date as date) = '" + formattedDate + "'"
                         + " AND clinic_number = '" + clinicNumber + "' ORDER BY date ;";
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DAY_OF_MONTH, 1);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        dt.applyPattern("yyyy-MM-dd HH:mm:ss");
+        formattedDate = dt.format(cal.getTime());
+        String query2 = "SELECT * FROM Appointment WHERE Appointment.date = '" + formattedDate + "'"
+                + " AND clinic_number = '" + clinicNumber + "' ORDER BY date ;";
         ArrayList<Appointment> matched = new ArrayList<>();
         try{
             ResultSet resultSet = ModelManager.getInstance().executeQuery(query);
+            while (resultSet.next()) {
+                matched.add(buildAppointment(resultSet));
+            }
+            resultSet = ModelManager.getInstance().executeQuery(query2);
             while (resultSet.next()) {
                 matched.add(buildAppointment(resultSet));
             }
@@ -173,7 +185,7 @@ public class AppointmentDAO {
             } catch (SQLException e){
                 e.printStackTrace();
             }
-            Appointment appp = new Appointment();
+            Appointment appp = matched.get(0).clone();
             appp.setPatientID(patient2.getPatientID());
             appp.setDate(appDate);
             appp.setPaidCost(paidCost);
@@ -182,6 +194,12 @@ public class AppointmentDAO {
                 app.setPatientID(patient2.getPatientID());
                 app.setDate(appDate);
                 app.setPaidCost(paidCost);
+                app.setAppointmentID(appp.getAppointmentID());
+                app.setComment(appp.getComment());
+                app.setFinished(appp.isFinished());
+                app.setImage(appp.getImage());
+                app.setConfirmedPaid(appp.isConfirmedPaid());
+                app.setClinicNumber(appp.getClinicNumber());
             }
             return status;
         }
