@@ -15,7 +15,7 @@ A java program with arabice UI to manage clinic system including patients histor
 
 
 # Licence
-
+This project is under GNU General Public License v3.0.
 
 
 # Credits
