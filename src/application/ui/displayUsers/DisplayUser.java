@@ -209,7 +209,7 @@ public class DisplayUser implements Initializable, PropertyChangeListener {
                                     setText(null);
                                 } else {
                                     if(getTableRow() != null && getTableRow().getItem() != null
-                                            && getTableRow().getItem().getUserName().equals(UserSignedInData.user.getUserName())){
+                                            && getTableRow().getItem().equals(UserSignedInData.user.getUserName())){
                                         btn.setOnAction(event -> {
                                             //download image
                                             try {
