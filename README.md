@@ -11,6 +11,7 @@ A java application with arabic UI to manage a clinic system including patients h
 4. IClinic application requires the user to log in using a username/password pair. The default values are:
 > * username: admin 
 > * password: admin
+
 `Tested on Windows 8 and 10 with java 10`
 
 
@@ -27,38 +28,38 @@ A java application with arabic UI to manage a clinic system including patients h
 * Sign In page.
 
 <p align="center">
-  <img width="650" height="500" src="readmeImages/p1.PNG">
+  <img width="600" height="500" src="readmeImages/p1.PNG">
 </p>
 
 * Main page to manage current day session (the client has 24 session each of them is about 30 min).
 
 <p align="center">
-  <img width="650" height="500" src="readmeImages/p2.PNG">
+  <img width="600" height="500" src="readmeImages/p2.PNG">
 </p>
 
 * Adding New Patient.
 
 <p align="center">
-  <img width="650" height="500" src="readmeImages/p3.PNG">
+  <img width="600" height="500" src="readmeImages/p3.PNG">
 </p>
 
 
 * Manage session by editing the price for each session, also marking each session if the client didn't come to remember to call him/her later.
 
 <p align="center">
-  <img width="650" height="500" src="readmeImages/p4.PNG">
+  <img width="600" height="500" src="readmeImages/p4.PNG">
 </p>
 
 * Searching users (we make the search for patients is possible using several options, we search for the patients assigned to the logged in user/doctor only for more privacy).
 
 <p align="center">
-  <img width="650" height="500" src="readmeImages/p5.PNG">
+  <img width="600" height="500" src="readmeImages/p5.PNG">
 </p>
 
 * Searching for patients and editing their own profiles that represents their previous session and also a description for their medical records with an image for it.
 
 <p align="center">
-  <img width="650" height="500" src="readmeImages/p6.PNG">
+  <img width="600" height="500" src="readmeImages/p6.PNG">
 </p>
 
 
