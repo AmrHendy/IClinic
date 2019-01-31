@@ -2,9 +2,9 @@
 A java program with arabice UI to manage clinic system including patients history and comming sessions of patients.
 
 # How to use it
-1- Download Jar from jars folder.
-2- Setup database using SQL script inside sql folder.
-3- Run JAR.
+- Download Jar from jars folder.
+- Setup database using SQL script inside sql folder.
+- Run JAR.
 
 (tested on Windows 8 and 10 with java 10)
 
