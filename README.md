@@ -16,7 +16,7 @@ A java application with arabic UI to manage a clinic system including patients h
 
 
 # How To Use
-1. log in in with the default username/password.
+1. Log in in with the default username/password.
 2. A new patient can be added with basic personal details:
 3. Upon selecting the patient from a list more fields become visible allowing the user to edit comments, appointments, etc.
 4. Photos can be uploaded to / downloaded from the application.
